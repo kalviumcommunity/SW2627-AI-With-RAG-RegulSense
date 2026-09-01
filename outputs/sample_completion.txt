@@ -1,0 +1,19 @@
+First LLM API Completion
+
+REQUEST:
+System: You are a concise banking compliance assistant.
+User: Explain in one sentence why regulatory compliance is important for banks.
+
+STATUS:
+HTTP/1.1 200 OK
+
+MODEL RESPONSE:
+Regulatory compliance is essential for banks as it ensures adherence to laws and regulations governing the financial industry, protecting both the bank and its customers from risks associated with non-compliance, such as financial sanctions, reputational damage, and regulatory penalties.
+
+USAGE:
+Completion tokens: 49
+Prompt tokens: 46
+Total tokens: 95
+
+RESULT:
+Successful OpenAI-compatible chat completion using Ollama.
