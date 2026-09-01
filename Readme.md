@@ -1,5 +1,26 @@
 # RegulSense RAG Assistant
 
+## Problem Statement
+
+A large bank maintains compliance circulars, internal audit reports, and regulatory updates, but risk officers cannot quickly confirm which current rule governs a transaction without reading through conflicting historical documents.
+
+---
+
+## Solution
+
+RegulSense uses a Retrieval-Augmented Generation (RAG) pipeline to search through regulatory and compliance documents and provide context-aware answers.
+
+The system is designed to:
+
+- Retrieve relevant regulatory documents
+- Identify currently active rules
+- Detect outdated or superseded regulations
+- Compare conflicting documents
+- Prioritize the latest applicable regulation
+- Provide explainable answers with source references
+
+---
+
 ## Development Environment Setup
 
 This repository contains the foundational workspace for RegulSense, a Retrieval-Augmented Generation (RAG) assistant designed to help risk and compliance officers identify the currently applicable rule from regulatory circulars, internal audit reports, and compliance documents.
