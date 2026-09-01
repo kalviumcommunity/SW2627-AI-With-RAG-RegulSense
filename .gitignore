@@ -18,9 +18,10 @@ data/*
 # Keep folder structure
 !data/.gitkeep
 
-# Outputs
+# Generated outputs
 outputs/*
 !outputs/.gitkeep
+!outputs/sample_completion.txt
 
 # Python cache
 __pycache__/
