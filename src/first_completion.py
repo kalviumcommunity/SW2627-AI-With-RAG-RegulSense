@@ -41,7 +41,7 @@ def main():
         },
         {
             "role": "user",
-            "content": "Explain in one sentence why regulatory compliance is important for banks.",
+            "content": "Explain in one sentence why the regulatory compliance is important for banks.",
         },
     ]
 
