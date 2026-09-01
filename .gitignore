@@ -1,0 +1,35 @@
+# Virtual environments
+.venv/
+venv/
+
+# Node modules
+node_modules/
+
+# Environment variables and secrets
+.env
+.env.*
+
+# Keep example environment file
+!.env.example
+
+# Local data
+data/*
+
+# Keep folder structure
+!data/.gitkeep
+
+# Outputs
+outputs/*
+!outputs/.gitkeep
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
