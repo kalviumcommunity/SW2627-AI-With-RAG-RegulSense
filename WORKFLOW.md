@@ -74,3 +74,63 @@ Easier code review
 Better collaboration
 Easier debugging and rollback
 Support for automated changelog generation
+
+Pull Request Review Process
+
+All changes must be submitted through a Pull Request before merging into main.
+
+PR Requirements
+
+Each Pull Request should include:
+
+A clear and descriptive title
+A summary of changes
+The reason for the changes
+A link to the related GitHub issue
+Testing or verification details
+Review Requirements
+
+Pull Requests require at least one approval before merging.
+
+Code review focuses on:
+
+Correctness
+Code clarity
+Data integrity
+Test coverage
+Security considerations
+Commit message quality
+
+Commit messages are also reviewed to ensure the project history remains clear and consistent.
+
+4. GitHub Issue Tracking
+
+Every new feature, bug fix, or significant task should begin with a GitHub issue.
+
+Issue Requirements
+
+Each issue should contain:
+
+A clear action-oriented title
+A description explaining why the work is needed
+Completion criteria
+Appropriate labels
+An assigned team member
+Issue Lifecycle
+Create Issue
+     ↓
+Assign Team Member
+     ↓
+Create Feature Branch
+     ↓
+Implement Changes
+     ↓
+Create Pull Request
+     ↓
+Code Review
+     ↓
+Merge Pull Request
+     ↓
+Close Issue
+
+Issues are closed when the corresponding Pull Request is successfully merged.
