@@ -16,4 +16,4 @@ Prompt tokens: 46
 Total tokens: 95
 
 RESULT:
-Successful OpenAI-compatible chat completion using Ollama.
+Successful OpenAI-compatible chat completion using the Ollama.
