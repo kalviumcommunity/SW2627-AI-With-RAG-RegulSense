@@ -17,12 +17,15 @@ data/*
 
 # Keep folder structure
 !data/.gitkeep
+!data/sample_regulatory_circular.txt
+
 
 # Generated outputs
 outputs/*
 !outputs/.gitkeep
 !outputs/sample_completion.txt
 !outputs/prompt_comparison_results.md
+!outputs/token_analysis_results.md
 
 
 # Python cache
