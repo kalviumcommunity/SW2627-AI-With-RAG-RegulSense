@@ -22,6 +22,8 @@ data/*
 outputs/*
 !outputs/.gitkeep
 !outputs/sample_completion.txt
+!outputs/prompt_comparison_results.md
+
 
 # Python cache
 __pycache__/
