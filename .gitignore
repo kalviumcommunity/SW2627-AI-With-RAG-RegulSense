@@ -26,6 +26,7 @@ outputs/*
 !outputs/sample_completion.txt
 !outputs/prompt_comparison_results.md
 !outputs/token_analysis_results.md
+!outputs/context_window_management_run.md
 
 
 # Python cache
