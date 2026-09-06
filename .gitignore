@@ -28,6 +28,7 @@ outputs/*
 !outputs/token_analysis_results.md
 !outputs/context_window_management_run.md
 !outputs/parameter_comparison_results.md
+!outputs/structured_output_results.md
 
 
 # Python cache
