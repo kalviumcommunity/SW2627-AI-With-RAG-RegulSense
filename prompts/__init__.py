@@ -4,6 +4,11 @@ from prompts.templates import (
     VARIATION_B_SYSTEM_PROMPT,
     TEST_QUERIES,
     format_messages,
+    PromptTemplate,
+    ChatPromptTemplate,
+    RAG_COMPLIANCE_USER_TEMPLATE,
+    REGUL_SENSE_SYSTEM_TEMPLATE,
+    BATCH_AUDIT_USER_TEMPLATE,
 )
 
 __all__ = [
@@ -11,4 +16,10 @@ __all__ = [
     "VARIATION_B_SYSTEM_PROMPT",
     "TEST_QUERIES",
     "format_messages",
+    "PromptTemplate",
+    "ChatPromptTemplate",
+    "RAG_COMPLIANCE_USER_TEMPLATE",
+    "REGUL_SENSE_SYSTEM_TEMPLATE",
+    "BATCH_AUDIT_USER_TEMPLATE",
 ]
+
