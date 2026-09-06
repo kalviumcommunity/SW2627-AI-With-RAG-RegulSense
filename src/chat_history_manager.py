@@ -27,7 +27,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from prompts.templates import VARIATION_B_SYSTEM_PROMPT
+from prompts.templates import VARIATION_B_SYSTEM_PROMPT, RAG_COMPLIANCE_USER_TEMPLATE
 
 load_dotenv()
 
@@ -119,11 +119,9 @@ class ChatHistoryManager:
         """Add a user message, optionally augmented with retrieved RAG context."""
         meta = metadata.copy() if metadata else {}
         if context_chunk:
-            formatted_content = (
-                f"--- RETRIEVED REGULATORY CONTEXT ---\n"
-                f"{context_chunk.strip()}\n"
-                f"------------------------------------\n\n"
-                f"Compliance Question: {query.strip()}"
+            formatted_content = RAG_COMPLIANCE_USER_TEMPLATE.render(
+                context=context_chunk.strip(),
+                question=query.strip(),
             )
             meta["has_context"] = True
             meta["context_tokens"] = self.count_string_tokens(context_chunk)

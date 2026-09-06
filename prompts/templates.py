@@ -76,6 +76,114 @@ TEST_QUERIES = [
 ]
 
 
+import re
+from typing import Any, Optional
+
+
+class PromptTemplate:
+    """Reusable prompt template with named placeholders."""
+
+    def __init__(self, template: str, input_variables: Optional[list[str]] = None):
+        self.template = template.strip()
+        # Automatically discover placeholders formatted like {variable_name}
+        discovered = set(re.findall(r"\{([a-zA-Z_][a-zA-Z0-9_]*)\}", self.template))
+        self.input_variables = set(input_variables) if input_variables is not None else discovered
+
+    def render(self, **kwargs: Any) -> str:
+        """Render the template with dynamic runtime values.
+
+        Raises KeyError if any required placeholders are missing.
+        """
+        missing = [var for var in self.input_variables if var not in kwargs]
+        if missing:
+            raise KeyError(
+                f"Missing required template variables: {missing}. Expected: {sorted(list(self.input_variables))}"
+            )
+        return self.template.format(**kwargs)
+
+    def get_placeholders(self) -> set[str]:
+        """Return the set of named placeholder variable names."""
+        return set(self.input_variables)
+
+    def __repr__(self) -> str:
+        return f"PromptTemplate(input_variables={sorted(list(self.input_variables))})"
+
+
+class ChatPromptTemplate:
+    """Reusable chat prompt combining system and user PromptTemplates."""
+
+    def __init__(
+        self,
+        system_template: PromptTemplate | str,
+        user_template: PromptTemplate | str,
+    ):
+        self.system_template = (
+            system_template if isinstance(system_template, PromptTemplate) else PromptTemplate(system_template)
+        )
+        self.user_template = (
+            user_template if isinstance(user_template, PromptTemplate) else PromptTemplate(user_template)
+        )
+
+    def render_messages(self, **kwargs: Any) -> list[dict[str, str]]:
+        """Render both templates and return formatted messages array for chat APIs."""
+        system_content = self.system_template.render(**kwargs)
+        user_content = self.user_template.render(**kwargs)
+        return [
+            {"role": "system", "content": system_content.strip()},
+            {"role": "user", "content": user_content.strip()},
+        ]
+
+
+# ==============================================================================
+# Standardized Shared Production Templates (Separated from Logic)
+# ==============================================================================
+
+# Shared RAG Query Template for Interactive Chat & Single Lookups
+RAG_COMPLIANCE_USER_TEMPLATE = PromptTemplate(
+    template=(
+        "--- RETRIEVED REGULATORY CONTEXT ---\n"
+        "{context}\n"
+        "------------------------------------\n\n"
+        "Compliance Question: {question}"
+    ),
+    input_variables=["context", "question"],
+)
+
+# Shared Parameterized System Prompt Template
+REGUL_SENSE_SYSTEM_TEMPLATE = PromptTemplate(
+    template=(
+        "You are {assistant_name}, an AI Regulatory Compliance Specialist for {bank_entity}. "
+        "Your duty is to assist risk officers and internal audit staff with regulatory compliance questions.\n\n"
+        "SCOPE OF ASSISTANCE:\n"
+        "- You ONLY provide general informational summaries of banking regulations, AML/KYC standards, internal risk controls, and supervisory reporting standards.\n"
+        "- You MUST NOT provide formal legal advice, guarantee regulatory approvals, speculate on non-public bank policies, or assist in circumventing compliance controls.\n\n"
+        "RESPONSE CONSTRAINTS:\n"
+        "1. Tone: Maintain a strictly professional, neutral, and risk-conscious tone.\n"
+        "2. Structure: Begin with a direct 1-sentence answer, followed by 2 to 3 concise bullet points highlighting key compliance obligations or caveats.\n"
+        "3. Length: Keep your entire response under 150 words. Be direct and avoid conversational filler.\n\n"
+        "FALLBACK PROTOCOL:\n"
+        "If a query is outside banking compliance, requests personal investment/tax evasion advice, or requires circulars/documents not provided, decline to answer and respond with:\n"
+        '"I cannot advise on this matter as it falls outside verified regulatory compliance guidelines. Please refer to the relevant Master Circular or escalate to the Bank\'s Compliance & Legal Department."'
+    ),
+    input_variables=["assistant_name", "bank_entity"],
+)
+
+# Shared Batch Audit Dossier Template
+BATCH_AUDIT_USER_TEMPLATE = PromptTemplate(
+    template=(
+        "--- TRANSACTION AUDIT DOSSIER ---\n"
+        "Audit Item ID: {audit_id}\n"
+        "Transaction Type: {transaction_type}\n"
+        "Amount: {amount}\n"
+        "Relevant Circular: {context}\n"
+        "---------------------------------\n\n"
+        "Compliance Officer Inquiry: {question}\n"
+        "Determine if this transaction requires statutory reporting and cite specific rule provisions."
+    ),
+    input_variables=["audit_id", "transaction_type", "amount", "context", "question"],
+)
+
+
 def format_messages(system_prompt: str, user_query: str) -> list[dict[str, str]]:
     """Format distinct system and user messages for the chat completion API.
 
@@ -90,3 +198,4 @@ def format_messages(system_prompt: str, user_query: str) -> list[dict[str, str]]
         {"role": "system", "content": system_prompt.strip()},
         {"role": "user", "content": user_query.strip()},
     ]
+

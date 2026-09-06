@@ -29,6 +29,7 @@ outputs/*
 !outputs/context_window_management_run.md
 !outputs/parameter_comparison_results.md
 !outputs/structured_output_results.md
+!outputs/prompt_template_renders.md
 
 
 # Python cache
