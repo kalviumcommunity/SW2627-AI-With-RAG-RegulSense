@@ -34,6 +34,7 @@ outputs/*
 !outputs/prompt_template_renders.md
 !outputs/document_loading_intake.md
 !outputs/text_cleaning_results.md
+!outputs/chunking_strategy_comparison.md
 
 
 # Python cache
