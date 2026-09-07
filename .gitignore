@@ -33,6 +33,7 @@ outputs/*
 !outputs/structured_output_results.md
 !outputs/prompt_template_renders.md
 !outputs/document_loading_intake.md
+!outputs/text_cleaning_results.md
 
 
 # Python cache
