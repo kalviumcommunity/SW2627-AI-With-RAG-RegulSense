@@ -18,6 +18,8 @@ data/*
 # Keep folder structure
 !data/.gitkeep
 !data/sample_regulatory_circular.txt
+!data/sample_corpus/
+!data/sample_corpus/**
 
 
 # Generated outputs
@@ -30,6 +32,7 @@ outputs/*
 !outputs/parameter_comparison_results.md
 !outputs/structured_output_results.md
 !outputs/prompt_template_renders.md
+!outputs/document_loading_intake.md
 
 
 # Python cache
