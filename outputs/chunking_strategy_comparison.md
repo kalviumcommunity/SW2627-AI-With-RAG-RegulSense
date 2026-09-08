@@ -3,7 +3,7 @@
 - **Benchmark Document**: `circular_dor_2024_108.txt`
 - **Original Volume**: 4,748 characters | 987 tokens (647 words)
 - **Tokenizer**: `cl100k_base` (OpenAI / TikToken standard)
-- **Execution Timestamp**: 2026-09-08 09:13:27
+- **Execution Timestamp**: 2026-09-08 12:22:35
 - **Chosen Production Strategy**: `RecursiveStructuralChunker`
 
 ---
@@ -23,6 +23,7 @@ We benchmarked three distinct chunking paradigms on standard regulatory text:
 
 | Strategy Name | Total Chunks | Avg Tokens | Token Range [Min - Max] | Std Dev (Tokens) | Overlap Overhead | Boundary Integrity |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|
+| `token_aware_300_overlap_50` | **4** | **284.0** | [236 - 300] | ±27.7 | +15.1% | **0.0%** |
 | `fixed_size_tokens_300_overlap_60` | **4** | **291.8** | [267 - 300] | ±14.3 | +18.2% | **0.0%** |
 | `paragraph_max_400` | **4** | **246.5** | [14 - 396] | ±145.0 | +-0.1% | **75.0%** |
 | `recursive_structural_350_overlap_50` | **4** | **246.5** | [69 - 341] | ±109.7 | +-0.1% | **75.0%** |
@@ -32,6 +33,69 @@ We benchmarked three distinct chunking paradigms on standard regulatory text:
 ## 3. Side-by-Side Chunk Inspection & Boundary Analysis (Task 2 & 5)
 
 The following inspects the exact chunk boundaries produced by each strategy on the same regulatory clauses:
+
+### Strategy: `token_aware_300_overlap_50`
+- **Chunk Count**: 4 chunks produced
+
+#### Chunk 1/4 (300 tokens, 1255 chars)
+- **Citation**: `[Source: circular_dor_2024_108.txt, Chunk: 1/4, Page: 1]`
+```text
+RESERVE BANK OF INDIA
+FINANCIAL STABILITY AND COMPLIANCE DEPARTMENT
+CENTRAL OFFICE, MUMBAI
+
+Ref: RBI/2023-24/108
+Circular No: DOR.AML.REC.66/14.01.001/2023-24
+Date: January 04, 2024
+
+To,
+All Scheduled Commercial Banks (excluding RRBs)
+All Small Finance Banks and Payment Banks
+All Non-Banking Financial Companies (NBFCs)
+
+Subject: Master Direction – Know Your Customer (KYC) and Anti-Money Laundering (AML) Standards – Enhanced Due Diligence and Transaction Record Management
+
+1. Preliminary and Statutory Authority
+In exercise of the powers conferred by Section 35A of the Banking Regulation Act, 1949, read with Section 51A of the Unlawful Activities (Prevention) Act, 1967, and the Prevention of Money-Laundering (Maintenance of Records) Rules, 2005, the Reserve Bank of India hereby issues the updated Master Directions on Customer Due Diligence (CDD) and compliance obligations for regulated entities (REs).
+
+2. Customer Due Diligence (CDD) Requirements
+Regulated entities must undertake client identification and verification procedures before establishing an account-based relationship or executing an occasional cross-border financial transaction:
+(a) Verification of Officially Valid Documents (OVDs): Banks must verify the identity and permanent
+```
+
+#### Chunk 2/4 (300 tokens, 1567 chars)
+- **Citation**: `[Source: circular_dor_2024_108.txt, Chunk: 2/4, Section: '2. Customer Due Diligence (CDD) Requirements', Page: 1]`
+```text
+CDD) Requirements
+Regulated entities must undertake client identification and verification procedures before establishing an account-based relationship or executing an occasional cross-border financial transaction:
+(a) Verification of Officially Valid Documents (OVDs): Banks must verify the identity and permanent address of individual customers using authorized OVDs (e.g., Passport, Permanent Account Number (PAN) Card, Voter ID, Aadhaar through secure offline or e-KYC channels).
+(b) Beneficial Ownership Identification: For corporate entities, trusts, and unincorporated associations, banks shall determine the natural person who ultimately owns or controls a customer, holding at least 10 percent of shares or voting rights.
+(c) Video-based Customer Identification Process (V-CIP): Where remote customer onboarding is conducted, live geo-tagging, facial match algorithms with a confidence score exceeding 95%, and liveliness detection must be strictly enforced.
+
+3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs
+Accounts classified as high-risk, including Politically Exposed Persons (PEPs), non-resident customers, and trusts, warrant enhanced scrutiny:
+(a) Approval from Senior Management: Establishing relationships with PEPs, their family members, or close associates requires written approval from an officer not below the rank of Deputy General Manager.
+(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.
+(c) Height
+```
+
+#### Chunk 3/4 (300 tokens, 1546 chars)
+- **Citation**: `[Source: circular_dor_2024_108.txt, Chunk: 3/4, Section: '3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs', Page: 1]`
+```text
+requires written approval from an officer not below the rank of Deputy General Manager.
+(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.
+(c) Heightened Transaction Monitoring: High-risk accounts shall be subjected to quarterly reviews, compared against the standard biennial review for low-risk customers.
+
+4. Transaction Monitoring and Reporting Thresholds
+Banks shall deploy rule-based and behavioral automated transaction monitoring systems to identify suspicious transaction patterns:
+(a) Cash Transaction Reports (CTRs): All cash transactions of the value of more than rupees ten lakhs or its equivalent in foreign currency must be reported monthly to the Financial Intelligence Unit - India (FIU-IND) by the 15th day of the succeeding month.
+(b) Counterfeit Currency Reports (CCRs) and Non-Profit Organization Transaction Reports (NTRs): All cross-border non-profit transactions exceeding rupees ten lakhs must be logged and monitored.
+(c) Suspicious Transaction Reports (STRs): If any transaction gives rise to reasonable suspicion of illicit funds, evasion, or terrorism financing, an STR shall be furnished to FIU-IND within seven working days of arriving at such a conclusion.
+
+5. Record Retention Obligations
+Under Rule 3 and Rule 10 of the PML Rules, 2005, all regulated entities shall maintain:
+(a) Transaction Records: Comprehensive records of all transactions, whether completed or attempted, domestic or
+```
 
 ### Strategy: `fixed_size_tokens_300_overlap_60`
 - **Chunk Count**: 4 chunks produced
