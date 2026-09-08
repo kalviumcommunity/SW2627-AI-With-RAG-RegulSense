@@ -39,6 +39,8 @@ outputs/*
 !outputs/chunk_metadata_trace_demonstration.md
 !outputs/token_aware_chunks_sample.json
 !outputs/token_overlap_boundary_demonstration.md
+!outputs/corpus_ingestion_summary.md
+!outputs/corpus_ingested_chunks.json
 
 
 # Python cache

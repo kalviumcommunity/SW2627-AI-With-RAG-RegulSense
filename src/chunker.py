@@ -336,6 +336,12 @@ class ChunkTracer:
                         doc_text = _load_content_from_path(candidate)
                         break
 
+            if doc_text is not None and meta.get("cleaned") and TextCleaner is not None:
+                try:
+                    doc_text = TextCleaner().clean(doc_text)
+                except Exception:
+                    pass
+
         char_start = int(meta.get("char_start", 0))
         char_end = int(meta.get("char_end", 0))
         section = str(meta.get("section", "General"))

@@ -342,6 +342,8 @@ class TextCleaner:
 
         return result
 
+    clean_text = clean
+
     def clean_document(self, doc: Document) -> Document:
         """Clean a Document instance and record provenance & transformation metadata."""
         raw_text = doc.content
