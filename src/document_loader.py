@@ -377,8 +377,15 @@ class DocumentLoader:
         if not pages_text:
             raise CorruptedDocumentError(f"PDF '{path.name}' contains no readable text content (may be scanned images without OCR).")
 
+        page_boundaries: List[Tuple[int, int, int]] = []
+        current_offset = 0
+        for p_num, p_text in enumerate(pages_text, 1):
+            p_len = len(p_text)
+            page_boundaries.append((p_num, current_offset, current_offset + p_len))
+            current_offset += p_len + 2  # account for "\n\n" separator
+
         full_content = "\n\n".join(pages_text)
-        return full_content.strip(), {"page_count": page_count}
+        return full_content.strip(), {"page_count": page_count, "page_boundaries": page_boundaries}
 
     def load_directory(
         self,

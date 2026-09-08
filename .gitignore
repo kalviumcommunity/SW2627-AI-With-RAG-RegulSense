@@ -35,6 +35,8 @@ outputs/*
 !outputs/document_loading_intake.md
 !outputs/text_cleaning_results.md
 !outputs/chunking_strategy_comparison.md
+!outputs/sample_chunks_with_metadata.json
+!outputs/chunk_metadata_trace_demonstration.md
 
 
 # Python cache

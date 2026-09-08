@@ -3,7 +3,7 @@
 - **Benchmark Document**: `circular_dor_2024_108.txt`
 - **Original Volume**: 4,748 characters | 987 tokens (647 words)
 - **Tokenizer**: `cl100k_base` (OpenAI / TikToken standard)
-- **Execution Timestamp**: 2026-09-07 14:27:20
+- **Execution Timestamp**: 2026-09-08 09:13:27
 - **Chosen Production Strategy**: `RecursiveStructuralChunker`
 
 ---
@@ -37,7 +37,7 @@ The following inspects the exact chunk boundaries produced by each strategy on t
 - **Chunk Count**: 4 chunks produced
 
 #### Chunk 1/4 (300 tokens, 1255 chars)
-- **Citation**: `[Source: circular_dor_2024_108.txt, Chunk: 1/4]`
+- **Citation**: `[Source: circular_dor_2024_108.txt, Chunk: 1/4, Page: 1]`
 ```text
 RESERVE BANK OF INDIA
 FINANCIAL STABILITY AND COMPLIANCE DEPARTMENT
@@ -63,7 +63,7 @@ Regulated entities must undertake client identification and verification procedu
 ```
 
 #### Chunk 2/4 (300 tokens, 1560 chars)
-- **Citation**: `[Source: circular_dor_2024_108.txt, Chunk: 2/4]`
+- **Citation**: `[Source: circular_dor_2024_108.txt, Chunk: 2/4, Section: '1. Preliminary and Statutory Authority', Page: 1]`
 ```text
 s).
 
@@ -80,7 +80,7 @@ Accounts classified as high-risk, including Politically Exposed Persons (PEPs), 
 ```
 
 #### Chunk 3/4 (300 tokens, 1537 chars)
-- **Citation**: `[Source: circular_dor_2024_108.txt, Chunk: 3/4]`
+- **Citation**: `[Source: circular_dor_2024_108.txt, Chunk: 3/4, Section: '3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs', Page: 1]`
 ```text
 Approval from Senior Management: Establishing relationships with PEPs, their family members, or close associates requires written approval from an officer not below the rank of Deputy General Manager.
 (b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.
@@ -100,7 +100,7 @@ Under Rule 3 and Rule 10 of the PML Rules, 2005, all regulated entities shall
 - **Chunk Count**: 4 chunks produced
 
 #### Chunk 1/4 (242 tokens, 912 chars)
-- **Citation**: `[Source: circular_dor_2024_108.txt, Chunk: 1/4]`
+- **Citation**: `[Source: circular_dor_2024_108.txt, Chunk: 1/4, Page: 1]`
 ```text
 RESERVE BANK OF INDIA
 FINANCIAL STABILITY AND COMPLIANCE DEPARTMENT
@@ -122,7 +122,7 @@ In exercise of the powers conferred by Section 35A of the Banking Regulation Act
 ```
 
 #### Chunk 2/4 (334 tokens, 1752 chars)
-- **Citation**: `[Source: circular_dor_2024_108.txt, Chunk: 2/4]`
+- **Citation**: `[Source: circular_dor_2024_108.txt, Chunk: 2/4, Section: '2. Customer Due Diligence (CDD) Requirements', Page: 1]`
 ```text
 2. Customer Due Diligence (CDD) Requirements
 Regulated entities must undertake client identification and verification procedures before establishing an account-based relationship or executing an occasional cross-border financial transaction:
@@ -138,7 +138,7 @@ Accounts classified as high-risk, including Politically Exposed Persons (PEPs), 
 ```
 
 #### Chunk 3/4 (396 tokens, 2027 chars)
-- **Citation**: `[Source: circular_dor_2024_108.txt, Chunk: 3/4]`
+- **Citation**: `[Source: circular_dor_2024_108.txt, Chunk: 3/4, Section: '4. Transaction Monitoring and Reporting Thresholds', Page: 1]`
 ```text
 4. Transaction Monitoring and Reporting Thresholds
 Banks shall deploy rule-based and behavioral automated transaction monitoring systems to identify suspicious transaction patterns:
@@ -160,7 +160,7 @@ Failure to adhere to these directions shall attract monetary penalties under Sec
 - **Chunk Count**: 4 chunks produced
 
 #### Chunk 1/4 (242 tokens, 912 chars)
-- **Citation**: `[Source: circular_dor_2024_108.txt, Chunk: 1/4]`
+- **Citation**: `[Source: circular_dor_2024_108.txt, Chunk: 1/4, Page: 1]`
 ```text
 RESERVE BANK OF INDIA
 FINANCIAL STABILITY AND COMPLIANCE DEPARTMENT
@@ -182,7 +182,7 @@ In exercise of the powers conferred by Section 35A of the Banking Regulation Act
 ```
 
 #### Chunk 2/4 (334 tokens, 1752 chars)
-- **Citation**: `[Source: circular_dor_2024_108.txt, Chunk: 2/4]`
+- **Citation**: `[Source: circular_dor_2024_108.txt, Chunk: 2/4, Section: '2. Customer Due Diligence (CDD) Requirements', Page: 1]`
 ```text
 2. Customer Due Diligence (CDD) Requirements
 Regulated entities must undertake client identification and verification procedures before establishing an account-based relationship or executing an occasional cross-border financial transaction:
@@ -198,7 +198,7 @@ Accounts classified as high-risk, including Politically Exposed Persons (PEPs), 
 ```
 
 #### Chunk 3/4 (341 tokens, 1784 chars)
-- **Citation**: `[Source: circular_dor_2024_108.txt, Chunk: 3/4]`
+- **Citation**: `[Source: circular_dor_2024_108.txt, Chunk: 3/4, Section: '4. Transaction Monitoring and Reporting Thresholds', Page: 1]`
 ```text
 4. Transaction Monitoring and Reporting Thresholds
 Banks shall deploy rule-based and behavioral automated transaction monitoring systems to identify suspicious transaction patterns:
