@@ -37,6 +37,8 @@ outputs/*
 !outputs/chunking_strategy_comparison.md
 !outputs/sample_chunks_with_metadata.json
 !outputs/chunk_metadata_trace_demonstration.md
+!outputs/token_aware_chunks_sample.json
+!outputs/token_overlap_boundary_demonstration.md
 
 
 # Python cache
