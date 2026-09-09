@@ -45,6 +45,8 @@ outputs/*
 !outputs/sample_embeddings.json
 !outputs/embedded_corpus_chunks.json
 !outputs/embedding_generation_verification.md
+!outputs/similarity_ranking_results.md
+!outputs/similarity_ranking_results.json
 
 
 # Python cache
