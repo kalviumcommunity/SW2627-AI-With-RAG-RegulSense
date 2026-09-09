@@ -41,6 +41,8 @@ outputs/*
 !outputs/token_overlap_boundary_demonstration.md
 !outputs/corpus_ingestion_summary.md
 !outputs/corpus_ingested_chunks.json
+!outputs/embedding_fundamentals_demonstration.md
+!outputs/sample_embeddings.json
 
 
 # Python cache
