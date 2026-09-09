@@ -1,0 +1,70 @@
+# RegulSense: Prepared Corpus Embedding Generation & Verification
+
+- **Target Embedding Model**: `all-minilm`
+- **API Base URL**: `http://localhost:11434/v1`
+- **Total Chunks Embedded**: `15`
+- **Embedding Vector Dimension**: `384`
+- **Dimension Uniformity Audit**: **PASSED: 15 chunks embedded with uniform vector dimension 384**
+- **Corpus Documents Represented**: `5` documents (.html, .md, .pdf, .txt)
+
+---
+
+## 1. Executive Verification Summary (Task 4)
+
+| Audit Metric | Value | Verification Status |
+| :--- | :---: | :--- |
+| **Total Chunks Embedded** | `15` | 100% of prepared chunks processed |
+| **Vector Length (Dimension)** | `384` | Uniform across all chunks |
+| **Dimension Uniformity** | `True` | $\forall c, \text{dim}(c) = 384$ |
+| **Unique Regulatory Docs** | `5` | Cross-format (.pdf, .txt, .html, .md) |
+| **Environment Configured** | `True` | Loaded dynamically from `.env` |
+
+---
+
+## 2. Sample Embedded Chunk & Metadata Linkage (Tasks 1, 2 & 4)
+
+### Sample Chunk ID: `circular_dor_2024_108_txt_tokenaware_001`
+
+- **Source Document**: `circular_dor_2024_108.txt`
+- **Document Identifier**: `circular_dor_2024_108_txt`
+- **Governing Section**: `Preamble / Document Header`
+- **Page Number**: `1`
+- **Chunk Index**: `0`
+- **Token Count**: `300` tokens
+- **Vector Length**: `384` dimensions
+- **Trimmed Vector Values (First 8 coordinates)**: `[-0.014354, 0.000433, -0.039206, -0.052459, -0.002194, -0.000799, 0.007816, 0.01694]`
+
+---
+
+## 3. Detailed Embedded Corpus Ledger
+
+The table below details the stored source text preview, retrieval metadata, and vector properties for the prepared corpus:
+
+| Chunk ID | Source Document | Section | Page | Chunk Idx | Vector Length | Trimmed Vector (First 5 Values) |
+| :--- | :--- | :--- | :---: | :---: | :---: | :--- |
+| `circular_dor_2024_108_txt_tokenaware_001` | `circular_dor_2024_108.txt` | Preamble / Document Header | 1 | 0 | `384` | `[-0.0144, 0.0004, -0.0392, -0.0525, -0.0022]` |
+| `circular_dor_2024_108_txt_tokenaware_002` | `circular_dor_2024_108.txt` | 2. Customer Due Diligence (... | 1 | 1 | `384` | `[-0.0711, -0.0280, -0.0266, -0.0616, 0.0413]` |
+| `circular_dor_2024_108_txt_tokenaware_003` | `circular_dor_2024_108.txt` | 3. Enhanced Due Diligence (... | 1 | 2 | `384` | `[-0.0219, -0.0297, -0.1296, -0.0012, 0.0285]` |
+| `circular_dor_2024_108_txt_tokenaware_004` | `circular_dor_2024_108.txt` | 5. Record Retention Obligat... | 1 | 3 | `384` | `[-0.0789, 0.0154, -0.0014, -0.0275, -0.0379]` |
+| `cyber_resilience_framework_pdf_tokenaware_001` | `cyber_resilience_framework.pdf` | Preamble / Document Header | 1 | 0 | `384` | `[-0.0121, -0.0051, -0.0741, -0.0082, 0.0371]` |
+| `cyber_resilience_framework_pdf_tokenaware_002` | `cyber_resilience_framework.pdf` | Preamble / Document Header | 1 | 1 | `384` | `[0.0027, -0.0196, -0.0559, -0.0442, 0.0267]` |
+| `digital_lending_compliance_note_html_tokenaware_001` | `digital_lending_compliance_note.html` | Preamble / Document Header | 1 | 0 | `384` | `[-0.0023, -0.0593, -0.0219, -0.0338, 0.0693]` |
+| `digital_lending_compliance_note_html_tokenaware_002` | `digital_lending_compliance_note.html` | 3. Code of Conduct for Reco... | 1 | 1 | `384` | `[-0.0700, 0.0433, 0.0075, -0.1063, 0.0104]` |
+| `guidelines_cdd_pml_rules_md_tokenaware_001` | `guidelines_cdd_pml_rules.md` | Internal Compliance Guideli... | 1 | 0 | `384` | `[-0.0189, -0.0213, -0.0501, -0.0127, -0.0130]` |
+| `guidelines_cdd_pml_rules_md_tokenaware_002` | `guidelines_cdd_pml_rules.md` | 2. Customer Risk Categoriza... | 1 | 1 | `384` | `[-0.0827, -0.0250, 0.0081, -0.0398, -0.0197]` |
+| `guidelines_cdd_pml_rules_md_tokenaware_003` | `guidelines_cdd_pml_rules.md` | 4. Beneficial Ownership Thr... | 1 | 2 | `384` | `[-0.0200, -0.0097, -0.0540, 0.0271, -0.0178]` |
+| `sample_regulatory_circular_txt_tokenaware_001` | `sample_regulatory_circular.txt` | Preamble / Document Header | 1 | 0 | `384` | `[-0.0144, 0.0004, -0.0392, -0.0525, -0.0022]` |
+| `sample_regulatory_circular_txt_tokenaware_002` | `sample_regulatory_circular.txt` | 2. Customer Due Diligence (... | 1 | 1 | `384` | `[-0.0711, -0.0280, -0.0266, -0.0616, 0.0413]` |
+| `sample_regulatory_circular_txt_tokenaware_003` | `sample_regulatory_circular.txt` | 3. Enhanced Due Diligence (... | 1 | 2 | `384` | `[-0.0219, -0.0297, -0.1296, -0.0012, 0.0285]` |
+| `sample_regulatory_circular_txt_tokenaware_004` | `sample_regulatory_circular.txt` | 5. Record Retention Obligat... | 1 | 3 | `384` | `[-0.0789, 0.0154, -0.0014, -0.0275, -0.0379]` |
+
+---
+
+## 4. Verification of Retrieval Readiness
+
+- **Vector-Text Binding**: Every embedding is immutably coupled with its raw chunk text (`source_text`).
+- **Audit Trail Metadata**: Every chunk preserves exact provenance (`source`, `filename`, `document_id`, `chunk_index`, `section`, `page_number`).
+- **Downstream Compatibility**: Ready for indexing into vector stores (e.g. ChromaDB, FAISS) for dense semantic retrieval in RegulSense.
+
+---
+*Report automatically generated by `src/corpus_embedder.py` for RegulSense RAG Assistant.*

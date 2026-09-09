@@ -43,6 +43,8 @@ outputs/*
 !outputs/corpus_ingested_chunks.json
 !outputs/embedding_fundamentals_demonstration.md
 !outputs/sample_embeddings.json
+!outputs/embedded_corpus_chunks.json
+!outputs/embedding_generation_verification.md
 
 
 # Python cache
