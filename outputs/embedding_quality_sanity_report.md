@@ -5,7 +5,7 @@
 - **Test Suite Size**: `6 known relevance test cases`
 - **Overall Pass Rate**: `5/6 passed (83.3%)`
 - **Average Separation Margin**: `+0.2339` (Cosine Similarity delta)
-- **Execution Latency**: `3.167 seconds`
+- **Execution Latency**: `2.889 seconds`
 
 ---
 
