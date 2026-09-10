@@ -51,6 +51,8 @@ outputs/*
 !outputs/batch_embedding_run_summary.json
 !outputs/embedding_quality_sanity_report.md
 !outputs/embedding_quality_sanity_report.json
+!outputs/vector_db_setup_report.md
+!outputs/vector_db_readback_record.json
 
 
 # Python cache
