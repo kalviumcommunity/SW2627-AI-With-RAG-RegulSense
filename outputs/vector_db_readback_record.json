@@ -9,7 +9,7 @@
     "distance_metric": "cosine",
     "embedding_model": "all-minilm",
     "is_reachable": true,
-    "heartbeat": 1789026477586393700
+    "heartbeat": 1789027091719676400
   },
   "readback_verification": {
     "record_id": "circular_dor_2024_108_txt_tokenaware_001",
@@ -32,17 +32,17 @@
       "file_type": ".txt"
     },
     "readback_metadata": {
-      "page_number": 1,
-      "section": "Preamble / Document Header",
-      "token_count": 300,
-      "source_document": "circular_dor_2024_108.txt",
       "chunk_index": 0,
       "file_type": ".txt",
-      "document_id": "circular_dor_2024_108_txt"
+      "document_id": "circular_dor_2024_108_txt",
+      "section": "Preamble / Document Header",
+      "token_count": 300,
+      "page_number": 1,
+      "source_document": "circular_dor_2024_108.txt"
     },
     "status": "PASSED: Record 'circular_dor_2024_108_txt_tokenaware_001' successfully inserted and verified across all criteria",
     "verification_passed": true,
-    "timestamp": "2026-09-10T07:47:57.586319+00:00"
+    "timestamp": "2026-09-10T07:58:11.719576+00:00"
   },
   "readback_record_sample": {
     "id": "circular_dor_2024_108_txt_tokenaware_001",
