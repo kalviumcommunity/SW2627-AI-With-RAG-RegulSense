@@ -1,0 +1,272 @@
+{
+  "total_tests": 6,
+  "passed_tests": 5,
+  "failed_tests": 1,
+  "borderline_tests": 0,
+  "pass_rate_pct": 83.3,
+  "average_separation_margin": 0.2339,
+  "model_name": "all-minilm",
+  "corpus_size": 15,
+  "evaluations": [
+    {
+      "case_id": "SANITY-01",
+      "query": "What officially valid documents (OVDs) are required for customer due diligence and identity verification?",
+      "category": "Customer Due Diligence / KYC",
+      "expected_outcome": "PASS",
+      "passed": true,
+      "status": "PASSED",
+      "best_relevant_chunk_id": "circular_dor_2024_108_txt_tokenaware_002",
+      "best_relevant_rank": 1,
+      "best_relevant_score": 0.6657,
+      "worst_unrelated_chunk_id": "cyber_resilience_framework_pdf_tokenaware_001",
+      "worst_unrelated_rank": 14,
+      "worst_unrelated_score": 0.2903,
+      "separation_margin": 0.3754,
+      "top_1_chunk_id": "circular_dor_2024_108_txt_tokenaware_002",
+      "top_1_score": 0.6657,
+      "top_1_document": "circular_dor_2024_108.txt",
+      "top_1_section": "2. Customer Due Diligence (CDD) Requirements",
+      "top_ranked_matches": [
+        {
+          "rank": 1,
+          "chunk_id": "circular_dor_2024_108_txt_tokenaware_002",
+          "score": 0.6657,
+          "source_document": "circular_dor_2024_108.txt",
+          "section": "2. Customer Due Diligence (CDD) Requirements"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "sample_regulatory_circular_txt_tokenaware_002",
+          "score": 0.6657,
+          "source_document": "sample_regulatory_circular.txt",
+          "section": "2. Customer Due Diligence (CDD) Requirements"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "guidelines_cdd_pml_rules_md_tokenaware_001",
+          "score": 0.4629,
+          "source_document": "guidelines_cdd_pml_rules.md",
+          "section": "Internal Compliance Guidelines: CDD & Prevention of Money Laundering (PML) Rules"
+        }
+      ],
+      "diagnostic_notes": "PASSED: Target chunk 'circular_dor_2024_108_txt_tokenaware_002' achieved Rank 1 (Score: 0.6657), outranking negative control by margin of +0.3754."
+    },
+    {
+      "case_id": "SANITY-02",
+      "query": "What are the incident reporting requirements and mandatory notification timelines for bank cyber attacks?",
+      "category": "Cyber Resilience & Incident Response",
+      "expected_outcome": "PASS",
+      "passed": true,
+      "status": "PASSED",
+      "best_relevant_chunk_id": "cyber_resilience_framework_pdf_tokenaware_001",
+      "best_relevant_rank": 1,
+      "best_relevant_score": 0.5845,
+      "worst_unrelated_chunk_id": "guidelines_cdd_pml_rules_md_tokenaware_002",
+      "worst_unrelated_rank": 14,
+      "worst_unrelated_score": 0.3217,
+      "separation_margin": 0.2628,
+      "top_1_chunk_id": "cyber_resilience_framework_pdf_tokenaware_001",
+      "top_1_score": 0.5845,
+      "top_1_document": "cyber_resilience_framework.pdf",
+      "top_1_section": "Preamble / Document Header",
+      "top_ranked_matches": [
+        {
+          "rank": 1,
+          "chunk_id": "cyber_resilience_framework_pdf_tokenaware_001",
+          "score": 0.5845,
+          "source_document": "cyber_resilience_framework.pdf",
+          "section": "Preamble / Document Header"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "cyber_resilience_framework_pdf_tokenaware_002",
+          "score": 0.5523,
+          "source_document": "cyber_resilience_framework.pdf",
+          "section": "Preamble / Document Header"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "circular_dor_2024_108_txt_tokenaware_003",
+          "score": 0.5319,
+          "source_document": "circular_dor_2024_108.txt",
+          "section": "3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs"
+        }
+      ],
+      "diagnostic_notes": "PASSED: Target chunk 'cyber_resilience_framework_pdf_tokenaware_001' achieved Rank 1 (Score: 0.5845), outranking negative control by margin of +0.2628."
+    },
+    {
+      "case_id": "SANITY-03",
+      "query": "How many years must banks retain customer transaction records and account opening files?",
+      "category": "Statutory Record Retention",
+      "expected_outcome": "PASS",
+      "passed": true,
+      "status": "PASSED",
+      "best_relevant_chunk_id": "circular_dor_2024_108_txt_tokenaware_004",
+      "best_relevant_rank": 1,
+      "best_relevant_score": 0.6386,
+      "worst_unrelated_chunk_id": "digital_lending_compliance_note_html_tokenaware_002",
+      "worst_unrelated_rank": 13,
+      "worst_unrelated_score": 0.34,
+      "separation_margin": 0.2986,
+      "top_1_chunk_id": "circular_dor_2024_108_txt_tokenaware_004",
+      "top_1_score": 0.6386,
+      "top_1_document": "circular_dor_2024_108.txt",
+      "top_1_section": "5. Record Retention Obligations",
+      "top_ranked_matches": [
+        {
+          "rank": 1,
+          "chunk_id": "circular_dor_2024_108_txt_tokenaware_004",
+          "score": 0.6386,
+          "source_document": "circular_dor_2024_108.txt",
+          "section": "5. Record Retention Obligations"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "sample_regulatory_circular_txt_tokenaware_004",
+          "score": 0.6386,
+          "source_document": "sample_regulatory_circular.txt",
+          "section": "5. Record Retention Obligations"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "guidelines_cdd_pml_rules_md_tokenaware_003",
+          "score": 0.556,
+          "source_document": "guidelines_cdd_pml_rules.md",
+          "section": "4. Beneficial Ownership Thresholds"
+        }
+      ],
+      "diagnostic_notes": "PASSED: Target chunk 'circular_dor_2024_108_txt_tokenaware_004' achieved Rank 1 (Score: 0.6386), outranking negative control by margin of +0.2986."
+    },
+    {
+      "case_id": "SANITY-04",
+      "query": "What disclosures must digital lending platforms make regarding all-inclusive interest rates and annual percentage rates?",
+      "category": "Digital Lending Disclosures",
+      "expected_outcome": "PASS",
+      "passed": true,
+      "status": "PASSED",
+      "best_relevant_chunk_id": "digital_lending_compliance_note_html_tokenaware_001",
+      "best_relevant_rank": 1,
+      "best_relevant_score": 0.5272,
+      "worst_unrelated_chunk_id": "circular_dor_2024_108_txt_tokenaware_003",
+      "worst_unrelated_rank": 10,
+      "worst_unrelated_score": 0.3155,
+      "separation_margin": 0.2117,
+      "top_1_chunk_id": "digital_lending_compliance_note_html_tokenaware_001",
+      "top_1_score": 0.5272,
+      "top_1_document": "digital_lending_compliance_note.html",
+      "top_1_section": "Preamble / Document Header",
+      "top_ranked_matches": [
+        {
+          "rank": 1,
+          "chunk_id": "digital_lending_compliance_note_html_tokenaware_001",
+          "score": 0.5272,
+          "source_document": "digital_lending_compliance_note.html",
+          "section": "Preamble / Document Header"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "digital_lending_compliance_note_html_tokenaware_002",
+          "score": 0.4697,
+          "source_document": "digital_lending_compliance_note.html",
+          "section": "3. Code of Conduct for Recovery Agents"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "cyber_resilience_framework_pdf_tokenaware_002",
+          "score": 0.3605,
+          "source_document": "cyber_resilience_framework.pdf",
+          "section": "Preamble / Document Header"
+        }
+      ],
+      "diagnostic_notes": "PASSED: Target chunk 'digital_lending_compliance_note_html_tokenaware_001' achieved Rank 1 (Score: 0.5272), outranking negative control by margin of +0.2117."
+    },
+    {
+      "case_id": "SANITY-05",
+      "query": "Who must approve establishing a banking relationship with a Politically Exposed Person?",
+      "category": "Governance & PEP Approval Authority",
+      "expected_outcome": "SURPRISING_FAIL",
+      "passed": false,
+      "status": "FAILED (EXPECTED_SURPRISE)",
+      "best_relevant_chunk_id": "circular_dor_2024_108_txt_tokenaware_003",
+      "best_relevant_rank": 6,
+      "best_relevant_score": 0.4071,
+      "worst_unrelated_chunk_id": "cyber_resilience_framework_pdf_tokenaware_001",
+      "worst_unrelated_rank": 13,
+      "worst_unrelated_score": 0.3381,
+      "separation_margin": 0.069,
+      "top_1_chunk_id": "circular_dor_2024_108_txt_tokenaware_002",
+      "top_1_score": 0.4681,
+      "top_1_document": "circular_dor_2024_108.txt",
+      "top_1_section": "2. Customer Due Diligence (CDD) Requirements",
+      "top_ranked_matches": [
+        {
+          "rank": 1,
+          "chunk_id": "circular_dor_2024_108_txt_tokenaware_002",
+          "score": 0.4681,
+          "source_document": "circular_dor_2024_108.txt",
+          "section": "2. Customer Due Diligence (CDD) Requirements"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "sample_regulatory_circular_txt_tokenaware_002",
+          "score": 0.4681,
+          "source_document": "sample_regulatory_circular.txt",
+          "section": "2. Customer Due Diligence (CDD) Requirements"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "guidelines_cdd_pml_rules_md_tokenaware_002",
+          "score": 0.439,
+          "source_document": "guidelines_cdd_pml_rules.md",
+          "section": "2. Customer Risk Categorization"
+        }
+      ],
+      "diagnostic_notes": "CONFIRMED SURPRISING CASE: Related chunk outranked negative control (+0.0690), but failed top-3 threshold (Rank 6, Score 0.4071) due to bi-encoder semantic dilution."
+    },
+    {
+      "case_id": "SANITY-06",
+      "query": "What hours are recovery agents permitted to call borrowers and what conduct is prohibited?",
+      "category": "Debt Recovery Conduct Hours",
+      "expected_outcome": "BORDERLINE",
+      "passed": true,
+      "status": "PASSED",
+      "best_relevant_chunk_id": "digital_lending_compliance_note_html_tokenaware_002",
+      "best_relevant_rank": 2,
+      "best_relevant_score": 0.508,
+      "worst_unrelated_chunk_id": "circular_dor_2024_108_txt_tokenaware_004",
+      "worst_unrelated_rank": 3,
+      "worst_unrelated_score": 0.322,
+      "separation_margin": 0.186,
+      "top_1_chunk_id": "digital_lending_compliance_note_html_tokenaware_001",
+      "top_1_score": 0.5385,
+      "top_1_document": "digital_lending_compliance_note.html",
+      "top_1_section": "Preamble / Document Header",
+      "top_ranked_matches": [
+        {
+          "rank": 1,
+          "chunk_id": "digital_lending_compliance_note_html_tokenaware_001",
+          "score": 0.5385,
+          "source_document": "digital_lending_compliance_note.html",
+          "section": "Preamble / Document Header"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "digital_lending_compliance_note_html_tokenaware_002",
+          "score": 0.508,
+          "source_document": "digital_lending_compliance_note.html",
+          "section": "3. Code of Conduct for Recovery Agents"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "circular_dor_2024_108_txt_tokenaware_004",
+          "score": 0.322,
+          "source_document": "circular_dor_2024_108.txt",
+          "section": "5. Record Retention Obligations"
+        }
+      ],
+      "diagnostic_notes": "PASSED: Target chunk 'digital_lending_compliance_note_html_tokenaware_002' achieved Rank 2 (Score: 0.5080), outranking negative control by margin of +0.1860."
+    }
+  ],
+  "surprising_case_analysis": "### Deep Dive: Analysis of Surprising & Borderline Retrieval Cases (Task 3)\n\nEmpirical testing across the prepared banking regulatory corpus revealed two key architectural phenomena that provide crucial insight into the behavior of dense embedding bi-encoders:\n\n#### 1. The Politically Exposed Persons (PEP) Approval Authority Failure (`SANITY-05`)\n- **Query**: *\"Who must approve establishing a banking relationship with a Politically Exposed Person?\"*\n- **Ground Truth Target**: `circular_dor_2024_108_txt_tokenaware_003` (Section 3: Enhanced Due Diligence for High-Risk Accounts and PEPs).\n  - *Direct Substantive Answer*: *\"Establishing relationships with PEPs, their family members, or close associates requires written approval from an officer not below the rank of Deputy General Manager.\"*\n- **Empirical Retrieval Outcome**:\n  - **Rank 1 (Score 0.4681)**: `circular_dor_2024_108_txt_tokenaware_002` (2. Customer Due Diligence Requirements)\n  - **Rank 2 (Score 0.4681)**: `sample_regulatory_circular_txt_tokenaware_002` (Duplicate circular CDD section)\n  - **Rank 3 (Score 0.4390)**: `guidelines_cdd_pml_rules_md_tokenaware_002` (Customer Risk Categorization)\n  - **Rank 4 (Score 0.4263)**: `circular_dor_2024_108_txt_tokenaware_001` (Document Header/Preamble)\n  - **Rank 6 (Score 0.4071)**: **Target Ground Truth Chunk (`tokenaware_003`)**\n- **Why Did This Happen? (Root Cause Analysis)**:\n  1. **Semantic Dominance of Common Phrases**: The query contains the phrase *\"establishing a banking relationship\"*. In the embedding space of `all-minilm`, this phrase shares dense semantic overlap with general account-opening procedures described extensively in Section 2 (*\"establish an account-based relationship\"*).\n  2. **Bi-Encoder Vector Compression Without Cross-Attention**: Dense bi-encoders independently project the entire query and entire chunk into fixed 384-dimensional vectors. Because Section 3 also discusses trusts, quarterly reviews, and source of funds, the specific DGM approval token vector is diluted across the 300-token chunk.\n  3. **Lack of Keyword Hard-Matching**: The query specifically asks *\"Who must approve\"* (a governance question). Dense embeddings without BM25 lexical boosting or cross-encoder re-ranking cannot prioritize the keyword match for *\"Deputy General Manager approval\"*.\n- **Architectural Remedy for RAG Pipeline**:\n  - Implement a **Hybrid Retrieval (BM25 + Dense)** pipeline. BM25 directly indexes the exact entity *\"Politically Exposed Person\"* and *\"approval\"*, lifting the chunk into the candidate pool.\n  - Apply a **Cross-Encoder Re-Ranker** (e.g. `bge-reranker-base`) on the top-10 candidates. Cross-encoders perform full cross-attention between every query word and document word, instantly promoting the DGM answer chunk to Rank 1.\n\n#### 2. The Preamble Attraction / Inversion Phenomenon (`SANITY-06`)\n- **Query**: *\"What hours are recovery agents permitted to call borrowers and what conduct is prohibited?\"*\n- **Target Clause**: `digital_lending_compliance_note_html_tokenaware_002` (Section 3: Code of Conduct for Recovery Agents - contains exact 08:00 to 19:00 hours).\n- **Empirical Retrieval Outcome**:\n  - **Rank 1 (Score 0.5385)**: `digital_lending_compliance_note_html_tokenaware_001` (Preamble / Document Header)\n  - **Rank 2 (Score 0.5080)**: `digital_lending_compliance_note_html_tokenaware_002` (Operative Recovery Agent Section)\n- **Why Did This Happen?**:\n  - The document preamble acts as a summary abstract, mentioning digital lending platforms, loan recovery, borrower rights, and fair practices all in one concentrated paragraph.\n  - This summary nature gives it artificially high cosine similarity against multiple user queries compared to the narrow substantive section below it.\n- **Architectural Remedy**:\n  - Add section hierarchy metadata filtering or chunk-type penalties for document preambles during semantic search.",
+  "execution_time_seconds": 3.167
+}
