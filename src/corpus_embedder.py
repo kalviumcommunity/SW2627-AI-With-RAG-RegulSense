@@ -145,55 +145,32 @@ class CorpusChunkEmbedder:
         chunks: List[Dict[str, Any]],
         batch_size: int = 16,
         trim_length: int = 8,
+        cache_path: Optional[Path] = None,
+        force_refresh: bool = True,
     ) -> List[EmbeddedChunkRecord]:
-        """Embeds a list of chunk dicts and returns EmbeddedChunkRecord instances.
+        """Embeds a list of chunk dicts in batches with resilient retry handling.
         
         Validates that every returned vector matches the expected dimension.
         """
+        from src.batch_embedder import BatchEmbedder
+
         if not chunks:
             return []
 
-        embedded_records: List[EmbeddedChunkRecord] = []
-        total_chunks = len(chunks)
-
-        logger.info("Starting embedding generation for %d chunks (batch_size=%d)...", total_chunks, batch_size)
-
-        for i in range(0, total_chunks, batch_size):
-            batch = chunks[i : i + batch_size]
-            batch_texts = [c.get("content", "") for c in batch]
-
-            try:
-                response = self.client.embeddings.create(
-                    model=self.model,
-                    input=batch_texts,
-                )
-            except Exception as exc:
-                logger.error("Embedding API call failed for batch [%d:%d]: %s", i, i + len(batch), exc)
-                raise
-
-            for chunk_meta, item in zip(batch, response.data):
-                vector = item.embedding
-                v_len = len(vector)
-                trimmed = [round(x, 6) for x in vector[:trim_length]]
-
-                # Standardize retrieval metadata
-                meta = dict(chunk_meta.get("metadata", {}))
-                meta.setdefault("chunk_id", chunk_meta.get("chunk_id", "unknown_chunk"))
-                meta.setdefault("chunk_index", chunk_meta.get("chunk_index", 0))
-                meta.setdefault("total_chunks", chunk_meta.get("total_chunks", 1))
-
-                record = EmbeddedChunkRecord(
-                    chunk_id=chunk_meta.get("chunk_id", "unknown_chunk"),
-                    source_text=chunk_meta.get("content", ""),
-                    metadata=meta,
-                    vector_length=v_len,
-                    trimmed_vector=trimmed,
-                    embedding=vector,
-                )
-                embedded_records.append(record)
-
-        logger.info("Successfully embedded %d chunks.", len(embedded_records))
-        return embedded_records
+        embedder = BatchEmbedder(
+            model=self.model,
+            batch_size=batch_size,
+            client=self.client,
+        )
+        records, _ = embedder.embed_chunks_batched(
+            chunks=chunks,
+            batch_size=batch_size,
+            cache_path=cache_path,
+            force_refresh=force_refresh,
+            trim_length=trim_length,
+            continue_on_failure=False,
+        )
+        return records
 
     def verify_embeddings(
         self,

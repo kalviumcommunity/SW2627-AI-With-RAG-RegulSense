@@ -1,0 +1,86 @@
+{
+  "metadata": {
+    "embedding_model": "all-minilm",
+    "api_base_url": "http://localhost:11434/v1",
+    "benchmark_pricing_rate_per_million": 0.02,
+    "demonstration_mode": true
+  },
+  "phase_1_fresh_run": {
+    "total_chunks": 15,
+    "embeddings_generated": 15,
+    "skipped_chunks": 0,
+    "failed_chunks": 0,
+    "total_batches": 3,
+    "successful_batches": 3,
+    "failed_batches": 0,
+    "total_retry_attempts": 0,
+    "total_tokens_processed": 3826,
+    "total_tokens_skipped": 0,
+    "embedding_cost_usd": 7.7e-05,
+    "cost_saved_usd": 0.0,
+    "pricing_model_name": "all-minilm",
+    "cost_per_million_tokens": 0.02,
+    "batch_size": 5,
+    "max_retries": 3,
+    "status": "SUCCESS: Processed 15 new chunks in 3 batches (0 skipped, cost: $0.000077)",
+    "execution_time_seconds": 3.599,
+    "failures": []
+  },
+  "phase_2_rerun_deduplication": {
+    "total_chunks": 15,
+    "embeddings_generated": 0,
+    "skipped_chunks": 15,
+    "failed_chunks": 0,
+    "total_batches": 0,
+    "successful_batches": 0,
+    "failed_batches": 0,
+    "total_retry_attempts": 0,
+    "total_tokens_processed": 0,
+    "total_tokens_skipped": 3826,
+    "embedding_cost_usd": 0.0,
+    "cost_saved_usd": 7.7e-05,
+    "pricing_model_name": "all-minilm",
+    "cost_per_million_tokens": 0.02,
+    "batch_size": 5,
+    "max_retries": 3,
+    "status": "SUCCESS: Processed 0 new chunks in 0 batches (15 skipped, cost: $0.000000)",
+    "execution_time_seconds": 0.023,
+    "failures": []
+  },
+  "phase_3_simulated_retry_audit": {
+    "total_chunks": 5,
+    "embeddings_generated": 0,
+    "skipped_chunks": 0,
+    "failed_chunks": 5,
+    "total_batches": 1,
+    "successful_batches": 0,
+    "failed_batches": 1,
+    "total_retry_attempts": 2,
+    "total_tokens_processed": 0,
+    "total_tokens_skipped": 0,
+    "embedding_cost_usd": 0.0,
+    "cost_saved_usd": 0.0,
+    "pricing_model_name": "all-minilm",
+    "cost_per_million_tokens": 0.02,
+    "batch_size": 5,
+    "max_retries": 2,
+    "status": "PARTIAL FAILURE: 0 batches succeeded, 1 batches failed (5 failed chunks)",
+    "execution_time_seconds": 0.008,
+    "failures": [
+      {
+        "batch_index": 1,
+        "chunk_ids": [
+          "circular_dor_2024_108_txt_tokenaware_001",
+          "circular_dor_2024_108_txt_tokenaware_002",
+          "circular_dor_2024_108_txt_tokenaware_003",
+          "circular_dor_2024_108_txt_tokenaware_004",
+          "cyber_resilience_framework_pdf_tokenaware_001"
+        ],
+        "error_type": "RateLimitError",
+        "error_message": "Rate limit exceeded (demo)",
+        "attempts": 3,
+        "timestamp": "2026-09-10 11:22:26"
+      }
+    ]
+  }
+}
