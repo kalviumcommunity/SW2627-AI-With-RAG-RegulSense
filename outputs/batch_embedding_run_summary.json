@@ -23,7 +23,7 @@
     "batch_size": 5,
     "max_retries": 3,
     "status": "SUCCESS: Processed 15 new chunks in 3 batches (0 skipped, cost: $0.000077)",
-    "execution_time_seconds": 3.227,
+    "execution_time_seconds": 3.599,
     "failures": []
   },
   "phase_2_rerun_deduplication": {
@@ -44,7 +44,7 @@
     "batch_size": 5,
     "max_retries": 3,
     "status": "SUCCESS: Processed 0 new chunks in 0 batches (15 skipped, cost: $0.000000)",
-    "execution_time_seconds": 0.017,
+    "execution_time_seconds": 0.023,
     "failures": []
   },
   "phase_3_simulated_retry_audit": {
@@ -65,7 +65,7 @@
     "batch_size": 5,
     "max_retries": 2,
     "status": "PARTIAL FAILURE: 0 batches succeeded, 1 batches failed (5 failed chunks)",
-    "execution_time_seconds": 0.006,
+    "execution_time_seconds": 0.008,
     "failures": [
       {
         "batch_index": 1,
@@ -79,7 +79,7 @@
         "error_type": "RateLimitError",
         "error_message": "Rate limit exceeded (demo)",
         "attempts": 3,
-        "timestamp": "2026-09-10 11:13:03"
+        "timestamp": "2026-09-10 11:22:26"
       }
     ]
   }

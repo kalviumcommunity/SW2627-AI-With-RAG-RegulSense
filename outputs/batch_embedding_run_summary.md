@@ -24,7 +24,7 @@ The table below contrasts the **Initial Batch Run (Phase 1)** against the **Idem
 | **Tokens Saved (Deduplicated)** | `0` | `3,826` | **3,826 tokens spared from re-ingestion** |
 | **Approximate Embedding Cost** | **`$0.000077`** | **`$0.000000`** | Financial cost of run (Task 3) |
 | **Cost Saved (Avoided Spend)** | `$0.000000` | **`$0.000077`** | **100% capital preserved on re-runs** |
-| **Execution Latency** | `3.227s` | `0.017s` | **~50x faster execution using cache** |
+| **Execution Latency** | `3.599s` | `0.023s` | **~50x faster execution using cache** |
 
 ---
 
