@@ -47,6 +47,8 @@ outputs/*
 !outputs/embedding_generation_verification.md
 !outputs/similarity_ranking_results.md
 !outputs/similarity_ranking_results.json
+!outputs/batch_embedding_run_summary.md
+!outputs/batch_embedding_run_summary.json
 
 
 # Python cache
