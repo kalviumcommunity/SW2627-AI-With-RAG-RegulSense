@@ -1,0 +1,71 @@
+{
+  "database_configuration": {
+    "engine": "ChromaDB",
+    "version": "1.5.9",
+    "mode": "PersistentClient",
+    "persist_directory": "C:\\Users\\uppal\\OneDrive\\Desktop\\WI-sprint-2\\SW2627-AI-With-RAG-RegulSense\\data\\chroma_db",
+    "collection_name": "regulsense_regulatory_chunks",
+    "vector_dimension": 384,
+    "distance_metric": "cosine",
+    "embedding_model": "all-minilm",
+    "is_reachable": true,
+    "heartbeat": 1789026477586393700
+  },
+  "readback_verification": {
+    "record_id": "circular_dor_2024_108_txt_tokenaware_001",
+    "id_matched": true,
+    "document_matched": true,
+    "metadata_matched": true,
+    "vector_dimension_matched": true,
+    "cosine_similarity_to_original": 1.0,
+    "expected_dimension": 384,
+    "readback_dimension": 384,
+    "inserted_document": "RESERVE BANK OF INDIA FINANCIAL STABILITY AND COMPLIANCE DEPARTMENT CENTRAL OFFICE, MUMBAI\n\nRef: RBI/2023-24/108 Circular No: DOR.AML.REC.66/14.01.001/2023-24 Date: January 04, 2024\n\nTo, All Scheduled Commercial Banks (excluding RRBs) All Small Finance Banks and Payment Banks All Non-Banking Financial Companies (NBFCs)\n\nSubject: Master Direction - Know Your Customer (KYC) and Anti-Money Laundering (AML) Standards - Enhanced Due Diligence and Transaction Record Management\n\n1. Preliminary and Statutory Authority\nIn exercise of the powers conferred by Section 35A of the Banking Regulation Act, 1949, read with Section 51A of the Unlawful Activities (Prevention) Act, 1967, and the Prevention of Money-Laundering (Maintenance of Records) Rules, 2005, the Reserve Bank of India hereby issues the updated Master Directions on Customer Due Diligence (CDD) and compliance obligations for regulated entities (REs).\n\n2. Customer Due Diligence (CDD) Requirements\nRegulated entities must undertake client identification and verification procedures before establishing an account-based relationship or executing an occasional cross-border financial transaction:\n(a) Verification of Officially Valid Documents (OVDs): Banks must verify the identity and permanent address of individual customers using",
+    "readback_document": "RESERVE BANK OF INDIA FINANCIAL STABILITY AND COMPLIANCE DEPARTMENT CENTRAL OFFICE, MUMBAI\n\nRef: RBI/2023-24/108 Circular No: DOR.AML.REC.66/14.01.001/2023-24 Date: January 04, 2024\n\nTo, All Scheduled Commercial Banks (excluding RRBs) All Small Finance Banks and Payment Banks All Non-Banking Financial Companies (NBFCs)\n\nSubject: Master Direction - Know Your Customer (KYC) and Anti-Money Laundering (AML) Standards - Enhanced Due Diligence and Transaction Record Management\n\n1. Preliminary and Statutory Authority\nIn exercise of the powers conferred by Section 35A of the Banking Regulation Act, 1949, read with Section 51A of the Unlawful Activities (Prevention) Act, 1967, and the Prevention of Money-Laundering (Maintenance of Records) Rules, 2005, the Reserve Bank of India hereby issues the updated Master Directions on Customer Due Diligence (CDD) and compliance obligations for regulated entities (REs).\n\n2. Customer Due Diligence (CDD) Requirements\nRegulated entities must undertake client identification and verification procedures before establishing an account-based relationship or executing an occasional cross-border financial transaction:\n(a) Verification of Officially Valid Documents (OVDs): Banks must verify the identity and permanent address of individual customers using",
+    "inserted_metadata": {
+      "source_document": "circular_dor_2024_108.txt",
+      "document_id": "circular_dor_2024_108_txt",
+      "section": "Preamble / Document Header",
+      "page_number": 1,
+      "chunk_index": 0,
+      "token_count": 300,
+      "file_type": ".txt"
+    },
+    "readback_metadata": {
+      "page_number": 1,
+      "section": "Preamble / Document Header",
+      "token_count": 300,
+      "source_document": "circular_dor_2024_108.txt",
+      "chunk_index": 0,
+      "file_type": ".txt",
+      "document_id": "circular_dor_2024_108_txt"
+    },
+    "status": "PASSED: Record 'circular_dor_2024_108_txt_tokenaware_001' successfully inserted and verified across all criteria",
+    "verification_passed": true,
+    "timestamp": "2026-09-10T07:47:57.586319+00:00"
+  },
+  "readback_record_sample": {
+    "id": "circular_dor_2024_108_txt_tokenaware_001",
+    "vector_length": 384,
+    "trimmed_vector": [
+      -0.014354,
+      0.000433,
+      -0.039206,
+      -0.052459,
+      -0.002194,
+      -0.000799,
+      0.007816,
+      0.01694
+    ],
+    "document": "RESERVE BANK OF INDIA FINANCIAL STABILITY AND COMPLIANCE DEPARTMENT CENTRAL OFFICE, MUMBAI\n\nRef: RBI/2023-24/108 Circular No: DOR.AML.REC.66/14.01.001/2023-24 Date: January 04, 2024\n\nTo, All Scheduled Commercial Banks (excluding RRBs) All Small Finance Banks and Payment Banks All Non-Banking Financial Companies (NBFCs)\n\nSubject: Master Direction - Know Your Customer (KYC) and Anti-Money Laundering (AML) Standards - Enhanced Due Diligence and Transaction Record Management\n\n1. Preliminary and Statutory Authority\nIn exercise of the powers conferred by Section 35A of the Banking Regulation Act, 1949, read with Section 51A of the Unlawful Activities (Prevention) Act, 1967, and the Prevention of Money-Laundering (Maintenance of Records) Rules, 2005, the Reserve Bank of India hereby issues the updated Master Directions on Customer Due Diligence (CDD) and compliance obligations for regulated entities (REs).\n\n2. Customer Due Diligence (CDD) Requirements\nRegulated entities must undertake client identification and verification procedures before establishing an account-based relationship or executing an occasional cross-border financial transaction:\n(a) Verification of Officially Valid Documents (OVDs): Banks must verify the identity and permanent address of individual customers using",
+    "metadata": {
+      "source_document": "circular_dor_2024_108.txt",
+      "document_id": "circular_dor_2024_108_txt",
+      "section": "Preamble / Document Header",
+      "page_number": 1,
+      "chunk_index": 0,
+      "token_count": 300,
+      "file_type": ".txt"
+    }
+  }
+}
