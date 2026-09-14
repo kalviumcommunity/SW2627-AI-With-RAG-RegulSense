@@ -522,6 +522,16 @@ def __getattr__(name: str):
     ):
         import src.retrieval_tuner as _rt
         return getattr(_rt, name)
+    if name in (
+        "TwoStageRetriever",
+        "CrossScorer",
+        "LLMScorer",
+        "ScoredCandidate",
+        "RerankResult",
+        "demonstrate_reranking",
+    ):
+        import src.reranker as _rr
+        return getattr(_rr, name)
     raise AttributeError(f"module '{__name__}' has no attribute '{name}'")
 
 
