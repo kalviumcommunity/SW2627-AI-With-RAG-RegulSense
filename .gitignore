@@ -63,6 +63,8 @@ outputs/*
 !outputs/retrieval_tuning_results.json
 !outputs/reranking_results.md
 !outputs/reranking_results.json
+!outputs/retrieval_evaluation_results.md
+!outputs/retrieval_evaluation_results.json
 
 
 # Python cache
