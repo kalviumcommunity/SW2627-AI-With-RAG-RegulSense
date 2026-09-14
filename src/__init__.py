@@ -1,5 +1,15 @@
 """RegulSense Package Initialization."""
 
+from src.context_assembler import (
+    AugmentedPrompt,
+    ContextAssembler,
+    InjectedChunk,
+    SourceMarker,
+    TokenBudgetLedger,
+    TokenBudgetManager,
+    TokenBudgetSpec,
+    run_sample_augmented_prompt,
+)
 from src.rag_pipeline import (
     AssembledContext,
     GenerationResult,
@@ -19,17 +29,25 @@ from src.rag_pipeline import (
 
 __all__ = [
     "AssembledContext",
+    "AugmentedPrompt",
+    "ContextAssembler",
     "GenerationResult",
+    "InjectedChunk",
     "PipelineStageMetrics",
     "QueryEmbedding",
     "RAGPipeline",
     "RAGResponse",
     "RetrievedContextChunk",
     "SourceCitation",
+    "SourceMarker",
+    "TokenBudgetLedger",
+    "TokenBudgetManager",
+    "TokenBudgetSpec",
     "assemble_context_stage",
     "attribute_sources_stage",
     "embed_query_stage",
     "generate_answer_stage",
     "retrieve_chunks_stage",
+    "run_sample_augmented_prompt",
     "run_sample_pipeline",
 ]
