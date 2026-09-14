@@ -65,6 +65,8 @@ outputs/*
 !outputs/reranking_results.json
 !outputs/retrieval_evaluation_results.md
 !outputs/retrieval_evaluation_results.json
+!outputs/rag_pipeline_execution.md
+!outputs/rag_pipeline_execution.json
 
 
 # Python cache
