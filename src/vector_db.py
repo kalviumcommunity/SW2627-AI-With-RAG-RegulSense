@@ -111,6 +111,32 @@ class ReadbackVerificationResult:
         return asdict(self)
 
 
+@dataclass
+class RetrievedRecord:
+    """Represents a vector search query hit retrieved from the vector database."""
+    rank: int
+    id: str
+    similarity_score: float
+    distance: float
+    document: str
+    metadata: Dict[str, Any]
+    embedding: Optional[List[float]] = None
+
+    def to_dict(self, include_embedding: bool = False) -> Dict[str, Any]:
+        """Serializes the retrieved record."""
+        data = {
+            "rank": self.rank,
+            "id": self.id,
+            "similarity_score": round(self.similarity_score, 6),
+            "distance": round(self.distance, 6),
+            "document": self.document,
+            "metadata": self.metadata,
+        }
+        if include_embedding and self.embedding is not None:
+            data["embedding"] = self.embedding
+        return data
+
+
 class VectorDatabaseManager:
     """Manages ChromaDB vector database setup, collection configuration, and record operations."""
 
@@ -311,6 +337,101 @@ class VectorDatabaseManager:
             document=doc,
             metadata=meta,
         )
+
+    def query_similarity(
+        self,
+        query_vector: List[float],
+        top_k: int = 3,
+        collection_name: Optional[str] = None,
+        where: Optional[Dict[str, Any]] = None,
+        include_embeddings: bool = False,
+    ) -> List[RetrievedRecord]:
+        """Runs a top-k similarity search against the ChromaDB vector database collection.
+        
+        Args:
+            query_vector: Dense query embedding coordinates.
+            top_k: Number of most similar results to return (default: 3).
+            collection_name: Target collection name (defaults to self.collection_name).
+            where: Optional metadata filter dict.
+            include_embeddings: If True, includes embedding vectors in results.
+            
+        Returns:
+            List of RetrievedRecord instances ordered by similarity score descending.
+        """
+        if not query_vector:
+            raise ValueError("query_vector cannot be empty.")
+
+        if len(query_vector) != self.dimension:
+            raise ValueError(
+                f"Query vector dimension mismatch: got {len(query_vector)}, expected {self.dimension}."
+            )
+
+        if top_k <= 0:
+            raise ValueError(f"top_k must be positive, got {top_k}.")
+
+        collection = self.get_or_create_collection(collection_name)
+        total_items = collection.count()
+        if total_items == 0:
+            logger.warning("Collection '%s' is empty; 0 records retrieved.", collection.name)
+            return []
+
+        actual_k = min(top_k, total_items)
+        include_fields = ["documents", "metadatas", "distances"]
+        if include_embeddings:
+            include_fields.append("embeddings")
+
+        query_kwargs: Dict[str, Any] = {
+            "query_embeddings": [query_vector],
+            "n_results": actual_k,
+            "include": include_fields,
+        }
+        if where:
+            query_kwargs["where"] = where
+
+        results = collection.query(**query_kwargs)
+
+        retrieved: List[RetrievedRecord] = []
+        ids = results.get("ids", [[]])[0]
+        docs = results.get("documents", [[]])[0]
+        metas = results.get("metadatas", [[]])[0]
+        distances = results.get("distances", [[]])[0]
+        embeddings = (
+            results.get("embeddings", [[]])[0]
+            if include_embeddings and results.get("embeddings")
+            else [None] * len(ids)
+        )
+
+        for i, (rec_id, doc, meta, dist) in enumerate(zip(ids, docs, metas, distances), start=1):
+            # For HNSW cosine space: distance = 1 - cosine_similarity
+            # Thus similarity_score = 1.0 - distance, bounded [-1.0, 1.0]
+            if self.distance_metric == "cosine":
+                score = max(-1.0, min(1.0, 1.0 - float(dist)))
+            elif self.distance_metric == "l2":
+                score = 1.0 / (1.0 + float(dist))
+            else:
+                score = float(dist)
+
+            rec_embedding = embeddings[i - 1] if include_embeddings and embeddings else None
+
+            retrieved.append(
+                RetrievedRecord(
+                    rank=i,
+                    id=rec_id,
+                    similarity_score=float(score),
+                    distance=float(dist),
+                    document=doc,
+                    metadata=meta or {},
+                    embedding=rec_embedding,
+                )
+            )
+
+        logger.info(
+            "Retrieved top-%d records from collection '%s' (top score: %.4f)",
+            len(retrieved),
+            collection.name,
+            retrieved[0].similarity_score if retrieved else 0.0,
+        )
+        return retrieved
 
     def verify_readback(
         self,

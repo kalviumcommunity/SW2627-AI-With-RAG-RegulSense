@@ -389,5 +389,17 @@ def run_similarity_ranking_demo(
     return ranking
 
 
+# Re-export VectorRetriever components for unified retrieval access
+try:
+    from src.retriever import (
+        KVariationDemonstration,
+        RetrievalRunResult,
+        VectorRetriever,
+        run_sample_query_retrieval,
+    )
+except ImportError:
+    pass
+
+
 if __name__ == "__main__":
     run_similarity_ranking_demo()

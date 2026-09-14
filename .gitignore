@@ -55,6 +55,8 @@ outputs/*
 !outputs/vector_db_readback_record.json
 !outputs/corpus_indexing_summary.md
 !outputs/corpus_indexing_summary.json
+!outputs/vector_search_results.md
+!outputs/vector_search_results.json
 
 
 # Python cache
