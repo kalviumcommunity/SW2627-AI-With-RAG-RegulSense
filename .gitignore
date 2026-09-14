@@ -69,6 +69,8 @@ outputs/*
 !outputs/rag_pipeline_execution.json
 !outputs/augmented_prompt_sample.md
 !outputs/augmented_prompt_sample.json
+!outputs/grounded_generation_results.md
+!outputs/grounded_generation_results.json
 
 
 # Python cache

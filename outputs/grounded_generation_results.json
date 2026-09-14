@@ -1,0 +1,214 @@
+{
+  "grounded_output": {
+    "timestamp": "2026-09-14T15:51:25.505122+00:00",
+    "query": "What are the mandatory timeframe and reporting procedures for banks to notify CERT-In and RBI regarding Severity 1 cyber security incidents?",
+    "answer": "Based on the provided regulatory context, the mandatory timeframe and reporting procedures for banks to notify CERT-In and RBI regarding Severity 1 cyber security incidents are as follows:\n\n* Initial report: Within 6 hours of detection, banks must report the incident to the RBI Cyber Security Cell (CSITE) and CERT-In. [1] Section 2, Incident Reporting Timelines (6-Hour Rule)\n* Comprehensive forensic analysis report: Within 7 business days, banks must follow up with a comprehensive forensic analysis report to the RBI Cyber Security Cell (CSITE) and CERT-In. [1] Section 2, Incident Reporting Timelines (6-Hour Rule)\n\nPlease note that these reporting procedures are specific to Severity 1 cyber security incidents and may not apply to other types of incidents or events.",
+    "is_fallback": false,
+    "injected_chunks": [
+      {
+        "marker": {
+          "marker_id": "[1]",
+          "index": 1,
+          "source_document": "cyber_resilience_framework.pdf",
+          "section": "Preamble / Document Header",
+          "page_number": 1,
+          "chunk_id": "cyber_resilience_framework_pdf_tokenaware_001",
+          "similarity_score": 0.6436
+        },
+        "raw_text": "RESERVE BANK OF INDIA DEPARTMENT OF CYBER SECURITY AND INFORMATION TECHNOLOGY CENTRAL OFFICE, MUMBAI Circular No: RBI/2024-25/19 - DoS.CO.CSITE.No.03/11.01.005/2024-25 Date: March 12, 2024 Subject: Master Direction on Cyber Resilience and Digital Payment Security Controls 1. Mandatory Two-Factor Authentication (2FA) All regulated payment system operators and scheduled commercial banks must enforce dynamic two-factor authentication (2FA) for all domestic electronic fund transfers (NEFT, RTGS, IMPS, and UPI). At least one factor must be dynamic, such as a time-based one-time password (TOTP) or biometric verification. 2. Incident Reporting Timelines (6-Hour Rule) Any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial of service (DoS) affecting customer-facing channels must be reported to the RBI Cyber Security Cell (CSITE) and CERT-In within 6 hours of detection. Initial reports must be followed by a comprehensive forensic analysis report within 7 business days. 3. Security Operations Centre (SOC) Operations Banks must operate a 24x7x365 Security Operations Centre (SOC) equipped with continuous automated log monitoring, SIEM analytics, and automated threat hunting capabilities.\n\n4. API Security and Third-Party Risk Management\n(a) All open banking and fintech integrations must mandate",
+        "formatted_block": "SOURCE [1]: cyber_resilience_framework.pdf\nSection: Preamble / Document Header | Page: 1 | Chunk ID: cyber_resilience_framework_pdf_tokenaware_001 | Similarity: 0.6436\nVerbatim Regulatory Content:\nRESERVE BANK OF INDIA DEPARTMENT OF CYBER SECURITY AND INFORMATION TECHNOLOGY CENTRAL OFFICE, MUMBAI Circular No: RBI/2024-25/19 - DoS.CO.CSITE.No.03/11.01.005/2024-25 Date: March 12, 2024 Subject: Master Direction on Cyber Resilience and Digital Payment Security Controls 1. Mandatory Two-Factor Authentication (2FA) All regulated payment system operators and scheduled commercial banks must enforce dynamic two-factor authentication (2FA) for all domestic electronic fund transfers (NEFT, RTGS, IMPS, and UPI). At least one factor must be dynamic, such as a time-based one-time password (TOTP) or biometric verification. 2. Incident Reporting Timelines (6-Hour Rule) Any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial of service (DoS) affecting customer-facing channels must be reported to the RBI Cyber Security Cell (CSITE) and CERT-In within 6 hours of detection. Initial reports must be followed by a comprehensive forensic analysis report within 7 business days. 3. Security Operations Centre (SOC) Operations Banks must operate a 24x7x365 Security Operations Centre (SOC) equipped with continuous automated log monitoring, SIEM analytics, and automated threat hunting capabilities.\n\n4. API Security and Third-Party Risk Management\n(a) All open banking and fintech integrations must mandate",
+        "token_count": 352,
+        "was_truncated": false
+      },
+      {
+        "marker": {
+          "marker_id": "[2]",
+          "index": 2,
+          "source_document": "circular_dor_2024_108.txt",
+          "section": "3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs",
+          "page_number": 1,
+          "chunk_id": "circular_dor_2024_108_txt_tokenaware_003",
+          "similarity_score": 0.5709
+        },
+        "raw_text": "officer not below the rank of Deputy General Manager.\n(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.\n(c) Heightened Transaction Monitoring: High-risk accounts shall be subjected to quarterly reviews, compared against the standard biennial review for low-risk customers.\n\n4. Transaction Monitoring and Reporting Thresholds\nBanks shall deploy rule-based and behavioral automated transaction monitoring systems to identify suspicious transaction patterns:\n(a) Cash Transaction Reports (CTRs): All cash transactions of the value of more than rupees ten lakhs or its equivalent in foreign currency must be reported monthly to the Financial Intelligence Unit - India (FIU-IND) by the 15th day of the succeeding month.\n(b) Counterfeit Currency Reports (CCRs) and Non-Profit Organization Transaction Reports (NTRs): All cross-border non-profit transactions exceeding rupees ten lakhs must be logged and monitored.\n(c) Suspicious Transaction Reports (STRs): If any transaction gives rise to reasonable suspicion of illicit funds, evasion, or terrorism financing, an STR shall be furnished to FIU-IND within seven working days of arriving at such a conclusion.\n\n5. Record Retention Obligations\nUnder Rule 3 and Rule 10 of the PML Rules, 2005, all regulated entities shall maintain:\n(a) Transaction Records: Comprehensive records of all transactions, whether completed or attempted, domestic or international, for a minimum",
+        "formatted_block": "SOURCE [2]: circular_dor_2024_108.txt\nSection: 3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs | Page: 1 | Chunk ID: circular_dor_2024_108_txt_tokenaware_003 | Similarity: 0.5709\nVerbatim Regulatory Content:\nofficer not below the rank of Deputy General Manager.\n(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.\n(c) Heightened Transaction Monitoring: High-risk accounts shall be subjected to quarterly reviews, compared against the standard biennial review for low-risk customers.\n\n4. Transaction Monitoring and Reporting Thresholds\nBanks shall deploy rule-based and behavioral automated transaction monitoring systems to identify suspicious transaction patterns:\n(a) Cash Transaction Reports (CTRs): All cash transactions of the value of more than rupees ten lakhs or its equivalent in foreign currency must be reported monthly to the Financial Intelligence Unit - India (FIU-IND) by the 15th day of the succeeding month.\n(b) Counterfeit Currency Reports (CCRs) and Non-Profit Organization Transaction Reports (NTRs): All cross-border non-profit transactions exceeding rupees ten lakhs must be logged and monitored.\n(c) Suspicious Transaction Reports (STRs): If any transaction gives rise to reasonable suspicion of illicit funds, evasion, or terrorism financing, an STR shall be furnished to FIU-IND within seven working days of arriving at such a conclusion.\n\n5. Record Retention Obligations\nUnder Rule 3 and Rule 10 of the PML Rules, 2005, all regulated entities shall maintain:\n(a) Transaction Records: Comprehensive records of all transactions, whether completed or attempted, domestic or international, for a minimum",
+        "token_count": 375,
+        "was_truncated": false
+      },
+      {
+        "marker": {
+          "marker_id": "[3]",
+          "index": 3,
+          "source_document": "sample_regulatory_circular.txt",
+          "section": "3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs",
+          "page_number": 1,
+          "chunk_id": "sample_regulatory_circular_txt_tokenaware_003",
+          "similarity_score": 0.5709
+        },
+        "raw_text": "officer not below the rank of Deputy General Manager.\n(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.\n(c) Heightened Transaction Monitoring: High-risk accounts shall be subjected to quarterly reviews, compared against the standard biennial review for low-risk customers.\n\n4. Transaction Monitoring and Reporting Thresholds\nBanks shall deploy rule-based and behavioral automated transaction monitoring systems to identify suspicious transaction patterns:\n(a) Cash Transaction Reports (CTRs): All cash transactions of the value of more than rupees ten lakhs or its equivalent in foreign currency must be reported monthly to the Financial Intelligence Unit - India (FIU-IND) by the 15th day of the succeeding month.\n(b) Counterfeit Currency Reports (CCRs) and Non-Profit Organization Transaction Reports (NTRs): All cross-border non-profit transactions exceeding rupees ten lakhs must be logged and monitored.\n(c) Suspicious Transaction Reports (STRs): If any transaction gives rise to reasonable suspicion of illicit funds, evasion, or terrorism financing, an STR shall be furnished to FIU-IND within seven working days of arriving at such a conclusion.\n\n5. Record Retention Obligations\nUnder Rule 3 and Rule 10 of the PML Rules, 2005, all regulated entities shall maintain:\n(a) Transaction Records: Comprehensive records of all transactions, whether completed or attempted, domestic or international, for a minimum",
+        "formatted_block": "SOURCE [3]: sample_regulatory_circular.txt\nSection: 3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs | Page: 1 | Chunk ID: sample_regulatory_circular_txt_tokenaware_003 | Similarity: 0.5709\nVerbatim Regulatory Content:\nofficer not below the rank of Deputy General Manager.\n(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.\n(c) Heightened Transaction Monitoring: High-risk accounts shall be subjected to quarterly reviews, compared against the standard biennial review for low-risk customers.\n\n4. Transaction Monitoring and Reporting Thresholds\nBanks shall deploy rule-based and behavioral automated transaction monitoring systems to identify suspicious transaction patterns:\n(a) Cash Transaction Reports (CTRs): All cash transactions of the value of more than rupees ten lakhs or its equivalent in foreign currency must be reported monthly to the Financial Intelligence Unit - India (FIU-IND) by the 15th day of the succeeding month.\n(b) Counterfeit Currency Reports (CCRs) and Non-Profit Organization Transaction Reports (NTRs): All cross-border non-profit transactions exceeding rupees ten lakhs must be logged and monitored.\n(c) Suspicious Transaction Reports (STRs): If any transaction gives rise to reasonable suspicion of illicit funds, evasion, or terrorism financing, an STR shall be furnished to FIU-IND within seven working days of arriving at such a conclusion.\n\n5. Record Retention Obligations\nUnder Rule 3 and Rule 10 of the PML Rules, 2005, all regulated entities shall maintain:\n(a) Transaction Records: Comprehensive records of all transactions, whether completed or attempted, domestic or international, for a minimum",
+        "token_count": 369,
+        "was_truncated": false
+      }
+    ],
+    "source_citations": [
+      "[1]"
+    ],
+    "accuracy_report": {
+      "is_grounded": true,
+      "fidelity_score": 1.0,
+      "citation_markers_present": [
+        "[1]"
+      ],
+      "citations_count": 2,
+      "verified_claims": [
+        "7 business days",
+        "cert-in",
+        "severity 1 (from query)",
+        "csite",
+        "rbi",
+        "6 hours"
+      ],
+      "unsupported_claims": [],
+      "verdict": "PASS",
+      "audit_notes": "Fidelity score: 100.0%. Verified 6 factual claims against source text. Found 2 source citations."
+    },
+    "prompt_tokens": 1520,
+    "completion_tokens": 160,
+    "total_tokens": 1680,
+    "latency_seconds": 108.988,
+    "model": "llama3:latest"
+  },
+  "fallback_output": {
+    "timestamp": "2026-09-14T15:51:41.371960+00:00",
+    "query": "What are the Basel III Common Equity Tier 1 (CET1) capital adequacy ratio and countercyclical buffer requirements for regional rural banks?",
+    "answer": "I'm unable to provide a compliance answer as the retrieved regulatory context is insufficient. The provided context does not contain sufficient information to answer this question.\n\nThe lack of regulatory context makes it impossible to determine the specific requirements for regional rural banks regarding Basel III Common Equity Tier 1 (CET1) capital adequacy ratio and countercyclical buffer.",
+    "is_fallback": true,
+    "injected_chunks": [],
+    "source_citations": [],
+    "accuracy_report": {
+      "is_grounded": true,
+      "fidelity_score": 1.0,
+      "citation_markers_present": [],
+      "citations_count": 0,
+      "verified_claims": [
+        "Invoked mandated insufficient-context fallback refusal protocol."
+      ],
+      "unsupported_claims": [],
+      "verdict": "PASS",
+      "audit_notes": "Answer correctly invoked the insufficient-context fallback protocol without hallucinating outside facts."
+    },
+    "prompt_tokens": 453,
+    "completion_tokens": 71,
+    "total_tokens": 524,
+    "latency_seconds": 15.8664,
+    "model": "llama3:latest"
+  },
+  "comparison_report": {
+    "query": "What are the mandatory timeframe and reporting procedures for banks to notify CERT-In and RBI regarding Severity 1 cyber security incidents?",
+    "with_retrieval": {
+      "timestamp": "2026-09-14T15:53:14.336998+00:00",
+      "query": "What are the mandatory timeframe and reporting procedures for banks to notify CERT-In and RBI regarding Severity 1 cyber security incidents?",
+      "answer": "Based on the provided regulatory context, the mandatory timeframe and reporting procedures for banks to notify CERT-In and RBI regarding Severity 1 cyber security incidents are as follows:\n\n**Initial Report:** Any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial of service (DoS) affecting customer-facing channels must be reported to the RBI Cyber Security Cell (CSITE) and CERT-In within **6 hours** of detection. [1]\n\n**Comprehensive Forensic Analysis Report:** Initial reports must be followed by a comprehensive forensic analysis report within **7 business days**. [1]\n\nThese reporting procedures are outlined in the Master Direction on Cyber Resilience and Digital Payment Security Controls, Circular No: RBI/2024-25/19, issued by the Reserve Bank of India (RBI) on March 12, 2024. [1]\n\nPlease note that these reporting procedures apply to Severity 1 cyber security incidents, which are not further defined in the provided regulatory context.",
+      "is_fallback": false,
+      "injected_chunks": [
+        {
+          "marker": {
+            "marker_id": "[1]",
+            "index": 1,
+            "source_document": "cyber_resilience_framework.pdf",
+            "section": "Preamble / Document Header",
+            "page_number": 1,
+            "chunk_id": "cyber_resilience_framework_pdf_tokenaware_001",
+            "similarity_score": 0.6436
+          },
+          "raw_text": "RESERVE BANK OF INDIA DEPARTMENT OF CYBER SECURITY AND INFORMATION TECHNOLOGY CENTRAL OFFICE, MUMBAI Circular No: RBI/2024-25/19 - DoS.CO.CSITE.No.03/11.01.005/2024-25 Date: March 12, 2024 Subject: Master Direction on Cyber Resilience and Digital Payment Security Controls 1. Mandatory Two-Factor Authentication (2FA) All regulated payment system operators and scheduled commercial banks must enforce dynamic two-factor authentication (2FA) for all domestic electronic fund transfers (NEFT, RTGS, IMPS, and UPI). At least one factor must be dynamic, such as a time-based one-time password (TOTP) or biometric verification. 2. Incident Reporting Timelines (6-Hour Rule) Any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial of service (DoS) affecting customer-facing channels must be reported to the RBI Cyber Security Cell (CSITE) and CERT-In within 6 hours of detection. Initial reports must be followed by a comprehensive forensic analysis report within 7 business days. 3. Security Operations Centre (SOC) Operations Banks must operate a 24x7x365 Security Operations Centre (SOC) equipped with continuous automated log monitoring, SIEM analytics, and automated threat hunting capabilities.\n\n4. API Security and Third-Party Risk Management\n(a) All open banking and fintech integrations must mandate",
+          "formatted_block": "SOURCE [1]: cyber_resilience_framework.pdf\nSection: Preamble / Document Header | Page: 1 | Chunk ID: cyber_resilience_framework_pdf_tokenaware_001 | Similarity: 0.6436\nVerbatim Regulatory Content:\nRESERVE BANK OF INDIA DEPARTMENT OF CYBER SECURITY AND INFORMATION TECHNOLOGY CENTRAL OFFICE, MUMBAI Circular No: RBI/2024-25/19 - DoS.CO.CSITE.No.03/11.01.005/2024-25 Date: March 12, 2024 Subject: Master Direction on Cyber Resilience and Digital Payment Security Controls 1. Mandatory Two-Factor Authentication (2FA) All regulated payment system operators and scheduled commercial banks must enforce dynamic two-factor authentication (2FA) for all domestic electronic fund transfers (NEFT, RTGS, IMPS, and UPI). At least one factor must be dynamic, such as a time-based one-time password (TOTP) or biometric verification. 2. Incident Reporting Timelines (6-Hour Rule) Any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial of service (DoS) affecting customer-facing channels must be reported to the RBI Cyber Security Cell (CSITE) and CERT-In within 6 hours of detection. Initial reports must be followed by a comprehensive forensic analysis report within 7 business days. 3. Security Operations Centre (SOC) Operations Banks must operate a 24x7x365 Security Operations Centre (SOC) equipped with continuous automated log monitoring, SIEM analytics, and automated threat hunting capabilities.\n\n4. API Security and Third-Party Risk Management\n(a) All open banking and fintech integrations must mandate",
+          "token_count": 352,
+          "was_truncated": false
+        },
+        {
+          "marker": {
+            "marker_id": "[2]",
+            "index": 2,
+            "source_document": "circular_dor_2024_108.txt",
+            "section": "3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs",
+            "page_number": 1,
+            "chunk_id": "circular_dor_2024_108_txt_tokenaware_003",
+            "similarity_score": 0.5709
+          },
+          "raw_text": "officer not below the rank of Deputy General Manager.\n(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.\n(c) Heightened Transaction Monitoring: High-risk accounts shall be subjected to quarterly reviews, compared against the standard biennial review for low-risk customers.\n\n4. Transaction Monitoring and Reporting Thresholds\nBanks shall deploy rule-based and behavioral automated transaction monitoring systems to identify suspicious transaction patterns:\n(a) Cash Transaction Reports (CTRs): All cash transactions of the value of more than rupees ten lakhs or its equivalent in foreign currency must be reported monthly to the Financial Intelligence Unit - India (FIU-IND) by the 15th day of the succeeding month.\n(b) Counterfeit Currency Reports (CCRs) and Non-Profit Organization Transaction Reports (NTRs): All cross-border non-profit transactions exceeding rupees ten lakhs must be logged and monitored.\n(c) Suspicious Transaction Reports (STRs): If any transaction gives rise to reasonable suspicion of illicit funds, evasion, or terrorism financing, an STR shall be furnished to FIU-IND within seven working days of arriving at such a conclusion.\n\n5. Record Retention Obligations\nUnder Rule 3 and Rule 10 of the PML Rules, 2005, all regulated entities shall maintain:\n(a) Transaction Records: Comprehensive records of all transactions, whether completed or attempted, domestic or international, for a minimum",
+          "formatted_block": "SOURCE [2]: circular_dor_2024_108.txt\nSection: 3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs | Page: 1 | Chunk ID: circular_dor_2024_108_txt_tokenaware_003 | Similarity: 0.5709\nVerbatim Regulatory Content:\nofficer not below the rank of Deputy General Manager.\n(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.\n(c) Heightened Transaction Monitoring: High-risk accounts shall be subjected to quarterly reviews, compared against the standard biennial review for low-risk customers.\n\n4. Transaction Monitoring and Reporting Thresholds\nBanks shall deploy rule-based and behavioral automated transaction monitoring systems to identify suspicious transaction patterns:\n(a) Cash Transaction Reports (CTRs): All cash transactions of the value of more than rupees ten lakhs or its equivalent in foreign currency must be reported monthly to the Financial Intelligence Unit - India (FIU-IND) by the 15th day of the succeeding month.\n(b) Counterfeit Currency Reports (CCRs) and Non-Profit Organization Transaction Reports (NTRs): All cross-border non-profit transactions exceeding rupees ten lakhs must be logged and monitored.\n(c) Suspicious Transaction Reports (STRs): If any transaction gives rise to reasonable suspicion of illicit funds, evasion, or terrorism financing, an STR shall be furnished to FIU-IND within seven working days of arriving at such a conclusion.\n\n5. Record Retention Obligations\nUnder Rule 3 and Rule 10 of the PML Rules, 2005, all regulated entities shall maintain:\n(a) Transaction Records: Comprehensive records of all transactions, whether completed or attempted, domestic or international, for a minimum",
+          "token_count": 375,
+          "was_truncated": false
+        },
+        {
+          "marker": {
+            "marker_id": "[3]",
+            "index": 3,
+            "source_document": "sample_regulatory_circular.txt",
+            "section": "3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs",
+            "page_number": 1,
+            "chunk_id": "sample_regulatory_circular_txt_tokenaware_003",
+            "similarity_score": 0.5709
+          },
+          "raw_text": "officer not below the rank of Deputy General Manager.\n(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.\n(c) Heightened Transaction Monitoring: High-risk accounts shall be subjected to quarterly reviews, compared against the standard biennial review for low-risk customers.\n\n4. Transaction Monitoring and Reporting Thresholds\nBanks shall deploy rule-based and behavioral automated transaction monitoring systems to identify suspicious transaction patterns:\n(a) Cash Transaction Reports (CTRs): All cash transactions of the value of more than rupees ten lakhs or its equivalent in foreign currency must be reported monthly to the Financial Intelligence Unit - India (FIU-IND) by the 15th day of the succeeding month.\n(b) Counterfeit Currency Reports (CCRs) and Non-Profit Organization Transaction Reports (NTRs): All cross-border non-profit transactions exceeding rupees ten lakhs must be logged and monitored.\n(c) Suspicious Transaction Reports (STRs): If any transaction gives rise to reasonable suspicion of illicit funds, evasion, or terrorism financing, an STR shall be furnished to FIU-IND within seven working days of arriving at such a conclusion.\n\n5. Record Retention Obligations\nUnder Rule 3 and Rule 10 of the PML Rules, 2005, all regulated entities shall maintain:\n(a) Transaction Records: Comprehensive records of all transactions, whether completed or attempted, domestic or international, for a minimum",
+          "formatted_block": "SOURCE [3]: sample_regulatory_circular.txt\nSection: 3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs | Page: 1 | Chunk ID: sample_regulatory_circular_txt_tokenaware_003 | Similarity: 0.5709\nVerbatim Regulatory Content:\nofficer not below the rank of Deputy General Manager.\n(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.\n(c) Heightened Transaction Monitoring: High-risk accounts shall be subjected to quarterly reviews, compared against the standard biennial review for low-risk customers.\n\n4. Transaction Monitoring and Reporting Thresholds\nBanks shall deploy rule-based and behavioral automated transaction monitoring systems to identify suspicious transaction patterns:\n(a) Cash Transaction Reports (CTRs): All cash transactions of the value of more than rupees ten lakhs or its equivalent in foreign currency must be reported monthly to the Financial Intelligence Unit - India (FIU-IND) by the 15th day of the succeeding month.\n(b) Counterfeit Currency Reports (CCRs) and Non-Profit Organization Transaction Reports (NTRs): All cross-border non-profit transactions exceeding rupees ten lakhs must be logged and monitored.\n(c) Suspicious Transaction Reports (STRs): If any transaction gives rise to reasonable suspicion of illicit funds, evasion, or terrorism financing, an STR shall be furnished to FIU-IND within seven working days of arriving at such a conclusion.\n\n5. Record Retention Obligations\nUnder Rule 3 and Rule 10 of the PML Rules, 2005, all regulated entities shall maintain:\n(a) Transaction Records: Comprehensive records of all transactions, whether completed or attempted, domestic or international, for a minimum",
+          "token_count": 369,
+          "was_truncated": false
+        }
+      ],
+      "source_citations": [
+        "[1]"
+      ],
+      "accuracy_report": {
+        "is_grounded": true,
+        "fidelity_score": 1.0,
+        "citation_markers_present": [
+          "[1]"
+        ],
+        "citations_count": 3,
+        "verified_claims": [
+          "7 business days",
+          "cert-in",
+          "severity 1 (from query)",
+          "csite",
+          "rbi",
+          "6 hours"
+        ],
+        "unsupported_claims": [],
+        "verdict": "PASS",
+        "audit_notes": "Fidelity score: 100.0%. Verified 6 factual claims against source text. Found 3 source citations."
+      },
+      "prompt_tokens": 1520,
+      "completion_tokens": 200,
+      "total_tokens": 1720,
+      "latency_seconds": 92.9054,
+      "model": "llama3:latest"
+    },
+    "without_retrieval": {
+      "query": "What are the mandatory timeframe and reporting procedures for banks to notify CERT-In and RBI regarding Severity 1 cyber security incidents?",
+      "answer": "As a bank staff, you're concerned about the timely reporting of cyber security incidents. According to the guidelines, here are the mandatory timeframe and reporting procedures for banks to notify CERT-In and RBI regarding Severity 1 cyber security incidents:\n\n**Mandatory Timeframe:**\n\n* Banks are required to notify CERT-In within 6 hours of detecting a Severity 1 cyber security incident.\n* RBI must be notified within 24 hours of detecting a Severity 1 cyber security incident.\n\n**Reporting Procedures:**\n\n1. **Severity 1 Incident Reporting to CERT-In:**\n\t* Banks must submit a Severity 1 incident report to CERT-In using the CERT-In Incident Reporting Form (IRF) available on the CERT-In website.\n\t* The report should include details such as incident description, impact, and mitigation measures taken.\n\t* The report should be submitted to CERT-In through the IRF portal or by email to [incident@cert-in.org](mailto:incident@cert-in.org).\n2. **Reporting to RBI:**\n\t* Banks must submit a Severity 1 incident report to RBI using the RBI's Cyber Security Incident Reporting Form (CSIRF) available on the RBI website.\n\t* The report should include details such as incident description, impact, and mitigation measures taken.\n\t* The report should be submitted to RBI through the CSIRF portal or by email to [cybersecurity@rbi.org](mailto:cybersecurity@rbi.org).\n\n**Additional Requirements:**\n\n* Banks are required to maintain a record of all cyber security incidents, including Severity 1 incidents, for a minimum period of 3 years.\n* Banks must also conduct a thorough investigation and root cause analysis of the incident, and implement corrective measures to prevent similar incidents in the future.\n\nRemember, timely reporting of Severity 1 cyber security incidents is crucial to minimize the impact and prevent further damage. As a bank staff, it's essential to follow these guidelines to ensure compliance with regulatory requirements.",
+      "prompt_tokens": 52,
+      "completion_tokens": 399,
+      "total_tokens": 451,
+      "latency_seconds": 61.1326,
+      "model": "llama3:latest"
+    },
+    "specificity_contrast": {
+      "grounded_source_citations": [
+        "[1]"
+      ],
+      "grounded_cites_circular_authority": true,
+      "grounded_contains_exact_6_hour_rule": true,
+      "baseline_cites_exact_circular": false,
+      "baseline_contains_exact_6_hour_rule": true,
+      "grounded_word_count": 142,
+      "baseline_word_count": 287,
+      "grounded_latency_seconds": 92.91,
+      "baseline_latency_seconds": 61.13
+    },
+    "hallucination_risk_assessment": "LOW RISK: The baseline captured core concepts, but lacks traceable evidentiary markers.",
+    "summary": "Retrieval grounding transformed the response from generic advice into an audit-ready compliance determination with 1 verifiable source citations, exact circular references, and strict fidelity to RBI Master Directions."
+  }
+}

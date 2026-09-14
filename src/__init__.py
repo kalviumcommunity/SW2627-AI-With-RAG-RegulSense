@@ -10,6 +10,14 @@ from src.context_assembler import (
     TokenBudgetSpec,
     run_sample_augmented_prompt,
 )
+from src.grounded_generator import (
+    AccuracyVerificationReport,
+    BaselineGenerationOutput,
+    GroundedGenerationOutput,
+    GroundedGenerator,
+    RetrievalComparisonReport,
+    run_grounded_generation_suite,
+)
 from src.rag_pipeline import (
     AssembledContext,
     GenerationResult,
@@ -28,15 +36,20 @@ from src.rag_pipeline import (
 )
 
 __all__ = [
+    "AccuracyVerificationReport",
     "AssembledContext",
     "AugmentedPrompt",
+    "BaselineGenerationOutput",
     "ContextAssembler",
     "GenerationResult",
+    "GroundedGenerationOutput",
+    "GroundedGenerator",
     "InjectedChunk",
     "PipelineStageMetrics",
     "QueryEmbedding",
     "RAGPipeline",
     "RAGResponse",
+    "RetrievalComparisonReport",
     "RetrievedContextChunk",
     "SourceCitation",
     "SourceMarker",
@@ -48,6 +61,7 @@ __all__ = [
     "embed_query_stage",
     "generate_answer_stage",
     "retrieve_chunks_stage",
+    "run_grounded_generation_suite",
     "run_sample_augmented_prompt",
     "run_sample_pipeline",
 ]
