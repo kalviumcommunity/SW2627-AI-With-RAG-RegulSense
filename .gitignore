@@ -67,6 +67,8 @@ outputs/*
 !outputs/retrieval_evaluation_results.json
 !outputs/rag_pipeline_execution.md
 !outputs/rag_pipeline_execution.json
+!outputs/augmented_prompt_sample.md
+!outputs/augmented_prompt_sample.json
 
 
 # Python cache
