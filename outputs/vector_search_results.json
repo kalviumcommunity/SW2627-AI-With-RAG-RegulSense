@@ -1,0 +1,214 @@
+{
+  "query_text": "What are the customer due diligence and KYC verification requirements for onboarding new bank accounts?",
+  "vector_dimension": 384,
+  "embedding_model": "all-minilm",
+  "collection_name": "regulsense_regulatory_chunks",
+  "query_vector_preview": [
+    -0.003556,
+    -0.114709,
+    0.029186,
+    -0.037025,
+    -0.027214,
+    0.002123,
+    0.067351,
+    -0.007881
+  ],
+  "common_chunk_ids": [
+    "circular_dor_2024_108_txt_tokenaware_002",
+    "sample_regulatory_circular_txt_tokenaware_002"
+  ],
+  "unique_to_larger_k": [
+    "guidelines_cdd_pml_rules_md_tokenaware_001",
+    "circular_dor_2024_108_txt_tokenaware_001",
+    "sample_regulatory_circular_txt_tokenaware_001"
+  ],
+  "score_drop": 0.084005,
+  "comparison_analysis": "Changing k from 2 to 5 expanded retrieved context from 2 chunks (600 tokens) to 5 chunks (1500 tokens). The top 2 results were strictly preserved. Expanding k introduced 3 additional chunks spanning 3 documents, with similarity score adjusting from 0.6501 down to 0.5660 (drop: 0.0840).",
+  "runs": {
+    "2": {
+      "query_text": "What are the customer due diligence and KYC verification requirements for onboarding new bank accounts?",
+      "k": 2,
+      "retrieved_count": 2,
+      "top_score": 0.650051,
+      "lowest_score": 0.650051,
+      "mean_score": 0.650051,
+      "total_tokens_retrieved": 600,
+      "source_documents": [
+        "circular_dor_2024_108.txt",
+        "sample_regulatory_circular.txt"
+      ],
+      "chunks": [
+        {
+          "rank": 1,
+          "id": "circular_dor_2024_108_txt_tokenaware_002",
+          "similarity_score": 0.650051,
+          "distance": 0.349949,
+          "document": "Regulated entities must undertake client identification and verification procedures before establishing an account-based relationship or executing an occasional cross-border financial transaction:\n(a) Verification of Officially Valid Documents (OVDs): Banks must verify the identity and permanent address of individual customers using authorized OVDs (e.g., Passport, Permanent Account Number (PAN) Card, Voter ID, Aadhaar through secure offline or e-KYC channels).\n(b) Beneficial Ownership Identification: For corporate entities, trusts, and unincorporated associations, banks shall determine the natural person who ultimately owns or controls a customer, holding at least 10 percent of shares or voting rights.\n(c) Video-based Customer Identification Process (V-CIP): Where remote customer onboarding is conducted, live geo-tagging, facial match algorithms with a confidence score exceeding 95%, and liveliness detection must be strictly enforced.\n\n3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs\nAccounts classified as high-risk, including Politically Exposed Persons (PEPs), non-resident customers, and trusts, warrant enhanced scrutiny:\n(a) Approval from Senior Management: Establishing relationships with PEPs, their family members, or close associates requires written approval from an officer not below the rank of Deputy General Manager.\n(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.\n(c) Heightened Transaction Monitoring: High",
+          "metadata": {
+            "document_id": "circular_dor_2024_108_txt",
+            "relative_path": "data\\sample_corpus\\circular_dor_2024_108.txt",
+            "source_document": "circular_dor_2024_108.txt",
+            "indexed_at": "2026-09-14T12:13:35.533006+00:00",
+            "section": "2. Customer Due Diligence (CDD) Requirements",
+            "char_count": 1582,
+            "token_count": 300,
+            "chunk_index": 1,
+            "file_type": ".txt",
+            "strategy": "token_aware_300_overlap_50",
+            "total_chunks": 4,
+            "page_number": 1,
+            "filename": "circular_dor_2024_108.txt"
+          }
+        },
+        {
+          "rank": 2,
+          "id": "sample_regulatory_circular_txt_tokenaware_002",
+          "similarity_score": 0.650051,
+          "distance": 0.349949,
+          "document": "Regulated entities must undertake client identification and verification procedures before establishing an account-based relationship or executing an occasional cross-border financial transaction:\n(a) Verification of Officially Valid Documents (OVDs): Banks must verify the identity and permanent address of individual customers using authorized OVDs (e.g., Passport, Permanent Account Number (PAN) Card, Voter ID, Aadhaar through secure offline or e-KYC channels).\n(b) Beneficial Ownership Identification: For corporate entities, trusts, and unincorporated associations, banks shall determine the natural person who ultimately owns or controls a customer, holding at least 10 percent of shares or voting rights.\n(c) Video-based Customer Identification Process (V-CIP): Where remote customer onboarding is conducted, live geo-tagging, facial match algorithms with a confidence score exceeding 95%, and liveliness detection must be strictly enforced.\n\n3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs\nAccounts classified as high-risk, including Politically Exposed Persons (PEPs), non-resident customers, and trusts, warrant enhanced scrutiny:\n(a) Approval from Senior Management: Establishing relationships with PEPs, their family members, or close associates requires written approval from an officer not below the rank of Deputy General Manager.\n(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.\n(c) Heightened Transaction Monitoring: High",
+          "metadata": {
+            "page_number": 1,
+            "relative_path": "data\\sample_regulatory_circular.txt",
+            "section": "2. Customer Due Diligence (CDD) Requirements",
+            "document_id": "sample_regulatory_circular_txt",
+            "filename": "sample_regulatory_circular.txt",
+            "file_type": ".txt",
+            "chunk_index": 1,
+            "total_chunks": 4,
+            "token_count": 300,
+            "char_count": 1582,
+            "source_document": "sample_regulatory_circular.txt",
+            "indexed_at": "2026-09-14T12:13:35.533217+00:00",
+            "strategy": "token_aware_300_overlap_50"
+          }
+        }
+      ]
+    },
+    "5": {
+      "query_text": "What are the customer due diligence and KYC verification requirements for onboarding new bank accounts?",
+      "k": 5,
+      "retrieved_count": 5,
+      "top_score": 0.650051,
+      "lowest_score": 0.566046,
+      "mean_score": 0.603218,
+      "total_tokens_retrieved": 1500,
+      "source_documents": [
+        "circular_dor_2024_108.txt",
+        "sample_regulatory_circular.txt",
+        "guidelines_cdd_pml_rules.md"
+      ],
+      "chunks": [
+        {
+          "rank": 1,
+          "id": "circular_dor_2024_108_txt_tokenaware_002",
+          "similarity_score": 0.650051,
+          "distance": 0.349949,
+          "document": "Regulated entities must undertake client identification and verification procedures before establishing an account-based relationship or executing an occasional cross-border financial transaction:\n(a) Verification of Officially Valid Documents (OVDs): Banks must verify the identity and permanent address of individual customers using authorized OVDs (e.g., Passport, Permanent Account Number (PAN) Card, Voter ID, Aadhaar through secure offline or e-KYC channels).\n(b) Beneficial Ownership Identification: For corporate entities, trusts, and unincorporated associations, banks shall determine the natural person who ultimately owns or controls a customer, holding at least 10 percent of shares or voting rights.\n(c) Video-based Customer Identification Process (V-CIP): Where remote customer onboarding is conducted, live geo-tagging, facial match algorithms with a confidence score exceeding 95%, and liveliness detection must be strictly enforced.\n\n3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs\nAccounts classified as high-risk, including Politically Exposed Persons (PEPs), non-resident customers, and trusts, warrant enhanced scrutiny:\n(a) Approval from Senior Management: Establishing relationships with PEPs, their family members, or close associates requires written approval from an officer not below the rank of Deputy General Manager.\n(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.\n(c) Heightened Transaction Monitoring: High",
+          "metadata": {
+            "chunk_index": 1,
+            "token_count": 300,
+            "file_type": ".txt",
+            "total_chunks": 4,
+            "document_id": "circular_dor_2024_108_txt",
+            "strategy": "token_aware_300_overlap_50",
+            "source_document": "circular_dor_2024_108.txt",
+            "section": "2. Customer Due Diligence (CDD) Requirements",
+            "indexed_at": "2026-09-14T12:13:35.533006+00:00",
+            "relative_path": "data\\sample_corpus\\circular_dor_2024_108.txt",
+            "char_count": 1582,
+            "page_number": 1,
+            "filename": "circular_dor_2024_108.txt"
+          }
+        },
+        {
+          "rank": 2,
+          "id": "sample_regulatory_circular_txt_tokenaware_002",
+          "similarity_score": 0.650051,
+          "distance": 0.349949,
+          "document": "Regulated entities must undertake client identification and verification procedures before establishing an account-based relationship or executing an occasional cross-border financial transaction:\n(a) Verification of Officially Valid Documents (OVDs): Banks must verify the identity and permanent address of individual customers using authorized OVDs (e.g., Passport, Permanent Account Number (PAN) Card, Voter ID, Aadhaar through secure offline or e-KYC channels).\n(b) Beneficial Ownership Identification: For corporate entities, trusts, and unincorporated associations, banks shall determine the natural person who ultimately owns or controls a customer, holding at least 10 percent of shares or voting rights.\n(c) Video-based Customer Identification Process (V-CIP): Where remote customer onboarding is conducted, live geo-tagging, facial match algorithms with a confidence score exceeding 95%, and liveliness detection must be strictly enforced.\n\n3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs\nAccounts classified as high-risk, including Politically Exposed Persons (PEPs), non-resident customers, and trusts, warrant enhanced scrutiny:\n(a) Approval from Senior Management: Establishing relationships with PEPs, their family members, or close associates requires written approval from an officer not below the rank of Deputy General Manager.\n(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.\n(c) Heightened Transaction Monitoring: High",
+          "metadata": {
+            "token_count": 300,
+            "total_chunks": 4,
+            "char_count": 1582,
+            "indexed_at": "2026-09-14T12:13:35.533217+00:00",
+            "strategy": "token_aware_300_overlap_50",
+            "source_document": "sample_regulatory_circular.txt",
+            "section": "2. Customer Due Diligence (CDD) Requirements",
+            "page_number": 1,
+            "relative_path": "data\\sample_regulatory_circular.txt",
+            "chunk_index": 1,
+            "document_id": "sample_regulatory_circular_txt",
+            "file_type": ".txt",
+            "filename": "sample_regulatory_circular.txt"
+          }
+        },
+        {
+          "rank": 3,
+          "id": "guidelines_cdd_pml_rules_md_tokenaware_001",
+          "similarity_score": 0.583894,
+          "distance": 0.416106,
+          "document": "# Internal Compliance Guidelines: CDD & Prevention of Money Laundering (PML) Rules\n\n**Document Identifier**: REG-COMP-2024-V2\n**Effective Date**: January 15, 2024\n**Applicability**: Branch Operations, Credit Appraisal, and Compliance Teams\n**Supervisory Authority**: Reserve Bank of India & FIU-IND\n\n---\n\n## 1. Executive Mandate\n\nAll business units must implement strict Customer Due Diligence (CDD) and AML screening prior to account onboarding or executing any single remittance exceeding INR 50,000. Customer risk categorization must be updated dynamically based on real-time transaction activity.\n\n## 2. Customer Risk Categorization\n\nEvery account is assigned a risk tier during onboarding:\n\n| Risk Tier | Review Frequency | Typical Profile | Screening Controls |\n| :--- | :--- | :--- | :--- |\n| **Tier 1 (Low)** | Every 10 years | Salaried individuals, government entities | Standard OVD verification |\n| **Tier 2 (Medium)** | Every 8 years | Small businesses, retail traders | Field verification, GST validation |\n| **Tier 3 (High)** | Every 2 years | PEPs, jewelers, bullion dealers, offshore trusts | Enhanced Due Diligence (EDD), DGM sign-off |\n\n## 3. Politically Exposed Persons (PEP) Workflow\n\n1. **Identification",
+          "metadata": {
+            "filename": "guidelines_cdd_pml_rules.md",
+            "section": "Internal Compliance Guidelines: CDD & Prevention of Money Laundering (PML) Rules",
+            "strategy": "token_aware_300_overlap_50",
+            "relative_path": "data\\sample_corpus\\guidelines_cdd_pml_rules.md",
+            "page_number": 1,
+            "source_document": "guidelines_cdd_pml_rules.md",
+            "total_chunks": 3,
+            "indexed_at": "2026-09-14T12:13:35.533149+00:00",
+            "file_type": ".md",
+            "token_count": 300,
+            "char_count": 1224,
+            "document_id": "guidelines_cdd_pml_rules_md",
+            "chunk_index": 0
+          }
+        },
+        {
+          "rank": 4,
+          "id": "circular_dor_2024_108_txt_tokenaware_001",
+          "similarity_score": 0.566046,
+          "distance": 0.433954,
+          "document": "RESERVE BANK OF INDIA FINANCIAL STABILITY AND COMPLIANCE DEPARTMENT CENTRAL OFFICE, MUMBAI\n\nRef: RBI/2023-24/108 Circular No: DOR.AML.REC.66/14.01.001/2023-24 Date: January 04, 2024\n\nTo, All Scheduled Commercial Banks (excluding RRBs) All Small Finance Banks and Payment Banks All Non-Banking Financial Companies (NBFCs)\n\nSubject: Master Direction - Know Your Customer (KYC) and Anti-Money Laundering (AML) Standards - Enhanced Due Diligence and Transaction Record Management\n\n1. Preliminary and Statutory Authority\nIn exercise of the powers conferred by Section 35A of the Banking Regulation Act, 1949, read with Section 51A of the Unlawful Activities (Prevention) Act, 1967, and the Prevention of Money-Laundering (Maintenance of Records) Rules, 2005, the Reserve Bank of India hereby issues the updated Master Directions on Customer Due Diligence (CDD) and compliance obligations for regulated entities (REs).\n\n2. Customer Due Diligence (CDD) Requirements\nRegulated entities must undertake client identification and verification procedures before establishing an account-based relationship or executing an occasional cross-border financial transaction:\n(a) Verification of Officially Valid Documents (OVDs): Banks must verify the identity and permanent address of individual customers using",
+          "metadata": {
+            "chunk_index": 0,
+            "indexed_at": "2026-09-14T12:13:35.532947+00:00",
+            "relative_path": "data\\sample_corpus\\circular_dor_2024_108.txt",
+            "section": "Preamble / Document Header",
+            "source_document": "circular_dor_2024_108.txt",
+            "total_chunks": 4,
+            "char_count": 1293,
+            "file_type": ".txt",
+            "page_number": 1,
+            "document_id": "circular_dor_2024_108_txt",
+            "token_count": 300,
+            "strategy": "token_aware_300_overlap_50",
+            "filename": "circular_dor_2024_108.txt"
+          }
+        },
+        {
+          "rank": 5,
+          "id": "sample_regulatory_circular_txt_tokenaware_001",
+          "similarity_score": 0.566046,
+          "distance": 0.433954,
+          "document": "RESERVE BANK OF INDIA FINANCIAL STABILITY AND COMPLIANCE DEPARTMENT CENTRAL OFFICE, MUMBAI\n\nRef: RBI/2023-24/108 Circular No: DOR.AML.REC.66/14.01.001/2023-24 Date: January 04, 2024\n\nTo, All Scheduled Commercial Banks (excluding RRBs) All Small Finance Banks and Payment Banks All Non-Banking Financial Companies (NBFCs)\n\nSubject: Master Direction - Know Your Customer (KYC) and Anti-Money Laundering (AML) Standards - Enhanced Due Diligence and Transaction Record Management\n\n1. Preliminary and Statutory Authority\nIn exercise of the powers conferred by Section 35A of the Banking Regulation Act, 1949, read with Section 51A of the Unlawful Activities (Prevention) Act, 1967, and the Prevention of Money-Laundering (Maintenance of Records) Rules, 2005, the Reserve Bank of India hereby issues the updated Master Directions on Customer Due Diligence (CDD) and compliance obligations for regulated entities (REs).\n\n2. Customer Due Diligence (CDD) Requirements\nRegulated entities must undertake client identification and verification procedures before establishing an account-based relationship or executing an occasional cross-border financial transaction:\n(a) Verification of Officially Valid Documents (OVDs): Banks must verify the identity and permanent address of individual customers using",
+          "metadata": {
+            "filename": "sample_regulatory_circular.txt",
+            "section": "Preamble / Document Header",
+            "token_count": 300,
+            "total_chunks": 4,
+            "page_number": 1,
+            "strategy": "token_aware_300_overlap_50",
+            "indexed_at": "2026-09-14T12:13:35.533200+00:00",
+            "chunk_index": 0,
+            "relative_path": "data\\sample_regulatory_circular.txt",
+            "char_count": 1293,
+            "source_document": "sample_regulatory_circular.txt",
+            "document_id": "sample_regulatory_circular_txt",
+            "file_type": ".txt"
+          }
+        }
+      ]
+    }
+  }
+}
