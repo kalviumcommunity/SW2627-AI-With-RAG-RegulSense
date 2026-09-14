@@ -59,6 +59,8 @@ outputs/*
 !outputs/vector_search_results.json
 !outputs/filtered_search_results.md
 !outputs/filtered_search_results.json
+!outputs/retrieval_tuning_results.md
+!outputs/retrieval_tuning_results.json
 
 
 # Python cache

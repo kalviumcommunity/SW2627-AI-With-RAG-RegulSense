@@ -501,7 +501,7 @@ def run_sample_query_retrieval(
     return retriever, demo, (md_path, json_path)
 
 
-# Backward-compatible lazy re-exports for filtered and hybrid retrieval components
+# Backward-compatible lazy re-exports for filtered, hybrid, and tuning retrieval components
 def __getattr__(name: str):
     if name in (
         "FilteredRetriever",
@@ -512,6 +512,16 @@ def __getattr__(name: str):
     ):
         import src.filtered_retriever as _fr
         return getattr(_fr, name)
+    if name in (
+        "RetrievalTuner",
+        "TestQuery",
+        "RetrievalConfig",
+        "TuningExperimentReport",
+        "BENCHMARK_TEST_QUERIES",
+        "DEFAULT_RETRIEVAL_CONFIGS",
+    ):
+        import src.retrieval_tuner as _rt
+        return getattr(_rt, name)
     raise AttributeError(f"module '{__name__}' has no attribute '{name}'")
 
 
