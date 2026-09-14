@@ -57,6 +57,8 @@ outputs/*
 !outputs/corpus_indexing_summary.json
 !outputs/vector_search_results.md
 !outputs/vector_search_results.json
+!outputs/filtered_search_results.md
+!outputs/filtered_search_results.json
 
 
 # Python cache

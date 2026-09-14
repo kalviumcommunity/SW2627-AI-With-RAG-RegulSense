@@ -501,6 +501,20 @@ def run_sample_query_retrieval(
     return retriever, demo, (md_path, json_path)
 
 
+# Backward-compatible lazy re-exports for filtered and hybrid retrieval components
+def __getattr__(name: str):
+    if name in (
+        "FilteredRetriever",
+        "FilterComparisonResult",
+        "HybridComparisonResult",
+        "HybridRecord",
+        "KeywordScorer",
+    ):
+        import src.filtered_retriever as _fr
+        return getattr(_fr, name)
+    raise AttributeError(f"module '{__name__}' has no attribute '{name}'")
+
+
 if __name__ == "__main__":
     import argparse
 

@@ -1,0 +1,693 @@
+{
+  "timestamp": "2026-09-14T12:55:41.208304+00:00",
+  "collection_name": "regulsense_regulatory_chunks",
+  "embedding_model": "all-minilm",
+  "vector_dimension": 384,
+  "cases": {
+    "case1_document_filtering": {
+      "query_text": "What are the rules and permitted hours for recovery agents contacting borrowers?",
+      "filter_criteria": {
+        "file_type": ".html"
+      },
+      "k": 3,
+      "precision_unfiltered": 0.6667,
+      "precision_filtered": 1.0,
+      "precision_gain_pct": 50.0,
+      "relevance_justification": "Applying filter {'file_type': '.html'} improved Precision@3 from 66.7% to 100.0% (+50.0% gain). It eliminated 1 out-of-scope chunks (such as 'sample_regulatory_circular_txt_tokenaware_004') from unrelated documents, ensuring 100% of context delivered to the LLM is legally grounded.",
+      "unfiltered_chunks": [
+        {
+          "rank": 1,
+          "id": "digital_lending_compliance_note_html_tokenaware_001",
+          "similarity_score": 0.564332,
+          "distance": 0.435668,
+          "document": "Regulatory Advisory: Digital Lending Guidelines & Consumer Protection\n\nRegulSense Regulatory Advisory: Digital Lending & Fair Practices Code\n\nReference: RBI/2022-23/DOR.CRE.REC.42/21.04.048/2022-23\n\nTarget Entities: Commercial Banks, Digital Lending Platforms, Lending Service Providers (LSPs)\n\n1. Direct Fund Disbursal and Repayment\n\nAll loan disbursals and repayments must be executed solely between the bank account of the borrower and the regulated entity (RE) without any pass-through or pool account of any third-party Lending Service Provider (LSP).\n\n2. Key Fact Statement (KFS) Mandate\n\nA standardized Key Fact Statement (KFS) must be provided to the prospective borrower before execution of any loan agreement. The KFS must explicitly disclose:\n\nAnnual Percentage Rate (APR) including all fees, processing charges, and penal interests.\n\nCooling-off / look-up period during which borrowers can exit digital loans without penalty.\n\nDetailed schedule of installments and default handling terms.\n\n3. Code of Conduct for Recovery Agents\n\nStrict Prohibition: Regulated entities and their engaged recovery agents are strictly prohibited from contacting borrowers before 8:00 AM or after 7:00 PM. Harassment, verbal intimidation, or unauthorized contact with borrowers' relatives or social networks will lead to immediate regulatory sanction.\n\n4. Data Privacy and Storage Restrictions\n\nDigital lending apps shall not access mobile phone resources such",
+          "metadata": {
+            "document_id": "digital_lending_compliance_note_html",
+            "filename": "digital_lending_compliance_note.html",
+            "relative_path": "data\\sample_corpus\\digital_lending_compliance_note.html",
+            "page_number": 1,
+            "section": "Preamble / Document Header",
+            "file_type": ".html",
+            "strategy": "token_aware_300_overlap_50",
+            "char_count": 1452,
+            "source_document": "digital_lending_compliance_note.html",
+            "total_chunks": 2,
+            "chunk_index": 0,
+            "indexed_at": "2026-09-14T12:13:35.533108+00:00",
+            "token_count": 300
+          }
+        },
+        {
+          "rank": 2,
+          "id": "digital_lending_compliance_note_html_tokenaware_002",
+          "similarity_score": 0.426502,
+          "distance": 0.573498,
+          "document": "or after 7:00 PM. Harassment, verbal intimidation, or unauthorized contact with borrowers' relatives or social networks will lead to immediate regulatory sanction.\n\n4. Data Privacy and Storage Restrictions\n\nDigital lending apps shall not access mobile phone resources such as file storage, contact lists, call logs, or camera (except for one-time KYC onboarding with express consent). Biometric data must never be stored on third-party servers.",
+          "metadata": {
+            "strategy": "token_aware_300_overlap_50",
+            "token_count": 87,
+            "total_chunks": 2,
+            "filename": "digital_lending_compliance_note.html",
+            "char_count": 444,
+            "file_type": ".html",
+            "source_document": "digital_lending_compliance_note.html",
+            "document_id": "digital_lending_compliance_note_html",
+            "indexed_at": "2026-09-14T12:13:35.533124+00:00",
+            "page_number": 1,
+            "relative_path": "data\\sample_corpus\\digital_lending_compliance_note.html",
+            "chunk_index": 1,
+            "section": "3. Code of Conduct for Recovery Agents"
+          }
+        },
+        {
+          "rank": 3,
+          "id": "sample_regulatory_circular_txt_tokenaware_004",
+          "similarity_score": 0.342605,
+          "distance": 0.657395,
+          "document": "igations\nUnder Rule 3 and Rule 10 of the PML Rules, 2005, all regulated entities shall maintain:\n(a) Transaction Records: Comprehensive records of all transactions, whether completed or attempted, domestic or international, for a minimum period of five years from the date of transaction between the bank and the client.\n(b) Customer Identification and Account Files: All account opening records, KYC verification dossiers, business correspondence, and internal audit notes must be safely retained for at least five years after the business relationship has ended or the account has been closed.\n(c) Audit Trails and Reconstruction: Records must be preserved in a manner that permits swift reconstruction of individual transactions (including amounts, currencies, counterparty details, and timestamps) to provide evidentiary support for regulatory inquiries and court proceedings.\n\n6. Non-Compliance Sanctions\nFailure to adhere to these directions shall attract monetary penalties under Section 47A(1)(c) read with Section 46(4) of the Banking Regulation Act, 1949, without prejudice to other statutory enforcement actions.\n\n(S. R. Sundaresan) Chief General Manager-in-Charge",
+          "metadata": {
+            "file_type": ".txt",
+            "filename": "sample_regulatory_circular.txt",
+            "document_id": "sample_regulatory_circular_txt",
+            "indexed_at": "2026-09-14T12:13:35.533250+00:00",
+            "chunk_index": 3,
+            "char_count": 1175,
+            "strategy": "token_aware_300_overlap_50",
+            "section": "5. Record Retention Obligations",
+            "token_count": 231,
+            "source_document": "sample_regulatory_circular.txt",
+            "page_number": 1,
+            "relative_path": "data\\sample_regulatory_circular.txt",
+            "total_chunks": 4
+          }
+        }
+      ],
+      "filtered_chunks": [
+        {
+          "rank": 1,
+          "id": "digital_lending_compliance_note_html_tokenaware_001",
+          "similarity_score": 0.564332,
+          "distance": 0.435668,
+          "document": "Regulatory Advisory: Digital Lending Guidelines & Consumer Protection\n\nRegulSense Regulatory Advisory: Digital Lending & Fair Practices Code\n\nReference: RBI/2022-23/DOR.CRE.REC.42/21.04.048/2022-23\n\nTarget Entities: Commercial Banks, Digital Lending Platforms, Lending Service Providers (LSPs)\n\n1. Direct Fund Disbursal and Repayment\n\nAll loan disbursals and repayments must be executed solely between the bank account of the borrower and the regulated entity (RE) without any pass-through or pool account of any third-party Lending Service Provider (LSP).\n\n2. Key Fact Statement (KFS) Mandate\n\nA standardized Key Fact Statement (KFS) must be provided to the prospective borrower before execution of any loan agreement. The KFS must explicitly disclose:\n\nAnnual Percentage Rate (APR) including all fees, processing charges, and penal interests.\n\nCooling-off / look-up period during which borrowers can exit digital loans without penalty.\n\nDetailed schedule of installments and default handling terms.\n\n3. Code of Conduct for Recovery Agents\n\nStrict Prohibition: Regulated entities and their engaged recovery agents are strictly prohibited from contacting borrowers before 8:00 AM or after 7:00 PM. Harassment, verbal intimidation, or unauthorized contact with borrowers' relatives or social networks will lead to immediate regulatory sanction.\n\n4. Data Privacy and Storage Restrictions\n\nDigital lending apps shall not access mobile phone resources such",
+          "metadata": {
+            "source_document": "digital_lending_compliance_note.html",
+            "token_count": 300,
+            "chunk_index": 0,
+            "file_type": ".html",
+            "section": "Preamble / Document Header",
+            "strategy": "token_aware_300_overlap_50",
+            "filename": "digital_lending_compliance_note.html",
+            "page_number": 1,
+            "document_id": "digital_lending_compliance_note_html",
+            "total_chunks": 2,
+            "indexed_at": "2026-09-14T12:13:35.533108+00:00",
+            "relative_path": "data\\sample_corpus\\digital_lending_compliance_note.html",
+            "char_count": 1452
+          }
+        },
+        {
+          "rank": 2,
+          "id": "digital_lending_compliance_note_html_tokenaware_002",
+          "similarity_score": 0.426502,
+          "distance": 0.573498,
+          "document": "or after 7:00 PM. Harassment, verbal intimidation, or unauthorized contact with borrowers' relatives or social networks will lead to immediate regulatory sanction.\n\n4. Data Privacy and Storage Restrictions\n\nDigital lending apps shall not access mobile phone resources such as file storage, contact lists, call logs, or camera (except for one-time KYC onboarding with express consent). Biometric data must never be stored on third-party servers.",
+          "metadata": {
+            "section": "3. Code of Conduct for Recovery Agents",
+            "filename": "digital_lending_compliance_note.html",
+            "strategy": "token_aware_300_overlap_50",
+            "char_count": 444,
+            "token_count": 87,
+            "file_type": ".html",
+            "indexed_at": "2026-09-14T12:13:35.533124+00:00",
+            "page_number": 1,
+            "total_chunks": 2,
+            "source_document": "digital_lending_compliance_note.html",
+            "chunk_index": 1,
+            "document_id": "digital_lending_compliance_note_html",
+            "relative_path": "data\\sample_corpus\\digital_lending_compliance_note.html"
+          }
+        }
+      ],
+      "eliminated_irrelevant_chunks": [
+        {
+          "rank": 3,
+          "id": "sample_regulatory_circular_txt_tokenaware_004",
+          "similarity_score": 0.342605,
+          "distance": 0.657395,
+          "document": "igations\nUnder Rule 3 and Rule 10 of the PML Rules, 2005, all regulated entities shall maintain:\n(a) Transaction Records: Comprehensive records of all transactions, whether completed or attempted, domestic or international, for a minimum period of five years from the date of transaction between the bank and the client.\n(b) Customer Identification and Account Files: All account opening records, KYC verification dossiers, business correspondence, and internal audit notes must be safely retained for at least five years after the business relationship has ended or the account has been closed.\n(c) Audit Trails and Reconstruction: Records must be preserved in a manner that permits swift reconstruction of individual transactions (including amounts, currencies, counterparty details, and timestamps) to provide evidentiary support for regulatory inquiries and court proceedings.\n\n6. Non-Compliance Sanctions\nFailure to adhere to these directions shall attract monetary penalties under Section 47A(1)(c) read with Section 46(4) of the Banking Regulation Act, 1949, without prejudice to other statutory enforcement actions.\n\n(S. R. Sundaresan) Chief General Manager-in-Charge",
+          "metadata": {
+            "file_type": ".txt",
+            "filename": "sample_regulatory_circular.txt",
+            "document_id": "sample_regulatory_circular_txt",
+            "indexed_at": "2026-09-14T12:13:35.533250+00:00",
+            "chunk_index": 3,
+            "char_count": 1175,
+            "strategy": "token_aware_300_overlap_50",
+            "section": "5. Record Retention Obligations",
+            "token_count": 231,
+            "source_document": "sample_regulatory_circular.txt",
+            "page_number": 1,
+            "relative_path": "data\\sample_regulatory_circular.txt",
+            "total_chunks": 4
+          }
+        }
+      ]
+    },
+    "case2_cyber_scoping": {
+      "query_text": "What is the mandatory timeline for notifying regulatory authorities of a cyber security incident?",
+      "filter_criteria": {
+        "source_document": "cyber_resilience_framework.pdf"
+      },
+      "k": 2,
+      "precision_unfiltered": 1.0,
+      "precision_filtered": 1.0,
+      "precision_gain_pct": 0.0,
+      "relevance_justification": "Applying filter {'source_document': 'cyber_resilience_framework.pdf'} improved Precision@2 from 100.0% to 100.0% (+0.0% gain). It eliminated 0 out-of-scope chunks (such as 'none') from unrelated documents, ensuring 100% of context delivered to the LLM is legally grounded.",
+      "unfiltered_chunks": [
+        {
+          "rank": 1,
+          "id": "cyber_resilience_framework_pdf_tokenaware_002",
+          "similarity_score": 0.447315,
+          "distance": 0.552685,
+          "document": "x7x365 Security Operations Centre (SOC) equipped with continuous automated log monitoring, SIEM analytics, and automated threat hunting capabilities.\n\n4. API Security and Third-Party Risk Management\n(a) All open banking and fintech integrations must mandate TLS 1.3 encryption with certificate pinning.\n(b) Third-party service providers and cloud vendors must undergo mandatory annual vulnerability assessment and penetration testing (VAPT) conducted by CERT-In empaneled auditors.\n5. Audit Trail and Forensic Preservation\nAll critical access logs, privileged user operations, database queries, and perimeter firewall event records must be stored in immutable WORM (Write Once, Read Many) storage for a minimum duration of three (3) years to aid statutory forensic investigations.\n6. Supervisory Penalties\nNon-compliance with the cyber resilience directives will invite punitive supervisory action under Section 47A of the Banking Regulation Act, 1949, including operational restrictions on digital onboarding.\nChief General Manager (Information Technology)\nReserve Bank of India",
+          "metadata": {
+            "relative_path": "data\\sample_corpus\\cyber_resilience_framework.pdf",
+            "char_count": 1079,
+            "filename": "cyber_resilience_framework.pdf",
+            "total_chunks": 2,
+            "page_number": 1,
+            "chunk_index": 1,
+            "strategy": "token_aware_300_overlap_50",
+            "token_count": 206,
+            "indexed_at": "2026-09-14T12:13:35.533090+00:00",
+            "section": "Preamble / Document Header",
+            "source_document": "cyber_resilience_framework.pdf",
+            "document_id": "cyber_resilience_framework_pdf",
+            "file_type": ".pdf"
+          }
+        },
+        {
+          "rank": 2,
+          "id": "cyber_resilience_framework_pdf_tokenaware_001",
+          "similarity_score": 0.438866,
+          "distance": 0.561134,
+          "document": "RESERVE BANK OF INDIA DEPARTMENT OF CYBER SECURITY AND INFORMATION TECHNOLOGY CENTRAL OFFICE, MUMBAI Circular No: RBI/2024-25/19 - DoS.CO.CSITE.No.03/11.01.005/2024-25 Date: March 12, 2024 Subject: Master Direction on Cyber Resilience and Digital Payment Security Controls 1. Mandatory Two-Factor Authentication (2FA) All regulated payment system operators and scheduled commercial banks must enforce dynamic two-factor authentication (2FA) for all domestic electronic fund transfers (NEFT, RTGS, IMPS, and UPI). At least one factor must be dynamic, such as a time-based one-time password (TOTP) or biometric verification. 2. Incident Reporting Timelines (6-Hour Rule) Any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial of service (DoS) affecting customer-facing channels must be reported to the RBI Cyber Security Cell (CSITE) and CERT-In within 6 hours of detection. Initial reports must be followed by a comprehensive forensic analysis report within 7 business days. 3. Security Operations Centre (SOC) Operations Banks must operate a 24x7x365 Security Operations Centre (SOC) equipped with continuous automated log monitoring, SIEM analytics, and automated threat hunting capabilities.\n\n4. API Security and Third-Party Risk Management\n(a) All open banking and fintech integrations must mandate",
+          "metadata": {
+            "total_chunks": 2,
+            "token_count": 300,
+            "file_type": ".pdf",
+            "document_id": "cyber_resilience_framework_pdf",
+            "source_document": "cyber_resilience_framework.pdf",
+            "filename": "cyber_resilience_framework.pdf",
+            "page_number": 1,
+            "section": "Preamble / Document Header",
+            "chunk_index": 0,
+            "char_count": 1345,
+            "strategy": "token_aware_300_overlap_50",
+            "relative_path": "data\\sample_corpus\\cyber_resilience_framework.pdf",
+            "indexed_at": "2026-09-14T12:13:35.533074+00:00"
+          }
+        }
+      ],
+      "filtered_chunks": [
+        {
+          "rank": 1,
+          "id": "cyber_resilience_framework_pdf_tokenaware_002",
+          "similarity_score": 0.447315,
+          "distance": 0.552685,
+          "document": "x7x365 Security Operations Centre (SOC) equipped with continuous automated log monitoring, SIEM analytics, and automated threat hunting capabilities.\n\n4. API Security and Third-Party Risk Management\n(a) All open banking and fintech integrations must mandate TLS 1.3 encryption with certificate pinning.\n(b) Third-party service providers and cloud vendors must undergo mandatory annual vulnerability assessment and penetration testing (VAPT) conducted by CERT-In empaneled auditors.\n5. Audit Trail and Forensic Preservation\nAll critical access logs, privileged user operations, database queries, and perimeter firewall event records must be stored in immutable WORM (Write Once, Read Many) storage for a minimum duration of three (3) years to aid statutory forensic investigations.\n6. Supervisory Penalties\nNon-compliance with the cyber resilience directives will invite punitive supervisory action under Section 47A of the Banking Regulation Act, 1949, including operational restrictions on digital onboarding.\nChief General Manager (Information Technology)\nReserve Bank of India",
+          "metadata": {
+            "document_id": "cyber_resilience_framework_pdf",
+            "char_count": 1079,
+            "file_type": ".pdf",
+            "total_chunks": 2,
+            "relative_path": "data\\sample_corpus\\cyber_resilience_framework.pdf",
+            "section": "Preamble / Document Header",
+            "token_count": 206,
+            "filename": "cyber_resilience_framework.pdf",
+            "page_number": 1,
+            "chunk_index": 1,
+            "indexed_at": "2026-09-14T12:13:35.533090+00:00",
+            "strategy": "token_aware_300_overlap_50",
+            "source_document": "cyber_resilience_framework.pdf"
+          }
+        },
+        {
+          "rank": 2,
+          "id": "cyber_resilience_framework_pdf_tokenaware_001",
+          "similarity_score": 0.438866,
+          "distance": 0.561134,
+          "document": "RESERVE BANK OF INDIA DEPARTMENT OF CYBER SECURITY AND INFORMATION TECHNOLOGY CENTRAL OFFICE, MUMBAI Circular No: RBI/2024-25/19 - DoS.CO.CSITE.No.03/11.01.005/2024-25 Date: March 12, 2024 Subject: Master Direction on Cyber Resilience and Digital Payment Security Controls 1. Mandatory Two-Factor Authentication (2FA) All regulated payment system operators and scheduled commercial banks must enforce dynamic two-factor authentication (2FA) for all domestic electronic fund transfers (NEFT, RTGS, IMPS, and UPI). At least one factor must be dynamic, such as a time-based one-time password (TOTP) or biometric verification. 2. Incident Reporting Timelines (6-Hour Rule) Any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial of service (DoS) affecting customer-facing channels must be reported to the RBI Cyber Security Cell (CSITE) and CERT-In within 6 hours of detection. Initial reports must be followed by a comprehensive forensic analysis report within 7 business days. 3. Security Operations Centre (SOC) Operations Banks must operate a 24x7x365 Security Operations Centre (SOC) equipped with continuous automated log monitoring, SIEM analytics, and automated threat hunting capabilities.\n\n4. API Security and Third-Party Risk Management\n(a) All open banking and fintech integrations must mandate",
+          "metadata": {
+            "token_count": 300,
+            "strategy": "token_aware_300_overlap_50",
+            "indexed_at": "2026-09-14T12:13:35.533074+00:00",
+            "file_type": ".pdf",
+            "page_number": 1,
+            "char_count": 1345,
+            "document_id": "cyber_resilience_framework_pdf",
+            "chunk_index": 0,
+            "total_chunks": 2,
+            "section": "Preamble / Document Header",
+            "filename": "cyber_resilience_framework.pdf",
+            "relative_path": "data\\sample_corpus\\cyber_resilience_framework.pdf",
+            "source_document": "cyber_resilience_framework.pdf"
+          }
+        }
+      ],
+      "eliminated_irrelevant_chunks": []
+    },
+    "case3_vcip_hybrid_exact": {
+      "query_text": "What facial match confidence score is required for V-CIP customer onboarding?",
+      "target_terms": [
+        "V-CIP",
+        "95%",
+        "facial match",
+        "liveliness"
+      ],
+      "alpha": 0.6,
+      "rank_promotions": [
+        {
+          "chunk_id": "circular_dor_2024_108_txt_tokenaware_002",
+          "old_dense_rank": 1,
+          "new_hybrid_rank": 1,
+          "promoted": false,
+          "exact_matches": [
+            "V-CIP",
+            "95%",
+            "facial match",
+            "liveliness"
+          ],
+          "hybrid_score": 0.5386846585707231
+        },
+        {
+          "chunk_id": "sample_regulatory_circular_txt_tokenaware_002",
+          "old_dense_rank": 2,
+          "new_hybrid_rank": 2,
+          "promoted": false,
+          "exact_matches": [
+            "V-CIP",
+            "95%",
+            "facial match",
+            "liveliness"
+          ],
+          "hybrid_score": 0.5386846585707231
+        },
+        {
+          "chunk_id": "guidelines_cdd_pml_rules_md_tokenaware_001",
+          "old_dense_rank": 3,
+          "new_hybrid_rank": 3,
+          "promoted": false,
+          "exact_matches": [],
+          "hybrid_score": 0.1906417965888977
+        }
+      ],
+      "analysis": "Hybrid search with alpha=0.60 prioritizing exact terms ['V-CIP', '95%', 'facial match', 'liveliness'] successfully boosted exact-match chunks. Most notably, 'circular_dor_2024_108_txt_tokenaware_002' achieved Rank #1 (hybrid score: 0.5387, keyword score: 0.6364) due to matching exact statutory terminology ['V-CIP', '95%', 'facial match', 'liveliness'].",
+      "dense_ranking": [
+        {
+          "rank": 1,
+          "id": "circular_dor_2024_108_txt_tokenaware_002",
+          "similarity_score": 0.473565,
+          "distance": 0.526435,
+          "document": "Regulated entities must undertake client identification and verification procedures before establishing an account-based relationship or executing an occasional cross-border financial transaction:\n(a) Verification of Officially Valid Documents (OVDs): Banks must verify the identity and permanent address of individual customers using authorized OVDs (e.g., Passport, Permanent Account Number (PAN) Card, Voter ID, Aadhaar through secure offline or e-KYC channels).\n(b) Beneficial Ownership Identification: For corporate entities, trusts, and unincorporated associations, banks shall determine the natural person who ultimately owns or controls a customer, holding at least 10 percent of shares or voting rights.\n(c) Video-based Customer Identification Process (V-CIP): Where remote customer onboarding is conducted, live geo-tagging, facial match algorithms with a confidence score exceeding 95%, and liveliness detection must be strictly enforced.\n\n3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs\nAccounts classified as high-risk, including Politically Exposed Persons (PEPs), non-resident customers, and trusts, warrant enhanced scrutiny:\n(a) Approval from Senior Management: Establishing relationships with PEPs, their family members, or close associates requires written approval from an officer not below the rank of Deputy General Manager.\n(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.\n(c) Heightened Transaction Monitoring: High",
+          "metadata": {
+            "total_chunks": 4,
+            "strategy": "token_aware_300_overlap_50",
+            "section": "2. Customer Due Diligence (CDD) Requirements",
+            "filename": "circular_dor_2024_108.txt",
+            "token_count": 300,
+            "file_type": ".txt",
+            "relative_path": "data\\sample_corpus\\circular_dor_2024_108.txt",
+            "source_document": "circular_dor_2024_108.txt",
+            "document_id": "circular_dor_2024_108_txt",
+            "char_count": 1582,
+            "page_number": 1,
+            "chunk_index": 1,
+            "indexed_at": "2026-09-14T12:13:35.533006+00:00"
+          }
+        },
+        {
+          "rank": 2,
+          "id": "sample_regulatory_circular_txt_tokenaware_002",
+          "similarity_score": 0.473565,
+          "distance": 0.526435,
+          "document": "Regulated entities must undertake client identification and verification procedures before establishing an account-based relationship or executing an occasional cross-border financial transaction:\n(a) Verification of Officially Valid Documents (OVDs): Banks must verify the identity and permanent address of individual customers using authorized OVDs (e.g., Passport, Permanent Account Number (PAN) Card, Voter ID, Aadhaar through secure offline or e-KYC channels).\n(b) Beneficial Ownership Identification: For corporate entities, trusts, and unincorporated associations, banks shall determine the natural person who ultimately owns or controls a customer, holding at least 10 percent of shares or voting rights.\n(c) Video-based Customer Identification Process (V-CIP): Where remote customer onboarding is conducted, live geo-tagging, facial match algorithms with a confidence score exceeding 95%, and liveliness detection must be strictly enforced.\n\n3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs\nAccounts classified as high-risk, including Politically Exposed Persons (PEPs), non-resident customers, and trusts, warrant enhanced scrutiny:\n(a) Approval from Senior Management: Establishing relationships with PEPs, their family members, or close associates requires written approval from an officer not below the rank of Deputy General Manager.\n(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.\n(c) Heightened Transaction Monitoring: High",
+          "metadata": {
+            "relative_path": "data\\sample_regulatory_circular.txt",
+            "filename": "sample_regulatory_circular.txt",
+            "total_chunks": 4,
+            "source_document": "sample_regulatory_circular.txt",
+            "strategy": "token_aware_300_overlap_50",
+            "indexed_at": "2026-09-14T12:13:35.533217+00:00",
+            "file_type": ".txt",
+            "section": "2. Customer Due Diligence (CDD) Requirements",
+            "document_id": "sample_regulatory_circular_txt",
+            "page_number": 1,
+            "token_count": 300,
+            "chunk_index": 1,
+            "char_count": 1582
+          }
+        },
+        {
+          "rank": 3,
+          "id": "guidelines_cdd_pml_rules_md_tokenaware_001",
+          "similarity_score": 0.317736,
+          "distance": 0.682264,
+          "document": "# Internal Compliance Guidelines: CDD & Prevention of Money Laundering (PML) Rules\n\n**Document Identifier**: REG-COMP-2024-V2\n**Effective Date**: January 15, 2024\n**Applicability**: Branch Operations, Credit Appraisal, and Compliance Teams\n**Supervisory Authority**: Reserve Bank of India & FIU-IND\n\n---\n\n## 1. Executive Mandate\n\nAll business units must implement strict Customer Due Diligence (CDD) and AML screening prior to account onboarding or executing any single remittance exceeding INR 50,000. Customer risk categorization must be updated dynamically based on real-time transaction activity.\n\n## 2. Customer Risk Categorization\n\nEvery account is assigned a risk tier during onboarding:\n\n| Risk Tier | Review Frequency | Typical Profile | Screening Controls |\n| :--- | :--- | :--- | :--- |\n| **Tier 1 (Low)** | Every 10 years | Salaried individuals, government entities | Standard OVD verification |\n| **Tier 2 (Medium)** | Every 8 years | Small businesses, retail traders | Field verification, GST validation |\n| **Tier 3 (High)** | Every 2 years | PEPs, jewelers, bullion dealers, offshore trusts | Enhanced Due Diligence (EDD), DGM sign-off |\n\n## 3. Politically Exposed Persons (PEP) Workflow\n\n1. **Identification",
+          "metadata": {
+            "page_number": 1,
+            "file_type": ".md",
+            "total_chunks": 3,
+            "strategy": "token_aware_300_overlap_50",
+            "filename": "guidelines_cdd_pml_rules.md",
+            "document_id": "guidelines_cdd_pml_rules_md",
+            "char_count": 1224,
+            "relative_path": "data\\sample_corpus\\guidelines_cdd_pml_rules.md",
+            "section": "Internal Compliance Guidelines: CDD & Prevention of Money Laundering (PML) Rules",
+            "indexed_at": "2026-09-14T12:13:35.533149+00:00",
+            "chunk_index": 0,
+            "token_count": 300,
+            "source_document": "guidelines_cdd_pml_rules.md"
+          }
+        }
+      ],
+      "hybrid_ranking": [
+        {
+          "rank": 1,
+          "id": "circular_dor_2024_108_txt_tokenaware_002",
+          "dense_score": 0.473565,
+          "keyword_score": 0.636364,
+          "hybrid_score": 0.538685,
+          "distance": 0.526435,
+          "exact_matches_found": [
+            "V-CIP",
+            "95%",
+            "facial match",
+            "liveliness"
+          ],
+          "source_document": "circular_dor_2024_108.txt",
+          "section": "2. Customer Due Diligence (CDD) Requirements",
+          "page_number": 1,
+          "chunk_index": 1,
+          "token_count": 300,
+          "document": "Regulated entities must undertake client identification and verification procedures before establishing an account-based relationship or executing an occasional cross-border financial transaction:\n(a) Verification of Officially Valid Documents (OVDs): Banks must verify the identity and permanent address of individual customers using authorized OVDs (e.g., Passport, Permanent Account Number (PAN) Card, Voter ID, Aadhaar through secure offline or e-KYC channels).\n(b) Beneficial Ownership Identification: For corporate entities, trusts, and unincorporated associations, banks shall determine the natural person who ultimately owns or controls a customer, holding at least 10 percent of shares or voting rights.\n(c) Video-based Customer Identification Process (V-CIP): Where remote customer onboarding is conducted, live geo-tagging, facial match algorithms with a confidence score exceeding 95%, and liveliness detection must be strictly enforced.\n\n3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs\nAccounts classified as high-risk, including Politically Exposed Persons (PEPs), non-resident customers, and trusts, warrant enhanced scrutiny:\n(a) Approval from Senior Management: Establishing relationships with PEPs, their family members, or close associates requires written approval from an officer not below the rank of Deputy General Manager.\n(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.\n(c) Heightened Transaction Monitoring: High",
+          "metadata": {
+            "page_number": 1,
+            "char_count": 1582,
+            "strategy": "token_aware_300_overlap_50",
+            "relative_path": "data\\sample_corpus\\circular_dor_2024_108.txt",
+            "file_type": ".txt",
+            "chunk_index": 1,
+            "document_id": "circular_dor_2024_108_txt",
+            "token_count": 300,
+            "total_chunks": 4,
+            "indexed_at": "2026-09-14T12:13:35.533006+00:00",
+            "section": "2. Customer Due Diligence (CDD) Requirements",
+            "filename": "circular_dor_2024_108.txt",
+            "source_document": "circular_dor_2024_108.txt"
+          }
+        },
+        {
+          "rank": 2,
+          "id": "sample_regulatory_circular_txt_tokenaware_002",
+          "dense_score": 0.473565,
+          "keyword_score": 0.636364,
+          "hybrid_score": 0.538685,
+          "distance": 0.526435,
+          "exact_matches_found": [
+            "V-CIP",
+            "95%",
+            "facial match",
+            "liveliness"
+          ],
+          "source_document": "sample_regulatory_circular.txt",
+          "section": "2. Customer Due Diligence (CDD) Requirements",
+          "page_number": 1,
+          "chunk_index": 1,
+          "token_count": 300,
+          "document": "Regulated entities must undertake client identification and verification procedures before establishing an account-based relationship or executing an occasional cross-border financial transaction:\n(a) Verification of Officially Valid Documents (OVDs): Banks must verify the identity and permanent address of individual customers using authorized OVDs (e.g., Passport, Permanent Account Number (PAN) Card, Voter ID, Aadhaar through secure offline or e-KYC channels).\n(b) Beneficial Ownership Identification: For corporate entities, trusts, and unincorporated associations, banks shall determine the natural person who ultimately owns or controls a customer, holding at least 10 percent of shares or voting rights.\n(c) Video-based Customer Identification Process (V-CIP): Where remote customer onboarding is conducted, live geo-tagging, facial match algorithms with a confidence score exceeding 95%, and liveliness detection must be strictly enforced.\n\n3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs\nAccounts classified as high-risk, including Politically Exposed Persons (PEPs), non-resident customers, and trusts, warrant enhanced scrutiny:\n(a) Approval from Senior Management: Establishing relationships with PEPs, their family members, or close associates requires written approval from an officer not below the rank of Deputy General Manager.\n(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.\n(c) Heightened Transaction Monitoring: High",
+          "metadata": {
+            "file_type": ".txt",
+            "chunk_index": 1,
+            "total_chunks": 4,
+            "source_document": "sample_regulatory_circular.txt",
+            "strategy": "token_aware_300_overlap_50",
+            "relative_path": "data\\sample_regulatory_circular.txt",
+            "indexed_at": "2026-09-14T12:13:35.533217+00:00",
+            "token_count": 300,
+            "page_number": 1,
+            "document_id": "sample_regulatory_circular_txt",
+            "section": "2. Customer Due Diligence (CDD) Requirements",
+            "filename": "sample_regulatory_circular.txt",
+            "char_count": 1582
+          }
+        },
+        {
+          "rank": 3,
+          "id": "guidelines_cdd_pml_rules_md_tokenaware_001",
+          "dense_score": 0.317736,
+          "keyword_score": 0.0,
+          "hybrid_score": 0.190642,
+          "distance": 0.682264,
+          "exact_matches_found": [],
+          "source_document": "guidelines_cdd_pml_rules.md",
+          "section": "Internal Compliance Guidelines: CDD & Prevention of Money Laundering (PML) Rules",
+          "page_number": 1,
+          "chunk_index": 0,
+          "token_count": 300,
+          "document": "# Internal Compliance Guidelines: CDD & Prevention of Money Laundering (PML) Rules\n\n**Document Identifier**: REG-COMP-2024-V2\n**Effective Date**: January 15, 2024\n**Applicability**: Branch Operations, Credit Appraisal, and Compliance Teams\n**Supervisory Authority**: Reserve Bank of India & FIU-IND\n\n---\n\n## 1. Executive Mandate\n\nAll business units must implement strict Customer Due Diligence (CDD) and AML screening prior to account onboarding or executing any single remittance exceeding INR 50,000. Customer risk categorization must be updated dynamically based on real-time transaction activity.\n\n## 2. Customer Risk Categorization\n\nEvery account is assigned a risk tier during onboarding:\n\n| Risk Tier | Review Frequency | Typical Profile | Screening Controls |\n| :--- | :--- | :--- | :--- |\n| **Tier 1 (Low)** | Every 10 years | Salaried individuals, government entities | Standard OVD verification |\n| **Tier 2 (Medium)** | Every 8 years | Small businesses, retail traders | Field verification, GST validation |\n| **Tier 3 (High)** | Every 2 years | PEPs, jewelers, bullion dealers, offshore trusts | Enhanced Due Diligence (EDD), DGM sign-off |\n\n## 3. Politically Exposed Persons (PEP) Workflow\n\n1. **Identification",
+          "metadata": {
+            "indexed_at": "2026-09-14T12:13:35.533149+00:00",
+            "strategy": "token_aware_300_overlap_50",
+            "total_chunks": 3,
+            "page_number": 1,
+            "file_type": ".md",
+            "filename": "guidelines_cdd_pml_rules.md",
+            "source_document": "guidelines_cdd_pml_rules.md",
+            "document_id": "guidelines_cdd_pml_rules_md",
+            "section": "Internal Compliance Guidelines: CDD & Prevention of Money Laundering (PML) Rules",
+            "relative_path": "data\\sample_corpus\\guidelines_cdd_pml_rules.md",
+            "chunk_index": 0,
+            "token_count": 300,
+            "char_count": 1224
+          }
+        }
+      ]
+    },
+    "case4_circular_code_hybrid": {
+      "query_text": "What statutory record retention requirements are defined under DOR.AML.REC.66?",
+      "target_terms": [
+        "DOR.AML.REC.66",
+        "Section 35A",
+        "retention",
+        "5 years"
+      ],
+      "alpha": 0.6,
+      "rank_promotions": [
+        {
+          "chunk_id": "guidelines_cdd_pml_rules_md_tokenaware_003",
+          "old_dense_rank": 3,
+          "new_hybrid_rank": 1,
+          "promoted": true,
+          "exact_matches": [
+            "retention",
+            "5 years"
+          ],
+          "hybrid_score": 0.4391345284201882
+        },
+        {
+          "chunk_id": "circular_dor_2024_108_txt_tokenaware_001",
+          "old_dense_rank": "> top_k",
+          "new_hybrid_rank": 2,
+          "promoted": true,
+          "exact_matches": [
+            "DOR.AML.REC.66",
+            "Section 35A"
+          ],
+          "hybrid_score": 0.42307474829933855
+        },
+        {
+          "chunk_id": "sample_regulatory_circular_txt_tokenaware_001",
+          "old_dense_rank": "> top_k",
+          "new_hybrid_rank": 3,
+          "promoted": true,
+          "exact_matches": [
+            "DOR.AML.REC.66",
+            "Section 35A"
+          ],
+          "hybrid_score": 0.42307474829933855
+        }
+      ],
+      "analysis": "Hybrid search with alpha=0.60 prioritizing exact terms ['DOR.AML.REC.66', 'Section 35A', 'retention', '5 years'] successfully boosted exact-match chunks. Most notably, 'guidelines_cdd_pml_rules_md_tokenaware_003' achieved Rank #1 (hybrid score: 0.4391, keyword score: 0.3182) due to matching exact statutory terminology ['retention', '5 years'].",
+      "dense_ranking": [
+        {
+          "rank": 1,
+          "id": "circular_dor_2024_108_txt_tokenaware_004",
+          "similarity_score": 0.57327,
+          "distance": 0.42673,
+          "document": "igations\nUnder Rule 3 and Rule 10 of the PML Rules, 2005, all regulated entities shall maintain:\n(a) Transaction Records: Comprehensive records of all transactions, whether completed or attempted, domestic or international, for a minimum period of five years from the date of transaction between the bank and the client.\n(b) Customer Identification and Account Files: All account opening records, KYC verification dossiers, business correspondence, and internal audit notes must be safely retained for at least five years after the business relationship has ended or the account has been closed.\n(c) Audit Trails and Reconstruction: Records must be preserved in a manner that permits swift reconstruction of individual transactions (including amounts, currencies, counterparty details, and timestamps) to provide evidentiary support for regulatory inquiries and court proceedings.\n\n6. Non-Compliance Sanctions\nFailure to adhere to these directions shall attract monetary penalties under Section 47A(1)(c) read with Section 46(4) of the Banking Regulation Act, 1949, without prejudice to other statutory enforcement actions.\n\n(S. R. Sundaresan) Chief General Manager-in-Charge",
+          "metadata": {
+            "page_number": 1,
+            "file_type": ".txt",
+            "char_count": 1175,
+            "strategy": "token_aware_300_overlap_50",
+            "indexed_at": "2026-09-14T12:13:35.533055+00:00",
+            "relative_path": "data\\sample_corpus\\circular_dor_2024_108.txt",
+            "source_document": "circular_dor_2024_108.txt",
+            "token_count": 231,
+            "filename": "circular_dor_2024_108.txt",
+            "total_chunks": 4,
+            "chunk_index": 3,
+            "document_id": "circular_dor_2024_108_txt",
+            "section": "5. Record Retention Obligations"
+          }
+        },
+        {
+          "rank": 2,
+          "id": "sample_regulatory_circular_txt_tokenaware_004",
+          "similarity_score": 0.57327,
+          "distance": 0.42673,
+          "document": "igations\nUnder Rule 3 and Rule 10 of the PML Rules, 2005, all regulated entities shall maintain:\n(a) Transaction Records: Comprehensive records of all transactions, whether completed or attempted, domestic or international, for a minimum period of five years from the date of transaction between the bank and the client.\n(b) Customer Identification and Account Files: All account opening records, KYC verification dossiers, business correspondence, and internal audit notes must be safely retained for at least five years after the business relationship has ended or the account has been closed.\n(c) Audit Trails and Reconstruction: Records must be preserved in a manner that permits swift reconstruction of individual transactions (including amounts, currencies, counterparty details, and timestamps) to provide evidentiary support for regulatory inquiries and court proceedings.\n\n6. Non-Compliance Sanctions\nFailure to adhere to these directions shall attract monetary penalties under Section 47A(1)(c) read with Section 46(4) of the Banking Regulation Act, 1949, without prejudice to other statutory enforcement actions.\n\n(S. R. Sundaresan) Chief General Manager-in-Charge",
+          "metadata": {
+            "strategy": "token_aware_300_overlap_50",
+            "total_chunks": 4,
+            "chunk_index": 3,
+            "file_type": ".txt",
+            "page_number": 1,
+            "relative_path": "data\\sample_regulatory_circular.txt",
+            "document_id": "sample_regulatory_circular_txt",
+            "token_count": 231,
+            "source_document": "sample_regulatory_circular.txt",
+            "filename": "sample_regulatory_circular.txt",
+            "char_count": 1175,
+            "indexed_at": "2026-09-14T12:13:35.533250+00:00",
+            "section": "5. Record Retention Obligations"
+          }
+        },
+        {
+          "rank": 3,
+          "id": "guidelines_cdd_pml_rules_md_tokenaware_003",
+          "similarity_score": 0.51977,
+          "distance": 0.48023,
+          "document": "Trusts**: Natural person(s) who hold more than **15%** of property, capital, or profits.\n\n## 5. Record Retention Standard\n\nAll audit logs, customer files, and transaction slips must be archived in tamper-evident electronic format for **not less than 5 years** following the termination of customer relationship.",
+          "metadata": {
+            "document_id": "guidelines_cdd_pml_rules_md",
+            "char_count": 311,
+            "strategy": "token_aware_300_overlap_50",
+            "total_chunks": 3,
+            "file_type": ".md",
+            "token_count": 69,
+            "indexed_at": "2026-09-14T12:13:35.533183+00:00",
+            "relative_path": "data\\sample_corpus\\guidelines_cdd_pml_rules.md",
+            "page_number": 1,
+            "section": "4. Beneficial Ownership Thresholds",
+            "chunk_index": 2,
+            "source_document": "guidelines_cdd_pml_rules.md",
+            "filename": "guidelines_cdd_pml_rules.md"
+          }
+        }
+      ],
+      "hybrid_ranking": [
+        {
+          "rank": 1,
+          "id": "guidelines_cdd_pml_rules_md_tokenaware_003",
+          "dense_score": 0.51977,
+          "keyword_score": 0.318182,
+          "hybrid_score": 0.439135,
+          "distance": 0.48023,
+          "exact_matches_found": [
+            "retention",
+            "5 years"
+          ],
+          "source_document": "guidelines_cdd_pml_rules.md",
+          "section": "4. Beneficial Ownership Thresholds",
+          "page_number": 1,
+          "chunk_index": 2,
+          "token_count": 69,
+          "document": "Trusts**: Natural person(s) who hold more than **15%** of property, capital, or profits.\n\n## 5. Record Retention Standard\n\nAll audit logs, customer files, and transaction slips must be archived in tamper-evident electronic format for **not less than 5 years** following the termination of customer relationship.",
+          "metadata": {
+            "source_document": "guidelines_cdd_pml_rules.md",
+            "chunk_index": 2,
+            "file_type": ".md",
+            "filename": "guidelines_cdd_pml_rules.md",
+            "page_number": 1,
+            "total_chunks": 3,
+            "document_id": "guidelines_cdd_pml_rules_md",
+            "section": "4. Beneficial Ownership Thresholds",
+            "strategy": "token_aware_300_overlap_50",
+            "char_count": 311,
+            "relative_path": "data\\sample_corpus\\guidelines_cdd_pml_rules.md",
+            "token_count": 69,
+            "indexed_at": "2026-09-14T12:13:35.533183+00:00"
+          }
+        },
+        {
+          "rank": 2,
+          "id": "circular_dor_2024_108_txt_tokenaware_001",
+          "dense_score": 0.493003,
+          "keyword_score": 0.318182,
+          "hybrid_score": 0.423075,
+          "distance": 0.506997,
+          "exact_matches_found": [
+            "DOR.AML.REC.66",
+            "Section 35A"
+          ],
+          "source_document": "circular_dor_2024_108.txt",
+          "section": "Preamble / Document Header",
+          "page_number": 1,
+          "chunk_index": 0,
+          "token_count": 300,
+          "document": "RESERVE BANK OF INDIA FINANCIAL STABILITY AND COMPLIANCE DEPARTMENT CENTRAL OFFICE, MUMBAI\n\nRef: RBI/2023-24/108 Circular No: DOR.AML.REC.66/14.01.001/2023-24 Date: January 04, 2024\n\nTo, All Scheduled Commercial Banks (excluding RRBs) All Small Finance Banks and Payment Banks All Non-Banking Financial Companies (NBFCs)\n\nSubject: Master Direction - Know Your Customer (KYC) and Anti-Money Laundering (AML) Standards - Enhanced Due Diligence and Transaction Record Management\n\n1. Preliminary and Statutory Authority\nIn exercise of the powers conferred by Section 35A of the Banking Regulation Act, 1949, read with Section 51A of the Unlawful Activities (Prevention) Act, 1967, and the Prevention of Money-Laundering (Maintenance of Records) Rules, 2005, the Reserve Bank of India hereby issues the updated Master Directions on Customer Due Diligence (CDD) and compliance obligations for regulated entities (REs).\n\n2. Customer Due Diligence (CDD) Requirements\nRegulated entities must undertake client identification and verification procedures before establishing an account-based relationship or executing an occasional cross-border financial transaction:\n(a) Verification of Officially Valid Documents (OVDs): Banks must verify the identity and permanent address of individual customers using",
+          "metadata": {
+            "char_count": 1293,
+            "file_type": ".txt",
+            "chunk_index": 0,
+            "source_document": "circular_dor_2024_108.txt",
+            "filename": "circular_dor_2024_108.txt",
+            "page_number": 1,
+            "total_chunks": 4,
+            "document_id": "circular_dor_2024_108_txt",
+            "token_count": 300,
+            "relative_path": "data\\sample_corpus\\circular_dor_2024_108.txt",
+            "section": "Preamble / Document Header",
+            "strategy": "token_aware_300_overlap_50",
+            "indexed_at": "2026-09-14T12:13:35.532947+00:00"
+          }
+        },
+        {
+          "rank": 3,
+          "id": "sample_regulatory_circular_txt_tokenaware_001",
+          "dense_score": 0.493003,
+          "keyword_score": 0.318182,
+          "hybrid_score": 0.423075,
+          "distance": 0.506997,
+          "exact_matches_found": [
+            "DOR.AML.REC.66",
+            "Section 35A"
+          ],
+          "source_document": "sample_regulatory_circular.txt",
+          "section": "Preamble / Document Header",
+          "page_number": 1,
+          "chunk_index": 0,
+          "token_count": 300,
+          "document": "RESERVE BANK OF INDIA FINANCIAL STABILITY AND COMPLIANCE DEPARTMENT CENTRAL OFFICE, MUMBAI\n\nRef: RBI/2023-24/108 Circular No: DOR.AML.REC.66/14.01.001/2023-24 Date: January 04, 2024\n\nTo, All Scheduled Commercial Banks (excluding RRBs) All Small Finance Banks and Payment Banks All Non-Banking Financial Companies (NBFCs)\n\nSubject: Master Direction - Know Your Customer (KYC) and Anti-Money Laundering (AML) Standards - Enhanced Due Diligence and Transaction Record Management\n\n1. Preliminary and Statutory Authority\nIn exercise of the powers conferred by Section 35A of the Banking Regulation Act, 1949, read with Section 51A of the Unlawful Activities (Prevention) Act, 1967, and the Prevention of Money-Laundering (Maintenance of Records) Rules, 2005, the Reserve Bank of India hereby issues the updated Master Directions on Customer Due Diligence (CDD) and compliance obligations for regulated entities (REs).\n\n2. Customer Due Diligence (CDD) Requirements\nRegulated entities must undertake client identification and verification procedures before establishing an account-based relationship or executing an occasional cross-border financial transaction:\n(a) Verification of Officially Valid Documents (OVDs): Banks must verify the identity and permanent address of individual customers using",
+          "metadata": {
+            "strategy": "token_aware_300_overlap_50",
+            "source_document": "sample_regulatory_circular.txt",
+            "char_count": 1293,
+            "filename": "sample_regulatory_circular.txt",
+            "relative_path": "data\\sample_regulatory_circular.txt",
+            "page_number": 1,
+            "file_type": ".txt",
+            "section": "Preamble / Document Header",
+            "token_count": 300,
+            "total_chunks": 4,
+            "document_id": "sample_regulatory_circular_txt",
+            "chunk_index": 0,
+            "indexed_at": "2026-09-14T12:13:35.533200+00:00"
+          }
+        }
+      ]
+    }
+  }
+}
