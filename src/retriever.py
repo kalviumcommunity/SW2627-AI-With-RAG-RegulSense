@@ -532,6 +532,15 @@ def __getattr__(name: str):
     ):
         import src.reranker as _rr
         return getattr(_rr, name)
+    if name in (
+        "RetrievalEvaluator",
+        "LabelledQuery",
+        "QueryEvaluationResult",
+        "EvaluationBenchmarkReport",
+        "LABELLED_COMPLIANCE_QUERIES",
+    ):
+        import src.retrieval_evaluator as _re
+        return getattr(_re, name)
     raise AttributeError(f"module '{__name__}' has no attribute '{name}'")
 
 
