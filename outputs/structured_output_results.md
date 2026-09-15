@@ -3,7 +3,7 @@
 - **Target Model**: `llama3:latest` (with `response_format={'type': 'json_object'}`)
 - **Schema Required Fields**: `answer`, `source`
 - **Domain**: Banking Regulatory Compliance (RBI KYC/AML Directives)
-- **Execution Timestamp**: 2026-09-15 09:56:24
+- **Execution Timestamp**: 2026-09-15 10:37:33
 - **Status**: 100% Graceful Execution Across All Edge Cases
 
 ---
