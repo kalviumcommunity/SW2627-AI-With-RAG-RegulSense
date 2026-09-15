@@ -26,6 +26,13 @@ from src.grounded_generator import (
     RetrievalComparisonReport,
     run_grounded_generation_suite,
 )
+from src.hallucination_guardrails import (
+    GuardrailExecutionResult,
+    GuardrailThresholdConfig,
+    HallucinationGuardrail,
+    RetrievalQualityAssessment,
+    run_hallucination_guardrails_suite,
+)
 from src.rag_pipeline import (
     AssembledContext,
     GenerationResult,
@@ -57,12 +64,16 @@ __all__ = [
     "GenerationResult",
     "GroundedGenerationOutput",
     "GroundedGenerator",
+    "GuardrailExecutionResult",
+    "GuardrailThresholdConfig",
+    "HallucinationGuardrail",
     "InjectedChunk",
     "PipelineStageMetrics",
     "QueryEmbedding",
     "RAGPipeline",
     "RAGResponse",
     "RetrievalComparisonReport",
+    "RetrievalQualityAssessment",
     "RetrievedContextChunk",
     "SourceCitation",
     "SourceMarker",
@@ -76,6 +87,7 @@ __all__ = [
     "retrieve_chunks_stage",
     "run_citation_evaluation_suite",
     "run_grounded_generation_suite",
+    "run_hallucination_guardrails_suite",
     "run_sample_augmented_prompt",
     "run_sample_pipeline",
 ]
