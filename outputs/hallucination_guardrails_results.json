@@ -1,0 +1,183 @@
+{
+  "confident_case": {
+    "timestamp": "2026-09-15T04:21:47.108722+00:00",
+    "query": "What are the mandatory timeframe and reporting procedures for banks to notify CERT-In and RBI regarding Severity 1 cyber security incidents?",
+    "action": "ANSWER",
+    "is_refusal": false,
+    "answer": "Based on the provided regulatory context, the mandatory timeframe and reporting procedures for banks to notify CERT-In and RBI regarding Severity 1 cyber security incidents are as follows:\n\n**Initial Report:** Within 6 hours of detection, banks must report the incident to the RBI Cyber Security Cell (CSITE) and CERT-In. [1]\n\n**Comprehensive Forensic Analysis Report:** Initial reports must be followed by a comprehensive forensic analysis report within 7 business days. [1]\n\nThese reporting procedures are outlined in the Master Direction on Cyber Resilience and Digital Payment Security Controls, as stated in the provided regulatory context.",
+    "citations": [
+      "[1]"
+    ],
+    "quality_assessment": {
+      "is_sufficient": true,
+      "status": "SUFFICIENT_CONTEXT",
+      "top_score": 0.6436,
+      "mean_qualifying_score": 0.5951,
+      "qualifying_chunk_count": 3,
+      "total_retrieved_count": 3,
+      "threshold_used": 0.5,
+      "min_chunks_required": 1,
+      "refusal_reason": null,
+      "qualifying_chunk_ids": [
+        "cyber_resilience_framework_pdf_tokenaware_001",
+        "circular_dor_2024_108_txt_tokenaware_003",
+        "sample_regulatory_circular_txt_tokenaware_003"
+      ]
+    },
+    "cited_output": {
+      "timestamp": "2026-09-15T04:21:47.108662+00:00",
+      "query": "What are the mandatory timeframe and reporting procedures for banks to notify CERT-In and RBI regarding Severity 1 cyber security incidents?",
+      "answer": "Based on the provided regulatory context, the mandatory timeframe and reporting procedures for banks to notify CERT-In and RBI regarding Severity 1 cyber security incidents are as follows:\n\n**Initial Report:** Within 6 hours of detection, banks must report the incident to the RBI Cyber Security Cell (CSITE) and CERT-In. [1]\n\n**Comprehensive Forensic Analysis Report:** Initial reports must be followed by a comprehensive forensic analysis report within 7 business days. [1]\n\nThese reporting procedures are outlined in the Master Direction on Cyber Resilience and Digital Payment Security Controls, as stated in the provided regulatory context.",
+      "is_fallback": false,
+      "has_fabricated_citations": false,
+      "citation_registry": {
+        "[1]": {
+          "marker_id": "[1]",
+          "index": 1,
+          "source_document": "cyber_resilience_framework.pdf",
+          "chunk_id": "cyber_resilience_framework_pdf_tokenaware_001",
+          "chunk_index": 0,
+          "section": "Preamble / Document Header",
+          "page_number": 1,
+          "similarity_score": 0.6436,
+          "verbatim_text": "RESERVE BANK OF INDIA DEPARTMENT OF CYBER SECURITY AND INFORMATION TECHNOLOGY CENTRAL OFFICE, MUMBAI Circular No: RBI/2024-25/19 - DoS.CO.CSITE.No.03/11.01.005/2024-25 Date: March 12, 2024 Subject: Master Direction on Cyber Resilience and Digital Payment Security Controls 1. Mandatory Two-Factor Authentication (2FA) All regulated payment system operators and scheduled commercial banks must enforce dynamic two-factor authentication (2FA) for all domestic electronic fund transfers (NEFT, RTGS, IMPS, and UPI). At least one factor must be dynamic, such as a time-based one-time password (TOTP) or biometric verification. 2. Incident Reporting Timelines (6-Hour Rule) Any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial of service (DoS) affecting customer-facing channels must be reported to the RBI Cyber Security Cell (CSITE) and CERT-In within 6 hours of detection. Initial reports must be followed by a comprehensive forensic analysis report within 7 business days. 3. Security Operations Centre (SOC) Operations Banks must operate a 24x7x365 Security Operations Centre (SOC) equipped with continuous automated log monitoring, SIEM analytics, and automated threat hunting capabilities.\n\n4. API Security and Third-Party Risk Management\n(a) All open banking and fintech integrations must mandate"
+        },
+        "[2]": {
+          "marker_id": "[2]",
+          "index": 2,
+          "source_document": "circular_dor_2024_108.txt",
+          "chunk_id": "circular_dor_2024_108_txt_tokenaware_003",
+          "chunk_index": 2,
+          "section": "3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs",
+          "page_number": 1,
+          "similarity_score": 0.5709,
+          "verbatim_text": "officer not below the rank of Deputy General Manager.\n(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.\n(c) Heightened Transaction Monitoring: High-risk accounts shall be subjected to quarterly reviews, compared against the standard biennial review for low-risk customers.\n\n4. Transaction Monitoring and Reporting Thresholds\nBanks shall deploy rule-based and behavioral automated transaction monitoring systems to identify suspicious transaction patterns:\n(a) Cash Transaction Reports (CTRs): All cash transactions of the value of more than rupees ten lakhs or its equivalent in foreign currency must be reported monthly to the Financial Intelligence Unit - India (FIU-IND) by the 15th day of the succeeding month.\n(b) Counterfeit Currency Reports (CCRs) and Non-Profit Organization Transaction Reports (NTRs): All cross-border non-profit transactions exceeding rupees ten lakhs must be logged and monitored.\n(c) Suspicious Transaction Reports (STRs): If any transaction gives rise to reasonable suspicion of illicit funds, evasion, or terrorism financing, an STR shall be furnished to FIU-IND within seven working days of arriving at such a conclusion.\n\n5. Record Retention Obligations\nUnder Rule 3 and Rule 10 of the PML Rules, 2005, all regulated entities shall maintain:\n(a) Transaction Records: Comprehensive records of all transactions, whether completed or attempted, domestic or international, for a minimum"
+        },
+        "[3]": {
+          "marker_id": "[3]",
+          "index": 3,
+          "source_document": "sample_regulatory_circular.txt",
+          "chunk_id": "sample_regulatory_circular_txt_tokenaware_003",
+          "chunk_index": 2,
+          "section": "3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs",
+          "page_number": 1,
+          "similarity_score": 0.5709,
+          "verbatim_text": "officer not below the rank of Deputy General Manager.\n(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.\n(c) Heightened Transaction Monitoring: High-risk accounts shall be subjected to quarterly reviews, compared against the standard biennial review for low-risk customers.\n\n4. Transaction Monitoring and Reporting Thresholds\nBanks shall deploy rule-based and behavioral automated transaction monitoring systems to identify suspicious transaction patterns:\n(a) Cash Transaction Reports (CTRs): All cash transactions of the value of more than rupees ten lakhs or its equivalent in foreign currency must be reported monthly to the Financial Intelligence Unit - India (FIU-IND) by the 15th day of the succeeding month.\n(b) Counterfeit Currency Reports (CCRs) and Non-Profit Organization Transaction Reports (NTRs): All cross-border non-profit transactions exceeding rupees ten lakhs must be logged and monitored.\n(c) Suspicious Transaction Reports (STRs): If any transaction gives rise to reasonable suspicion of illicit funds, evasion, or terrorism financing, an STR shall be furnished to FIU-IND within seven working days of arriving at such a conclusion.\n\n5. Record Retention Obligations\nUnder Rule 3 and Rule 10 of the PML Rules, 2005, all regulated entities shall maintain:\n(a) Transaction Records: Comprehensive records of all transactions, whether completed or attempted, domestic or international, for a minimum"
+        }
+      },
+      "audit_report": {
+        "total_citations_found": 2,
+        "unique_markers_cited": [
+          "[1]"
+        ],
+        "verified_citations_count": 2,
+        "fabricated_citations_count": 0,
+        "unsupported_claims_count": 0,
+        "citation_precision": 1.0,
+        "fabricated_markers": [],
+        "overall_verdict": "PASS",
+        "audit_notes": "All 2 citations successfully verified against source chunk text with 100% evidentiary fidelity.",
+        "claim_verifications": [
+          {
+            "claim_sentence": "**Initial Report:** Within 6 hours of detection, banks must report the incident to the RBI Cyber Security Cell (CSITE) and CERT-In. [1]",
+            "cited_marker": "[1]",
+            "source_document": "cyber_resilience_framework.pdf",
+            "section": "Preamble / Document Header",
+            "chunk_id": "cyber_resilience_framework_pdf_tokenaware_001",
+            "is_verified": true,
+            "status": "VERIFIED",
+            "matched_verbatim_span": "tory Two-Factor Authentication (2FA) All regulated payment system oper",
+            "matched_keywords": [
+              "within",
+              "hours",
+              "detection",
+              "banks",
+              "incident",
+              "rbi"
+            ],
+            "confidence_score": 1.0
+          },
+          {
+            "claim_sentence": "**Comprehensive Forensic Analysis Report:** Initial reports must be followed by a comprehensive forensic analysis report within 7 business days. [1]",
+            "cited_marker": "[1]",
+            "source_document": "cyber_resilience_framework.pdf",
+            "section": "Preamble / Document Header",
+            "chunk_id": "cyber_resilience_framework_pdf_tokenaware_001",
+            "is_verified": true,
+            "status": "VERIFIED",
+            "matched_verbatim_span": "Initial reports must be followed by a comprehensive forensic analysis report with",
+            "matched_keywords": [
+              "comprehensive",
+              "forensic",
+              "analysis",
+              "reports",
+              "followed",
+              "comprehensive"
+            ],
+            "confidence_score": 1.0
+          }
+        ]
+      },
+      "prompt_tokens": 1520,
+      "completion_tokens": 122,
+      "latency_seconds": 104.048,
+      "model": "llama3:latest"
+    },
+    "latency_seconds": 107.3238,
+    "model": "llama3:latest"
+  },
+  "weak_score_refusal_case": {
+    "timestamp": "2026-09-15T04:21:47.171883+00:00",
+    "query": "What are the Basel III Common Equity Tier 1 (CET1) capital buffer ratios and countercyclical requirements for regional rural banks?",
+    "action": "REFUSE",
+    "is_refusal": true,
+    "answer": "The provided regulatory context does not contain sufficient information to answer this question reliably.\n\n**Guardrail Diagnostic**: LOW_SIMILARITY_SCORE\n- **Top Similarity Score**: `0.4292` (Threshold Required: `0.5000`)\n- **Qualifying Chunks**: `0` (Minimum Required: `1`)\n- **Refusal Details**: The highest matching regulatory chunk achieved a similarity score of 0.4292, which is below the minimum required confidence threshold of 0.5000. To prevent hallucination, an answer cannot be generated.",
+    "citations": [],
+    "quality_assessment": {
+      "is_sufficient": false,
+      "status": "LOW_SIMILARITY_SCORE",
+      "top_score": 0.4292,
+      "mean_qualifying_score": 0.0,
+      "qualifying_chunk_count": 0,
+      "total_retrieved_count": 3,
+      "threshold_used": 0.5,
+      "min_chunks_required": 1,
+      "refusal_reason": "The highest matching regulatory chunk achieved a similarity score of 0.4292, which is below the minimum required confidence threshold of 0.5000. To prevent hallucination, an answer cannot be generated.",
+      "qualifying_chunk_ids": []
+    },
+    "cited_output": null,
+    "latency_seconds": 0.063,
+    "model": "llama3:latest"
+  },
+  "empty_refusal_case": {
+    "timestamp": "2026-09-15T04:21:47.172150+00:00",
+    "query": "What are the extraterritorial sanctions compliance guidelines for cryptocurrency mining operations in Antarctica under FATF Recommendation 99?",
+    "action": "REFUSE",
+    "is_refusal": true,
+    "answer": "The provided regulatory context does not contain sufficient information to answer this question reliably.\n\n**Guardrail Diagnostic**: EMPTY_RESULTS\n- **Top Similarity Score**: `0.0000` (Threshold Required: `0.5000`)\n- **Qualifying Chunks**: `0` (Minimum Required: `1`)\n- **Refusal Details**: The regulatory search engine returned 0 candidate documents. No authoritative compliance context is available to address this inquiry.",
+    "citations": [],
+    "quality_assessment": {
+      "is_sufficient": false,
+      "status": "EMPTY_RESULTS",
+      "top_score": 0.0,
+      "mean_qualifying_score": 0.0,
+      "qualifying_chunk_count": 0,
+      "total_retrieved_count": 0,
+      "threshold_used": 0.5,
+      "min_chunks_required": 1,
+      "refusal_reason": "The regulatory search engine returned 0 candidate documents. No authoritative compliance context is available to address this inquiry.",
+      "qualifying_chunk_ids": []
+    },
+    "cited_output": null,
+    "latency_seconds": 0.0001,
+    "model": "llama3:latest"
+  },
+  "summary": {
+    "threshold_used": 0.5,
+    "min_chunks_required": 1,
+    "confident_top_score": 0.6436069011688232,
+    "weak_top_score": 0.4291767477989197,
+    "refusal_rate": 0.6666666666666666,
+    "hallucination_preventions": 2
+  }
+}
