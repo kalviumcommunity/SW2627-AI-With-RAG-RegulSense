@@ -1,0 +1,40 @@
+{
+  "scenario": "RegulSense Chat Interface - Guardrail Refusals and Error Handling",
+  "timestamp": "2026-09-15T14:51:24.874800+00:00",
+  "cases": [
+    {
+      "case_type": "SAFE_GUARDRAIL_REFUSAL",
+      "description": "Hallucination guardrail triggers safe refusal when vector retrieval similarity is below threshold.",
+      "query": "What are the reserve capital requirements for Martian colony commercial banks?",
+      "status": "refusal",
+      "answer": "The provided regulatory context does not contain sufficient information to answer this question reliably.\n\n**Guardrail Diagnostic**: LOW_SIMILARITY_SCORE\n- **Top Similarity Score**: `0.3949` (Threshold Required: `0.5000`)\n- **Qualifying Chunks**: `0` (Minimum Required: `1`)\n- **Refusal Details**: The highest matching regulatory chunk achieved a similarity score of 0.3949, which is below the minimum required confidence threshold of 0.5000. To prevent hallucination, an answer cannot be generated.",
+      "is_refusal": true,
+      "metadata": {
+        "latency_seconds": 0.0867,
+        "model": "llama3:latest",
+        "top_k": 3,
+        "is_refusal": true,
+        "action_taken": "REFUSE",
+        "guardrail_status": "LOW_SIMILARITY_SCORE",
+        "top_similarity_score": 0.3949,
+        "total_sources_returned": 0,
+        "timestamp": "2026-09-15T14:51:22.811125+00:00"
+      }
+    },
+    {
+      "case_type": "INPUT_VALIDATION_ERROR",
+      "description": "Client-side validation catches queries shorter than 3 characters or empty input.",
+      "query": "hi",
+      "status_code": 400,
+      "error_code": "QUESTION_TOO_SHORT",
+      "error_message": "Question must be at least 3 characters long."
+    },
+    {
+      "case_type": "BACKEND_OFFLINE_ERROR",
+      "description": "UI detects when backend server is unreachable and guides user with troubleshooting steps.",
+      "status_code": 503,
+      "error_code": "BACKEND_OFFLINE",
+      "error_message": "Backend service unreachable at http://127.0.0.1:59999. Start backend with 'uvicorn src.api:app --port 8000'."
+    }
+  ]
+}

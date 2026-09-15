@@ -141,8 +141,41 @@ Environment variables loaded successfully.
 * OpenAI-compatible API client
 * ChromaDB for vector storage
 * python-dotenv for environment variable management
-* FastAPI for future backend development
+* FastAPI for backend API development
 * Uvicorn ASGI server
+* Streamlit for chat user interface
+
+## Running the Web Applications
+
+### 1. Launching the Streamlit Chat Interface
+
+RegulSense includes a modern Streamlit web interface for conversational regulatory compliance queries with verifiable citations and source chunk inspection:
+
+```bash
+# Start Streamlit directly (supports automatic in-process fallback or connects to backend)
+streamlit run app.py
+```
+
+Features available in the UI:
+- **Task 1: Question & Answer Canvas**: Conversational chat stream with role-based styling and history preservation.
+- **Task 2: Backend API Integration**: Queries `POST /api/v1/query` and displays grounded responses.
+- **Task 3: Retrieved Source Inspection**: Expandable trays under each answer detailing source document names, chunk IDs, sections, page numbers, similarity scores, and verbatim excerpts.
+- **Task 4: Loading & Error States**: Progress indicators during generation, safe guardrail refusal cards, and clear server offline troubleshooting banners.
+- **Task 5: Runtime Circular Upload**: Sidebar file uploader allowing drag-and-drop ingestion of `.pdf`, `.txt`, and `.md` circulars into ChromaDB without restarting.
+
+### 2. Launching the FastAPI Backend API (Optional Standalone)
+
+To run the REST backend service independently:
+
+```bash
+uvicorn src.api:app --host 0.0.0.0 --port 8000 --reload
+```
+
+Endpoints available:
+- `POST /api/v1/query` - Evaluates regulatory compliance inquiries.
+- `POST /api/v1/upload` - Uploads, chunks, embeds, and indexes new regulatory documents.
+- `GET /api/v1/health` - Readiness and vector database connectivity probe.
+- `GET /docs` - Interactive Swagger API documentation.
 
 ## Security
 
