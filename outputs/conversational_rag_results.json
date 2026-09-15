@@ -1,0 +1,502 @@
+{
+  "metadata": {
+    "title": "RegulSense Conversational RAG Evaluation",
+    "timestamp": "2026-09-15T04:51:38.748301+00:00",
+    "chat_model": "llama3:latest",
+    "embedding_model": "all-minilm",
+    "total_turns": 4,
+    "rewritten_turns": 3,
+    "average_score_uplift": 0.0939,
+    "unique_source_documents": [
+      "circular_dor_2024_108.txt",
+      "cyber_resilience_framework.pdf",
+      "sample_regulatory_circular.txt"
+    ]
+  },
+  "turns": [
+    {
+      "turn_index": 1,
+      "timestamp": "2026-09-15T04:45:55.402481+00:00",
+      "user_raw_query": "What are the mandatory timeframe and reporting procedures for banks to notify CERT-In and RBI regarding Severity 1 cyber security incidents?",
+      "rewritten_query": "What are the mandatory timeframe and reporting procedures for banks to notify CERT-In and RBI regarding Severity 1 cyber security incidents?",
+      "is_rewritten": false,
+      "rewriting_method": "STANDALONE_PASSTHROUGH",
+      "rewriting_latency": 0.0,
+      "raw_top_score": 0.6436,
+      "rewritten_top_score": 0.6436,
+      "score_uplift": 0.0,
+      "raw_retrieved_chunk_ids": [
+        "cyber_resilience_framework_pdf_tokenaware_001",
+        "circular_dor_2024_108_txt_tokenaware_003",
+        "sample_regulatory_circular_txt_tokenaware_003"
+      ],
+      "retrieved_chunk_ids": [
+        "cyber_resilience_framework_pdf_tokenaware_001",
+        "circular_dor_2024_108_txt_tokenaware_003",
+        "sample_regulatory_circular_txt_tokenaware_003"
+      ],
+      "retrieved_documents": [
+        "cyber_resilience_framework.pdf",
+        "circular_dor_2024_108.txt",
+        "sample_regulatory_circular.txt"
+      ],
+      "assistant_answer": "Based on the provided regulatory context, the mandatory timeframe and reporting procedures for banks to notify CERT-In and RBI regarding Severity 1 cyber security incidents are as follows:\n\n**Initial Report**: Any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial of service (DoS) affecting customer-facing channels must be reported to the RBI Cyber Security Cell (CSITE) and CERT-In within **6 hours** of detection. [1]\n\n**Comprehensive Forensic Analysis Report**: Initial reports must be followed by a comprehensive forensic analysis report within **7 business days**. [1]\n\nThese reporting procedures are outlined in the Master Direction on Cyber Resilience and Digital Payment Security Controls, Circular No: RBI/2024-25/19 - DoS.CO.CSITE.No.03/11.01.005/2024-25, dated March 12, 2024.",
+      "citations": [
+        "[1]",
+        "[2]",
+        "[3]"
+      ],
+      "total_latency_seconds": 104.4283,
+      "cited_output": {
+        "timestamp": "2026-09-15T04:45:55.402405+00:00",
+        "query": "What are the mandatory timeframe and reporting procedures for banks to notify CERT-In and RBI regarding Severity 1 cyber security incidents?",
+        "answer": "Based on the provided regulatory context, the mandatory timeframe and reporting procedures for banks to notify CERT-In and RBI regarding Severity 1 cyber security incidents are as follows:\n\n**Initial Report**: Any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial of service (DoS) affecting customer-facing channels must be reported to the RBI Cyber Security Cell (CSITE) and CERT-In within **6 hours** of detection. [1]\n\n**Comprehensive Forensic Analysis Report**: Initial reports must be followed by a comprehensive forensic analysis report within **7 business days**. [1]\n\nThese reporting procedures are outlined in the Master Direction on Cyber Resilience and Digital Payment Security Controls, Circular No: RBI/2024-25/19 - DoS.CO.CSITE.No.03/11.01.005/2024-25, dated March 12, 2024.",
+        "is_fallback": false,
+        "has_fabricated_citations": false,
+        "citation_registry": {
+          "[1]": {
+            "marker_id": "[1]",
+            "index": 1,
+            "source_document": "cyber_resilience_framework.pdf",
+            "chunk_id": "cyber_resilience_framework_pdf_tokenaware_001",
+            "chunk_index": 0,
+            "section": "Preamble / Document Header",
+            "page_number": 1,
+            "similarity_score": 0.6436,
+            "verbatim_text": "RESERVE BANK OF INDIA DEPARTMENT OF CYBER SECURITY AND INFORMATION TECHNOLOGY CENTRAL OFFICE, MUMBAI Circular No: RBI/2024-25/19 - DoS.CO.CSITE.No.03/11.01.005/2024-25 Date: March 12, 2024 Subject: Master Direction on Cyber Resilience and Digital Payment Security Controls 1. Mandatory Two-Factor Authentication (2FA) All regulated payment system operators and scheduled commercial banks must enforce dynamic two-factor authentication (2FA) for all domestic electronic fund transfers (NEFT, RTGS, IMPS, and UPI). At least one factor must be dynamic, such as a time-based one-time password (TOTP) or biometric verification. 2. Incident Reporting Timelines (6-Hour Rule) Any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial of service (DoS) affecting customer-facing channels must be reported to the RBI Cyber Security Cell (CSITE) and CERT-In within 6 hours of detection. Initial reports must be followed by a comprehensive forensic analysis report within 7 business days. 3. Security Operations Centre (SOC) Operations Banks must operate a 24x7x365 Security Operations Centre (SOC) equipped with continuous automated log monitoring, SIEM analytics, and automated threat hunting capabilities.\n\n4. API Security and Third-Party Risk Management\n(a) All open banking and fintech integrations must mandate"
+          },
+          "[2]": {
+            "marker_id": "[2]",
+            "index": 2,
+            "source_document": "circular_dor_2024_108.txt",
+            "chunk_id": "circular_dor_2024_108_txt_tokenaware_003",
+            "chunk_index": 2,
+            "section": "3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs",
+            "page_number": 1,
+            "similarity_score": 0.5709,
+            "verbatim_text": "officer not below the rank of Deputy General Manager.\n(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.\n(c) Heightened Transaction Monitoring: High-risk accounts shall be subjected to quarterly reviews, compared against the standard biennial review for low-risk customers.\n\n4. Transaction Monitoring and Reporting Thresholds\nBanks shall deploy rule-based and behavioral automated transaction monitoring systems to identify suspicious transaction patterns:\n(a) Cash Transaction Reports (CTRs): All cash transactions of the value of more than rupees ten lakhs or its equivalent in foreign currency must be reported monthly to the Financial Intelligence Unit - India (FIU-IND) by the 15th day of the succeeding month.\n(b) Counterfeit Currency Reports (CCRs) and Non-Profit Organization Transaction Reports (NTRs): All cross-border non-profit transactions exceeding rupees ten lakhs must be logged and monitored.\n(c) Suspicious Transaction Reports (STRs): If any transaction gives rise to reasonable suspicion of illicit funds, evasion, or terrorism financing, an STR shall be furnished to FIU-IND within seven working days of arriving at such a conclusion.\n\n5. Record Retention Obligations\nUnder Rule 3 and Rule 10 of the PML Rules, 2005, all regulated entities shall maintain:\n(a) Transaction Records: Comprehensive records of all transactions, whether completed or attempted, domestic or international, for a minimum"
+          },
+          "[3]": {
+            "marker_id": "[3]",
+            "index": 3,
+            "source_document": "sample_regulatory_circular.txt",
+            "chunk_id": "sample_regulatory_circular_txt_tokenaware_003",
+            "chunk_index": 2,
+            "section": "3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs",
+            "page_number": 1,
+            "similarity_score": 0.5709,
+            "verbatim_text": "officer not below the rank of Deputy General Manager.\n(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.\n(c) Heightened Transaction Monitoring: High-risk accounts shall be subjected to quarterly reviews, compared against the standard biennial review for low-risk customers.\n\n4. Transaction Monitoring and Reporting Thresholds\nBanks shall deploy rule-based and behavioral automated transaction monitoring systems to identify suspicious transaction patterns:\n(a) Cash Transaction Reports (CTRs): All cash transactions of the value of more than rupees ten lakhs or its equivalent in foreign currency must be reported monthly to the Financial Intelligence Unit - India (FIU-IND) by the 15th day of the succeeding month.\n(b) Counterfeit Currency Reports (CCRs) and Non-Profit Organization Transaction Reports (NTRs): All cross-border non-profit transactions exceeding rupees ten lakhs must be logged and monitored.\n(c) Suspicious Transaction Reports (STRs): If any transaction gives rise to reasonable suspicion of illicit funds, evasion, or terrorism financing, an STR shall be furnished to FIU-IND within seven working days of arriving at such a conclusion.\n\n5. Record Retention Obligations\nUnder Rule 3 and Rule 10 of the PML Rules, 2005, all regulated entities shall maintain:\n(a) Transaction Records: Comprehensive records of all transactions, whether completed or attempted, domestic or international, for a minimum"
+          }
+        },
+        "audit_report": {
+          "total_citations_found": 2,
+          "unique_markers_cited": [
+            "[1]"
+          ],
+          "verified_citations_count": 2,
+          "fabricated_citations_count": 0,
+          "unsupported_claims_count": 0,
+          "citation_precision": 1.0,
+          "fabricated_markers": [],
+          "overall_verdict": "PASS",
+          "audit_notes": "All 2 citations successfully verified against source chunk text with 100% evidentiary fidelity.",
+          "claim_verifications": [
+            {
+              "claim_sentence": "**Initial Report**: Any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial of service (DoS) affecting customer-facing channels must be reported to the RBI Cyber Security Cell (CSITE) and CERT-In within **6 hours** of detection. [1]",
+              "cited_marker": "[1]",
+              "source_document": "cyber_resilience_framework.pdf",
+              "section": "Preamble / Document Header",
+              "chunk_id": "cyber_resilience_framework_pdf_tokenaware_001",
+              "is_verified": true,
+              "status": "VERIFIED",
+              "matched_verbatim_span": "Any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial",
+              "matched_keywords": [
+                "any",
+                "cyber",
+                "security",
+                "incident",
+                "ransomware",
+                "compromise"
+              ],
+              "confidence_score": 1.0
+            },
+            {
+              "claim_sentence": "**Comprehensive Forensic Analysis Report**: Initial reports must be followed by a comprehensive forensic analysis report within **7 business days**. [1]",
+              "cited_marker": "[1]",
+              "source_document": "cyber_resilience_framework.pdf",
+              "section": "Preamble / Document Header",
+              "chunk_id": "cyber_resilience_framework_pdf_tokenaware_001",
+              "is_verified": true,
+              "status": "VERIFIED",
+              "matched_verbatim_span": "Initial reports must be followed by a comprehensive forensic analysis report with",
+              "matched_keywords": [
+                "comprehensive",
+                "forensic",
+                "analysis",
+                "reports",
+                "followed",
+                "comprehensive"
+              ],
+              "confidence_score": 1.0
+            }
+          ]
+        },
+        "prompt_tokens": 1520,
+        "completion_tokens": 180,
+        "latency_seconds": 101.0903,
+        "model": "llama3:latest"
+      }
+    },
+    {
+      "turn_index": 2,
+      "timestamp": "2026-09-15T04:47:58.810720+00:00",
+      "user_raw_query": "What must be submitted after that initial report, and by what deadline?",
+      "rewritten_query": "What must be submitted after the initial report to CERT-In and RBI regarding Severity 1 cyber security incidents, and what is the corresponding reporting deadline?",
+      "is_rewritten": true,
+      "rewriting_method": "LLM",
+      "rewriting_latency": 21.4817,
+      "raw_top_score": 0.3431,
+      "rewritten_top_score": 0.5975,
+      "score_uplift": 0.2544,
+      "raw_retrieved_chunk_ids": [
+        "circular_dor_2024_108_txt_tokenaware_004",
+        "sample_regulatory_circular_txt_tokenaware_004",
+        "guidelines_cdd_pml_rules_md_tokenaware_001"
+      ],
+      "retrieved_chunk_ids": [
+        "cyber_resilience_framework_pdf_tokenaware_001",
+        "circular_dor_2024_108_txt_tokenaware_003",
+        "sample_regulatory_circular_txt_tokenaware_003"
+      ],
+      "retrieved_documents": [
+        "cyber_resilience_framework.pdf",
+        "circular_dor_2024_108.txt",
+        "sample_regulatory_circular.txt"
+      ],
+      "assistant_answer": "Based on the provided regulatory context, I answer:\n\nAccording to the Master Direction on Cyber Resilience and Digital Payment Security Controls [1], any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial of service (DoS) affecting customer-facing channels must be reported to the RBI Cyber Security Cell (CSITE) and CERT-In within 6 hours of detection. Initial reports must be followed by a comprehensive forensic analysis report within 7 business days.\n\nTherefore, after the initial report, a comprehensive forensic analysis report must be submitted to CERT-In and RBI regarding Severity 1 cyber security incidents, and the corresponding reporting deadline is within 7 business days.\n\nNote: The provided regulatory context does not contain sufficient information to answer this question.",
+      "citations": [
+        "[1]",
+        "[2]",
+        "[3]"
+      ],
+      "total_latency_seconds": 123.408,
+      "cited_output": {
+        "timestamp": "2026-09-15T04:47:58.810654+00:00",
+        "query": "What must be submitted after the initial report to CERT-In and RBI regarding Severity 1 cyber security incidents, and what is the corresponding reporting deadline?",
+        "answer": "Based on the provided regulatory context, I answer:\n\nAccording to the Master Direction on Cyber Resilience and Digital Payment Security Controls [1], any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial of service (DoS) affecting customer-facing channels must be reported to the RBI Cyber Security Cell (CSITE) and CERT-In within 6 hours of detection. Initial reports must be followed by a comprehensive forensic analysis report within 7 business days.\n\nTherefore, after the initial report, a comprehensive forensic analysis report must be submitted to CERT-In and RBI regarding Severity 1 cyber security incidents, and the corresponding reporting deadline is within 7 business days.\n\nNote: The provided regulatory context does not contain sufficient information to answer this question.",
+        "is_fallback": false,
+        "has_fabricated_citations": false,
+        "citation_registry": {
+          "[1]": {
+            "marker_id": "[1]",
+            "index": 1,
+            "source_document": "cyber_resilience_framework.pdf",
+            "chunk_id": "cyber_resilience_framework_pdf_tokenaware_001",
+            "chunk_index": 0,
+            "section": "Preamble / Document Header",
+            "page_number": 1,
+            "similarity_score": 0.5975,
+            "verbatim_text": "RESERVE BANK OF INDIA DEPARTMENT OF CYBER SECURITY AND INFORMATION TECHNOLOGY CENTRAL OFFICE, MUMBAI Circular No: RBI/2024-25/19 - DoS.CO.CSITE.No.03/11.01.005/2024-25 Date: March 12, 2024 Subject: Master Direction on Cyber Resilience and Digital Payment Security Controls 1. Mandatory Two-Factor Authentication (2FA) All regulated payment system operators and scheduled commercial banks must enforce dynamic two-factor authentication (2FA) for all domestic electronic fund transfers (NEFT, RTGS, IMPS, and UPI). At least one factor must be dynamic, such as a time-based one-time password (TOTP) or biometric verification. 2. Incident Reporting Timelines (6-Hour Rule) Any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial of service (DoS) affecting customer-facing channels must be reported to the RBI Cyber Security Cell (CSITE) and CERT-In within 6 hours of detection. Initial reports must be followed by a comprehensive forensic analysis report within 7 business days. 3. Security Operations Centre (SOC) Operations Banks must operate a 24x7x365 Security Operations Centre (SOC) equipped with continuous automated log monitoring, SIEM analytics, and automated threat hunting capabilities.\n\n4. API Security and Third-Party Risk Management\n(a) All open banking and fintech integrations must mandate"
+          },
+          "[2]": {
+            "marker_id": "[2]",
+            "index": 2,
+            "source_document": "circular_dor_2024_108.txt",
+            "chunk_id": "circular_dor_2024_108_txt_tokenaware_003",
+            "chunk_index": 2,
+            "section": "3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs",
+            "page_number": 1,
+            "similarity_score": 0.5213,
+            "verbatim_text": "officer not below the rank of Deputy General Manager.\n(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.\n(c) Heightened Transaction Monitoring: High-risk accounts shall be subjected to quarterly reviews, compared against the standard biennial review for low-risk customers.\n\n4. Transaction Monitoring and Reporting Thresholds\nBanks shall deploy rule-based and behavioral automated transaction monitoring systems to identify suspicious transaction patterns:\n(a) Cash Transaction Reports (CTRs): All cash transactions of the value of more than rupees ten lakhs or its equivalent in foreign currency must be reported monthly to the Financial Intelligence Unit - India (FIU-IND) by the 15th day of the succeeding month.\n(b) Counterfeit Currency Reports (CCRs) and Non-Profit Organization Transaction Reports (NTRs): All cross-border non-profit transactions exceeding rupees ten lakhs must be logged and monitored.\n(c) Suspicious Transaction Reports (STRs): If any transaction gives rise to reasonable suspicion of illicit funds, evasion, or terrorism financing, an STR shall be furnished to FIU-IND within seven working days of arriving at such a conclusion.\n\n5. Record Retention Obligations\nUnder Rule 3 and Rule 10 of the PML Rules, 2005, all regulated entities shall maintain:\n(a) Transaction Records: Comprehensive records of all transactions, whether completed or attempted, domestic or international, for a minimum"
+          },
+          "[3]": {
+            "marker_id": "[3]",
+            "index": 3,
+            "source_document": "sample_regulatory_circular.txt",
+            "chunk_id": "sample_regulatory_circular_txt_tokenaware_003",
+            "chunk_index": 2,
+            "section": "3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs",
+            "page_number": 1,
+            "similarity_score": 0.5213,
+            "verbatim_text": "officer not below the rank of Deputy General Manager.\n(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.\n(c) Heightened Transaction Monitoring: High-risk accounts shall be subjected to quarterly reviews, compared against the standard biennial review for low-risk customers.\n\n4. Transaction Monitoring and Reporting Thresholds\nBanks shall deploy rule-based and behavioral automated transaction monitoring systems to identify suspicious transaction patterns:\n(a) Cash Transaction Reports (CTRs): All cash transactions of the value of more than rupees ten lakhs or its equivalent in foreign currency must be reported monthly to the Financial Intelligence Unit - India (FIU-IND) by the 15th day of the succeeding month.\n(b) Counterfeit Currency Reports (CCRs) and Non-Profit Organization Transaction Reports (NTRs): All cross-border non-profit transactions exceeding rupees ten lakhs must be logged and monitored.\n(c) Suspicious Transaction Reports (STRs): If any transaction gives rise to reasonable suspicion of illicit funds, evasion, or terrorism financing, an STR shall be furnished to FIU-IND within seven working days of arriving at such a conclusion.\n\n5. Record Retention Obligations\nUnder Rule 3 and Rule 10 of the PML Rules, 2005, all regulated entities shall maintain:\n(a) Transaction Records: Comprehensive records of all transactions, whether completed or attempted, domestic or international, for a minimum"
+          }
+        },
+        "audit_report": {
+          "total_citations_found": 1,
+          "unique_markers_cited": [
+            "[1]"
+          ],
+          "verified_citations_count": 1,
+          "fabricated_citations_count": 0,
+          "unsupported_claims_count": 0,
+          "citation_precision": 1.0,
+          "fabricated_markers": [],
+          "overall_verdict": "PASS",
+          "audit_notes": "All 1 citations successfully verified against source chunk text with 100% evidentiary fidelity.",
+          "claim_verifications": [
+            {
+              "claim_sentence": "According to the Master Direction on Cyber Resilience and Digital Payment Security Controls [1], any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial of service (DoS) affecting customer-facing channels must be reported to the RBI Cyber Security Cell (CSITE) and CERT-In within 6 hours of detection.",
+              "cited_marker": "[1]",
+              "source_document": "cyber_resilience_framework.pdf",
+              "section": "Preamble / Document Header",
+              "chunk_id": "cyber_resilience_framework_pdf_tokenaware_001",
+              "is_verified": true,
+              "status": "VERIFIED",
+              "matched_verbatim_span": "Master Direction on Cyber Resilience and Digital Payment Security Controls 1. Mandator",
+              "matched_keywords": [
+                "master",
+                "direction",
+                "cyber",
+                "resilience",
+                "and",
+                "digital"
+              ],
+              "confidence_score": 1.0
+            }
+          ]
+        },
+        "prompt_tokens": 1525,
+        "completion_tokens": 151,
+        "latency_seconds": 101.8184,
+        "model": "llama3:latest"
+      }
+    },
+    {
+      "turn_index": 3,
+      "timestamp": "2026-09-15T04:49:39.196776+00:00",
+      "user_raw_query": "How long do banks need to preserve the audit logs and firewall records related to such incidents?",
+      "rewritten_query": "What is the mandatory retention period for audit logs and firewall records related to Severity 1 cyber security incidents as per RBI and CERT-In regulations?",
+      "is_rewritten": true,
+      "rewriting_method": "LLM",
+      "rewriting_latency": 9.8945,
+      "raw_top_score": 0.6213,
+      "rewritten_top_score": 0.5623,
+      "score_uplift": -0.059,
+      "raw_retrieved_chunk_ids": [
+        "circular_dor_2024_108_txt_tokenaware_004",
+        "sample_regulatory_circular_txt_tokenaware_004",
+        "cyber_resilience_framework_pdf_tokenaware_002"
+      ],
+      "retrieved_chunk_ids": [
+        "cyber_resilience_framework_pdf_tokenaware_002",
+        "circular_dor_2024_108_txt_tokenaware_004",
+        "sample_regulatory_circular_txt_tokenaware_004"
+      ],
+      "retrieved_documents": [
+        "cyber_resilience_framework.pdf",
+        "circular_dor_2024_108.txt",
+        "sample_regulatory_circular.txt"
+      ],
+      "assistant_answer": "Based on the provided regulatory context, the mandatory retention period for audit logs and firewall records related to Severity 1 cyber security incidents is not explicitly stated.\n\nHowever, we can infer that the retention period for \"critical access logs, privileged user operations, database queries, and perimeter firewall event records\" is a minimum of three (3) years, as mentioned in Section 5. Audit Trail and Forensic Preservation of the cyber_resilience_framework.pdf [1].\n\nIt is essential to note that this information is not explicitly stated for Severity 1 cyber security incidents, but rather for \"all critical access logs\" in general. Therefore, it is crucial to consult the relevant RBI and CERT-In regulations to determine the specific retention period for Severity 1 cyber security incidents.\n\nThe provided regulatory context does not contain sufficient information to answer this question with complete certainty.",
+      "citations": [
+        "[1]",
+        "[2]",
+        "[3]"
+      ],
+      "total_latency_seconds": 100.3859,
+      "cited_output": {
+        "timestamp": "2026-09-15T04:49:39.196720+00:00",
+        "query": "What is the mandatory retention period for audit logs and firewall records related to Severity 1 cyber security incidents as per RBI and CERT-In regulations?",
+        "answer": "Based on the provided regulatory context, the mandatory retention period for audit logs and firewall records related to Severity 1 cyber security incidents is not explicitly stated.\n\nHowever, we can infer that the retention period for \"critical access logs, privileged user operations, database queries, and perimeter firewall event records\" is a minimum of three (3) years, as mentioned in Section 5. Audit Trail and Forensic Preservation of the cyber_resilience_framework.pdf [1].\n\nIt is essential to note that this information is not explicitly stated for Severity 1 cyber security incidents, but rather for \"all critical access logs\" in general. Therefore, it is crucial to consult the relevant RBI and CERT-In regulations to determine the specific retention period for Severity 1 cyber security incidents.\n\nThe provided regulatory context does not contain sufficient information to answer this question with complete certainty.",
+        "is_fallback": false,
+        "has_fabricated_citations": false,
+        "citation_registry": {
+          "[1]": {
+            "marker_id": "[1]",
+            "index": 1,
+            "source_document": "cyber_resilience_framework.pdf",
+            "chunk_id": "cyber_resilience_framework_pdf_tokenaware_002",
+            "chunk_index": 1,
+            "section": "Preamble / Document Header",
+            "page_number": 1,
+            "similarity_score": 0.5623,
+            "verbatim_text": "x7x365 Security Operations Centre (SOC) equipped with continuous automated log monitoring, SIEM analytics, and automated threat hunting capabilities.\n\n4. API Security and Third-Party Risk Management\n(a) All open banking and fintech integrations must mandate TLS 1.3 encryption with certificate pinning.\n(b) Third-party service providers and cloud vendors must undergo mandatory annual vulnerability assessment and penetration testing (VAPT) conducted by CERT-In empaneled auditors.\n5. Audit Trail and Forensic Preservation\nAll critical access logs, privileged user operations, database queries, and perimeter firewall event records must be stored in immutable WORM (Write Once, Read Many) storage for a minimum duration of three (3) years to aid statutory forensic investigations.\n6. Supervisory Penalties\nNon-compliance with the cyber resilience directives will invite punitive supervisory action under Section 47A of the Banking Regulation Act, 1949, including operational restrictions on digital onboarding.\nChief General Manager (Information Technology)\nReserve Bank of India"
+          },
+          "[2]": {
+            "marker_id": "[2]",
+            "index": 2,
+            "source_document": "circular_dor_2024_108.txt",
+            "chunk_id": "circular_dor_2024_108_txt_tokenaware_004",
+            "chunk_index": 3,
+            "section": "5. Record Retention Obligations",
+            "page_number": 1,
+            "similarity_score": 0.5508,
+            "verbatim_text": "igations\nUnder Rule 3 and Rule 10 of the PML Rules, 2005, all regulated entities shall maintain:\n(a) Transaction Records: Comprehensive records of all transactions, whether completed or attempted, domestic or international, for a minimum period of five years from the date of transaction between the bank and the client.\n(b) Customer Identification and Account Files: All account opening records, KYC verification dossiers, business correspondence, and internal audit notes must be safely retained for at least five years after the business relationship has ended or the account has been closed.\n(c) Audit Trails and Reconstruction: Records must be preserved in a manner that permits swift reconstruction of individual transactions (including amounts, currencies, counterparty details, and timestamps) to provide evidentiary support for regulatory inquiries and court proceedings.\n\n6. Non-Compliance Sanctions\nFailure to adhere to these directions shall attract monetary penalties under Section 47A(1)(c) read with Section 46(4) of the Banking Regulation Act, 1949, without prejudice to other statutory enforcement actions.\n\n(S. R. Sundaresan) Chief General Manager-in-Charge"
+          },
+          "[3]": {
+            "marker_id": "[3]",
+            "index": 3,
+            "source_document": "sample_regulatory_circular.txt",
+            "chunk_id": "sample_regulatory_circular_txt_tokenaware_004",
+            "chunk_index": 3,
+            "section": "5. Record Retention Obligations",
+            "page_number": 1,
+            "similarity_score": 0.5508,
+            "verbatim_text": "igations\nUnder Rule 3 and Rule 10 of the PML Rules, 2005, all regulated entities shall maintain:\n(a) Transaction Records: Comprehensive records of all transactions, whether completed or attempted, domestic or international, for a minimum period of five years from the date of transaction between the bank and the client.\n(b) Customer Identification and Account Files: All account opening records, KYC verification dossiers, business correspondence, and internal audit notes must be safely retained for at least five years after the business relationship has ended or the account has been closed.\n(c) Audit Trails and Reconstruction: Records must be preserved in a manner that permits swift reconstruction of individual transactions (including amounts, currencies, counterparty details, and timestamps) to provide evidentiary support for regulatory inquiries and court proceedings.\n\n6. Non-Compliance Sanctions\nFailure to adhere to these directions shall attract monetary penalties under Section 47A(1)(c) read with Section 46(4) of the Banking Regulation Act, 1949, without prejudice to other statutory enforcement actions.\n\n(S. R. Sundaresan) Chief General Manager-in-Charge"
+          }
+        },
+        "audit_report": {
+          "total_citations_found": 1,
+          "unique_markers_cited": [
+            "[1]"
+          ],
+          "verified_citations_count": 1,
+          "fabricated_citations_count": 0,
+          "unsupported_claims_count": 0,
+          "citation_precision": 1.0,
+          "fabricated_markers": [],
+          "overall_verdict": "PASS",
+          "audit_notes": "All 1 citations successfully verified against source chunk text with 100% evidentiary fidelity.",
+          "claim_verifications": [
+            {
+              "claim_sentence": "Audit Trail and Forensic Preservation of the cyber_resilience_framework.pdf [1].",
+              "cited_marker": "[1]",
+              "source_document": "cyber_resilience_framework.pdf",
+              "section": "Preamble / Document Header",
+              "chunk_id": "cyber_resilience_framework_pdf_tokenaware_002",
+              "is_verified": true,
+              "status": "VERIFIED",
+              "matched_verbatim_span": "Audit Trail and Forensic Preservation\nAll critical access logs, pri",
+              "matched_keywords": [
+                "audit",
+                "trail",
+                "and",
+                "forensic",
+                "preservation"
+              ],
+              "confidence_score": 1.0
+            }
+          ]
+        },
+        "prompt_tokens": 1266,
+        "completion_tokens": 170,
+        "latency_seconds": 90.3898,
+        "model": "llama3:latest"
+      }
+    },
+    {
+      "turn_index": 4,
+      "timestamp": "2026-09-15T04:51:38.745388+00:00",
+      "user_raw_query": "What are the supervisory penalties if a bank fails to comply with them?",
+      "rewritten_query": "What are the supervisory penalties for non-compliance with the mandatory reporting procedures and retention periods for Severity 1 cyber security incidents as outlined in the Master Direction on Cyber Resilience and Digital Payment Security Controls [1] and other relevant RBI and CERT-In regulations?",
+      "is_rewritten": true,
+      "rewriting_method": "LLM",
+      "rewriting_latency": 13.8721,
+      "raw_top_score": 0.5393,
+      "rewritten_top_score": 0.6258,
+      "score_uplift": 0.0864,
+      "raw_retrieved_chunk_ids": [
+        "circular_dor_2024_108_txt_tokenaware_004",
+        "sample_regulatory_circular_txt_tokenaware_004",
+        "sample_regulatory_circular_txt_tokenaware_001"
+      ],
+      "retrieved_chunk_ids": [
+        "cyber_resilience_framework_pdf_tokenaware_002",
+        "circular_dor_2024_108_txt_tokenaware_004",
+        "sample_regulatory_circular_txt_tokenaware_004"
+      ],
+      "retrieved_documents": [
+        "cyber_resilience_framework.pdf",
+        "circular_dor_2024_108.txt",
+        "sample_regulatory_circular.txt"
+      ],
+      "assistant_answer": "Based on the provided regulatory context, the supervisory penalties for non-compliance with the mandatory reporting procedures and retention periods for Severity 1 cyber security incidents are:\n\n**Primary Source:** [1] cyber_resilience_framework.pdf, Section: 6. Supervisory Penalties\n\n* Non-compliance with the cyber resilience directives will invite punitive supervisory action under Section 47A of the Banking Regulation Act, 1949, including operational restrictions on digital onboarding.\n\n**Additional Context:** [2] circular_dor_2024_108.txt, Section: 6. Non-Compliance Sanctions\n\n* Failure to adhere to these directions shall attract monetary penalties under Section 47A(1)(c) read with Section 46(4) of the Banking Regulation Act, 1949, without prejudice to other statutory enforcement actions.\n\n**Key Compliance Obligations:**\n\n* Maintain records of Severity 1 cyber security incidents in immutable WORM storage for a minimum duration of three (3) years to aid statutory forensic investigations.\n* Report Severity 1 cyber security incidents to the relevant authorities in a timely manner.\n* Ensure that all critical access logs, privileged user operations, database queries, and perimeter firewall event records are stored in immutable WORM storage for a minimum duration of three (3) years.\n\n**Grounded Compliance Answer:** Non-compliance with the mandatory reporting procedures and retention periods for Severity 1 cyber security incidents will attract punitive supervisory action under Section 47A of the Banking Regulation Act, 1949, including operational restrictions on digital onboarding, as well as monetary penalties under Section 47A(1)(c) read with Section 46(4) of the Banking Regulation Act, 1949.",
+      "citations": [
+        "[1]",
+        "[2]",
+        "[3]"
+      ],
+      "total_latency_seconds": 119.5484,
+      "cited_output": {
+        "timestamp": "2026-09-15T04:51:38.745331+00:00",
+        "query": "What are the supervisory penalties for non-compliance with the mandatory reporting procedures and retention periods for Severity 1 cyber security incidents as outlined in the Master Direction on Cyber Resilience and Digital Payment Security Controls [1] and other relevant RBI and CERT-In regulations?",
+        "answer": "Based on the provided regulatory context, the supervisory penalties for non-compliance with the mandatory reporting procedures and retention periods for Severity 1 cyber security incidents are:\n\n**Primary Source:** [1] cyber_resilience_framework.pdf, Section: 6. Supervisory Penalties\n\n* Non-compliance with the cyber resilience directives will invite punitive supervisory action under Section 47A of the Banking Regulation Act, 1949, including operational restrictions on digital onboarding.\n\n**Additional Context:** [2] circular_dor_2024_108.txt, Section: 6. Non-Compliance Sanctions\n\n* Failure to adhere to these directions shall attract monetary penalties under Section 47A(1)(c) read with Section 46(4) of the Banking Regulation Act, 1949, without prejudice to other statutory enforcement actions.\n\n**Key Compliance Obligations:**\n\n* Maintain records of Severity 1 cyber security incidents in immutable WORM storage for a minimum duration of three (3) years to aid statutory forensic investigations.\n* Report Severity 1 cyber security incidents to the relevant authorities in a timely manner.\n* Ensure that all critical access logs, privileged user operations, database queries, and perimeter firewall event records are stored in immutable WORM storage for a minimum duration of three (3) years.\n\n**Grounded Compliance Answer:** Non-compliance with the mandatory reporting procedures and retention periods for Severity 1 cyber security incidents will attract punitive supervisory action under Section 47A of the Banking Regulation Act, 1949, including operational restrictions on digital onboarding, as well as monetary penalties under Section 47A(1)(c) read with Section 46(4) of the Banking Regulation Act, 1949.",
+        "is_fallback": false,
+        "has_fabricated_citations": false,
+        "citation_registry": {
+          "[1]": {
+            "marker_id": "[1]",
+            "index": 1,
+            "source_document": "cyber_resilience_framework.pdf",
+            "chunk_id": "cyber_resilience_framework_pdf_tokenaware_002",
+            "chunk_index": 1,
+            "section": "Preamble / Document Header",
+            "page_number": 1,
+            "similarity_score": 0.6258,
+            "verbatim_text": "x7x365 Security Operations Centre (SOC) equipped with continuous automated log monitoring, SIEM analytics, and automated threat hunting capabilities.\n\n4. API Security and Third-Party Risk Management\n(a) All open banking and fintech integrations must mandate TLS 1.3 encryption with certificate pinning.\n(b) Third-party service providers and cloud vendors must undergo mandatory annual vulnerability assessment and penetration testing (VAPT) conducted by CERT-In empaneled auditors.\n5. Audit Trail and Forensic Preservation\nAll critical access logs, privileged user operations, database queries, and perimeter firewall event records must be stored in immutable WORM (Write Once, Read Many) storage for a minimum duration of three (3) years to aid statutory forensic investigations.\n6. Supervisory Penalties\nNon-compliance with the cyber resilience directives will invite punitive supervisory action under Section 47A of the Banking Regulation Act, 1949, including operational restrictions on digital onboarding.\nChief General Manager (Information Technology)\nReserve Bank of India"
+          },
+          "[2]": {
+            "marker_id": "[2]",
+            "index": 2,
+            "source_document": "circular_dor_2024_108.txt",
+            "chunk_id": "circular_dor_2024_108_txt_tokenaware_004",
+            "chunk_index": 3,
+            "section": "5. Record Retention Obligations",
+            "page_number": 1,
+            "similarity_score": 0.5617,
+            "verbatim_text": "igations\nUnder Rule 3 and Rule 10 of the PML Rules, 2005, all regulated entities shall maintain:\n(a) Transaction Records: Comprehensive records of all transactions, whether completed or attempted, domestic or international, for a minimum period of five years from the date of transaction between the bank and the client.\n(b) Customer Identification and Account Files: All account opening records, KYC verification dossiers, business correspondence, and internal audit notes must be safely retained for at least five years after the business relationship has ended or the account has been closed.\n(c) Audit Trails and Reconstruction: Records must be preserved in a manner that permits swift reconstruction of individual transactions (including amounts, currencies, counterparty details, and timestamps) to provide evidentiary support for regulatory inquiries and court proceedings.\n\n6. Non-Compliance Sanctions\nFailure to adhere to these directions shall attract monetary penalties under Section 47A(1)(c) read with Section 46(4) of the Banking Regulation Act, 1949, without prejudice to other statutory enforcement actions.\n\n(S. R. Sundaresan) Chief General Manager-in-Charge"
+          },
+          "[3]": {
+            "marker_id": "[3]",
+            "index": 3,
+            "source_document": "sample_regulatory_circular.txt",
+            "chunk_id": "sample_regulatory_circular_txt_tokenaware_004",
+            "chunk_index": 3,
+            "section": "5. Record Retention Obligations",
+            "page_number": 1,
+            "similarity_score": 0.5617,
+            "verbatim_text": "igations\nUnder Rule 3 and Rule 10 of the PML Rules, 2005, all regulated entities shall maintain:\n(a) Transaction Records: Comprehensive records of all transactions, whether completed or attempted, domestic or international, for a minimum period of five years from the date of transaction between the bank and the client.\n(b) Customer Identification and Account Files: All account opening records, KYC verification dossiers, business correspondence, and internal audit notes must be safely retained for at least five years after the business relationship has ended or the account has been closed.\n(c) Audit Trails and Reconstruction: Records must be preserved in a manner that permits swift reconstruction of individual transactions (including amounts, currencies, counterparty details, and timestamps) to provide evidentiary support for regulatory inquiries and court proceedings.\n\n6. Non-Compliance Sanctions\nFailure to adhere to these directions shall attract monetary penalties under Section 47A(1)(c) read with Section 46(4) of the Banking Regulation Act, 1949, without prejudice to other statutory enforcement actions.\n\n(S. R. Sundaresan) Chief General Manager-in-Charge"
+          }
+        },
+        "audit_report": {
+          "total_citations_found": 2,
+          "unique_markers_cited": [
+            "[1]",
+            "[2]"
+          ],
+          "verified_citations_count": 0,
+          "fabricated_citations_count": 0,
+          "unsupported_claims_count": 1,
+          "citation_precision": 0.0,
+          "fabricated_markers": [],
+          "overall_verdict": "FLAGGED",
+          "audit_notes": "Found 1 claims with insufficient evidence in cited chunks.",
+          "claim_verifications": [
+            {
+              "claim_sentence": "**Primary Source:** [1] cyber_resilience_framework.pdf, Section: 6.",
+              "cited_marker": "[1]",
+              "source_document": "cyber_resilience_framework.pdf",
+              "section": "Preamble / Document Header",
+              "chunk_id": "cyber_resilience_framework_pdf_tokenaware_002",
+              "is_verified": false,
+              "status": "UNSUPPORTED",
+              "matched_verbatim_span": null,
+              "matched_keywords": [
+                "section"
+              ],
+              "confidence_score": 0.2
+            },
+            {
+              "claim_sentence": "**Additional Context:** [2] circular_dor_2024_108.txt, Section: 6.",
+              "cited_marker": "[2]",
+              "source_document": "circular_dor_2024_108.txt",
+              "section": "5. Record Retention Obligations",
+              "chunk_id": "circular_dor_2024_108_txt_tokenaware_004",
+              "is_verified": false,
+              "status": "PARTIALLY_SUPPORTED",
+              "matched_verbatim_span": null,
+              "matched_keywords": [
+                "section"
+              ],
+              "confidence_score": 0.25
+            }
+          ]
+        },
+        "prompt_tokens": 1291,
+        "completion_tokens": 351,
+        "latency_seconds": 105.5668,
+        "model": "llama3:latest"
+      }
+    }
+  ]
+}

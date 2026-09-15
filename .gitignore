@@ -75,6 +75,8 @@ outputs/*
 !outputs/citation_verification_results.json
 !outputs/hallucination_guardrails_results.md
 !outputs/hallucination_guardrails_results.json
+!outputs/conversational_rag_results.md
+!outputs/conversational_rag_results.json
 
 
 # Python cache
