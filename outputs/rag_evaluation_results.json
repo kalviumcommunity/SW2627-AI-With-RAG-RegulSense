@@ -1,0 +1,549 @@
+{
+  "metadata": {
+    "title": "RegulSense RAG System Evaluation & Quality Benchmark",
+    "timestamp": "2026-09-15T05:32:07.885260+00:00",
+    "chat_model": "llama3:latest"
+  },
+  "summary": {
+    "timestamp": "2026-09-15T05:32:07.881588+00:00",
+    "total_tests": 8,
+    "passed_tests": 3,
+    "flagged_tests": 1,
+    "failed_tests": 4,
+    "pass_rate": 0.375,
+    "mean_correctness": 0.7184,
+    "mean_grounding": 0.6667,
+    "mean_citation_precision": 0.75,
+    "mean_source_recall": 1.0,
+    "mean_overall_score": 0.7066,
+    "safe_refusal_accuracy": 1.0,
+    "fabricated_citations_count": 0,
+    "failure_breakdown": {
+      "UNGROUNDED_SPECULATION": 2,
+      "FABRICATED_CITATIONS": 2,
+      "MARGINAL_QUALITY": 1
+    }
+  },
+  "results": [
+    {
+      "test_id": "EVAL-01",
+      "query": "What are the mandatory timeframe and reporting procedures for banks to notify CERT-In and RBI regarding Severity 1 cyber security incidents?",
+      "category": "Cyber Incident Reporting",
+      "is_answerable": true,
+      "is_refusal": false,
+      "generated_answer": "Based on the provided regulatory context, the answer to the compliance inquiry is:\n\nAccording to the Master Direction on Cyber Resilience and Digital Payment Security Controls [1], any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial of service (DoS) affecting customer-facing channels must be reported to the RBI Cyber Security Cell (CSITE) and CERT-In within 6 hours of detection [1, Section 2].\n\nThis is the mandatory timeframe for banks to notify CERT-In and RBI regarding Severity 1 cyber security incidents.\n\nNote: The provided regulatory context does not contain sufficient information to answer this question.",
+      "correctness_score": 0.66,
+      "grounding_score": 0.3333,
+      "citation_precision": 1.0,
+      "overall_score": 0.6137,
+      "source_recall": 1.0,
+      "verdict": "FAIL",
+      "matched_key_facts": [
+        "6 hours",
+        "CERT-In",
+        "CSITE"
+      ],
+      "missing_key_facts": [
+        "7 business days",
+        "forensic analysis"
+      ],
+      "retrieved_chunk_ids": [
+        "cyber_resilience_framework_pdf_tokenaware_001",
+        "circular_dor_2024_108_txt_tokenaware_003",
+        "sample_regulatory_circular_txt_tokenaware_003"
+      ],
+      "retrieved_sources": [
+        "cyber_resilience_framework.pdf",
+        "circular_dor_2024_108.txt",
+        "sample_regulatory_circular.txt"
+      ],
+      "expected_sources": [
+        "cyber_resilience_framework.pdf"
+      ],
+      "failure_category": "UNGROUNDED_SPECULATION",
+      "failure_root_cause": "Generated assertions contain information not present in the retrieved regulatory context chunks.",
+      "remediation_advice": "Tighten prompt constraints by reducing generation temperature to 0.0 and emphasizing negative constraints.",
+      "latency_seconds": 104.6229,
+      "citation_checks": [
+        {
+          "marker": "[1]",
+          "cited_chunk_id": "cyber_resilience_framework_pdf_tokenaware_001",
+          "source_document": "cyber_resilience_framework.pdf",
+          "is_valid_marker": true,
+          "is_fabricated": false,
+          "supports_claim": true,
+          "verbatim_evidence_snippet": "Master Direction on Cyber Resilience and Digital Payment Security Controls 1. Mandatory Tw",
+          "claim_sentence": "Based on the provided regulatory context, the answer to the compliance inquiry is:\n\nAccording to the Master Direction on Cyber Resilience and Digital Payment Security Controls [1], any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial of service (DoS) affecting customer-facing channels must be reported to the RBI Cyber Security Cell (CSITE) and CERT-In within 6 hours of detection [1, Section 2].",
+          "audit_notes": "Verified: Citation maps to valid chunk containing direct supporting evidence."
+        }
+      ]
+    },
+    {
+      "test_id": "EVAL-02",
+      "query": "What is the mandatory storage format and minimum retention period for bank cyber security audit logs and perimeter firewall event records?",
+      "category": "Forensic Audit Trail Preservation",
+      "is_answerable": true,
+      "is_refusal": false,
+      "generated_answer": "Based on the provided regulatory context, the answer to the compliance inquiry is:\n\nAccording to the cyber resilience framework [1], all critical access logs, privileged user operations, database queries, and perimeter firewall event records must be stored in immutable WORM (Write Once, Read Many) storage for a minimum duration of three (3) years to aid statutory forensic investigations.\n\nThis requirement is explicitly stated in the \"Audit Trail and Forensic Preservation\" section of the cyber resilience framework [1].\n\nNo additional information is required to answer this question, as the provided regulatory context contains sufficient evidence to provide a definitive answer.",
+      "correctness_score": 1.0,
+      "grounding_score": 0.6667,
+      "citation_precision": 1.0,
+      "overall_score": 0.8833,
+      "source_recall": 1.0,
+      "verdict": "PASS",
+      "matched_key_facts": [
+        "WORM",
+        "three (3) years",
+        "3 years",
+        "critical access logs",
+        "firewall"
+      ],
+      "missing_key_facts": [],
+      "retrieved_chunk_ids": [
+        "cyber_resilience_framework_pdf_tokenaware_002",
+        "circular_dor_2024_108_txt_tokenaware_004",
+        "sample_regulatory_circular_txt_tokenaware_004"
+      ],
+      "retrieved_sources": [
+        "cyber_resilience_framework.pdf",
+        "circular_dor_2024_108.txt",
+        "sample_regulatory_circular.txt"
+      ],
+      "expected_sources": [
+        "cyber_resilience_framework.pdf"
+      ],
+      "failure_category": null,
+      "failure_root_cause": null,
+      "remediation_advice": null,
+      "latency_seconds": 63.3497,
+      "citation_checks": [
+        {
+          "marker": "[1]",
+          "cited_chunk_id": "cyber_resilience_framework_pdf_tokenaware_002",
+          "source_document": "cyber_resilience_framework.pdf",
+          "is_valid_marker": true,
+          "is_fabricated": false,
+          "supports_claim": true,
+          "verbatim_evidence_snippet": "All critical access logs, privileged user operations, database queries, and perimeter firew",
+          "claim_sentence": "Based on the provided regulatory context, the answer to the compliance inquiry is:\n\nAccording to the cyber resilience framework [1], all critical access logs, privileged user operations, database queries, and perimeter firewall event records must be stored in immutable WORM (Write Once, Read Many) storage for a minimum duration of three (3) years to aid statutory forensic investigations.",
+          "audit_notes": "Verified: Citation maps to valid chunk containing direct supporting evidence."
+        },
+        {
+          "marker": "[1]",
+          "cited_chunk_id": "cyber_resilience_framework_pdf_tokenaware_002",
+          "source_document": "cyber_resilience_framework.pdf",
+          "is_valid_marker": true,
+          "is_fabricated": false,
+          "supports_claim": true,
+          "verbatim_evidence_snippet": "All critical access logs, privileged user operations, database queries, and perimeter firew",
+          "claim_sentence": "Based on the provided regulatory context, the answer to the compliance inquiry is:\n\nAccording to the cyber resilience framework [1], all critical access logs, privileged user operations, database queries, and perimeter firewall event records must be stored in immutable WORM (Write Once, Read Many) storage for a minimum duration of three (3) years to aid statutory forensic investigations.",
+          "audit_notes": "Verified: Citation maps to valid chunk containing direct supporting evidence."
+        }
+      ]
+    },
+    {
+      "test_id": "EVAL-03",
+      "query": "What core customer due diligence (CDD) documents and verification steps are mandatory when onboarding an individual customer account?",
+      "category": "Customer Due Diligence (CDD)",
+      "is_answerable": true,
+      "is_refusal": false,
+      "generated_answer": "Here is the answer:\n\nWhen onboarding an individual customer account, regulated entities must undertake client identification and verification procedures, as per [1] and [2]. Specifically, the following core customer due diligence (CDD) documents and verification steps are mandatory:\n\n* Verification of Officially Valid Documents (OVDs): Banks must verify the identity and permanent address of individual customers using authorized OVDs (e.g., Passport, Permanent Account Number (PAN) Card, Voter ID, Aadhaar through secure offline or e-KYC channels). [1] and [2]\n* Facial match algorithms with a confidence score exceeding 95% must be strictly enforced for remote customer onboarding. [1] and [2]\n\nThese mandatory CDD documents and verification steps ensure the identity and permanent address of individual customers are verified before establishing an account-based relationship or executing an occasional cross-border financial transaction.",
+      "correctness_score": 0.83,
+      "grounding_score": 1.0,
+      "citation_precision": 1.0,
+      "overall_score": 0.9235,
+      "source_recall": 1.0,
+      "verdict": "PASS",
+      "matched_key_facts": [
+        "Officially Valid Document",
+        "OVD",
+        "identity",
+        "address"
+      ],
+      "missing_key_facts": [
+        "photograph"
+      ],
+      "retrieved_chunk_ids": [
+        "circular_dor_2024_108_txt_tokenaware_002",
+        "sample_regulatory_circular_txt_tokenaware_002",
+        "guidelines_cdd_pml_rules_md_tokenaware_001"
+      ],
+      "retrieved_sources": [
+        "circular_dor_2024_108.txt",
+        "sample_regulatory_circular.txt",
+        "guidelines_cdd_pml_rules.md"
+      ],
+      "expected_sources": [
+        "circular_dor_2024_108.txt",
+        "sample_regulatory_circular.txt"
+      ],
+      "failure_category": null,
+      "failure_root_cause": null,
+      "remediation_advice": null,
+      "latency_seconds": 89.3709,
+      "citation_checks": [
+        {
+          "marker": "[1]",
+          "cited_chunk_id": "circular_dor_2024_108_txt_tokenaware_002",
+          "source_document": "circular_dor_2024_108.txt",
+          "is_valid_marker": true,
+          "is_fabricated": false,
+          "supports_claim": true,
+          "verbatim_evidence_snippet": "Regulated entities must undertake client identification and verification procedures before establishing a",
+          "claim_sentence": "Here is the answer:\n\nWhen onboarding an individual customer account, regulated entities must undertake client identification and verification procedures, as per [1] and [2].",
+          "audit_notes": "Verified: Citation maps to valid chunk containing direct supporting evidence."
+        },
+        {
+          "marker": "[2]",
+          "cited_chunk_id": "sample_regulatory_circular_txt_tokenaware_002",
+          "source_document": "sample_regulatory_circular.txt",
+          "is_valid_marker": true,
+          "is_fabricated": false,
+          "supports_claim": true,
+          "verbatim_evidence_snippet": "Regulated entities must undertake client identification and verification procedures before establishing a",
+          "claim_sentence": "Here is the answer:\n\nWhen onboarding an individual customer account, regulated entities must undertake client identification and verification procedures, as per [1] and [2].",
+          "audit_notes": "Verified: Citation maps to valid chunk containing direct supporting evidence."
+        },
+        {
+          "marker": "[1]",
+          "cited_chunk_id": "circular_dor_2024_108_txt_tokenaware_002",
+          "source_document": "circular_dor_2024_108.txt",
+          "is_valid_marker": true,
+          "is_fabricated": false,
+          "supports_claim": true,
+          "verbatim_evidence_snippet": "Regulated entities must undertake client identification and verification procedures before establishing a",
+          "claim_sentence": "Here is the answer:\n\nWhen onboarding an individual customer account, regulated entities must undertake client identification and verification procedures, as per [1] and [2].",
+          "audit_notes": "Verified: Citation maps to valid chunk containing direct supporting evidence."
+        },
+        {
+          "marker": "[2]",
+          "cited_chunk_id": "sample_regulatory_circular_txt_tokenaware_002",
+          "source_document": "sample_regulatory_circular.txt",
+          "is_valid_marker": true,
+          "is_fabricated": false,
+          "supports_claim": true,
+          "verbatim_evidence_snippet": "Regulated entities must undertake client identification and verification procedures before establishing a",
+          "claim_sentence": "Here is the answer:\n\nWhen onboarding an individual customer account, regulated entities must undertake client identification and verification procedures, as per [1] and [2].",
+          "audit_notes": "Verified: Citation maps to valid chunk containing direct supporting evidence."
+        },
+        {
+          "marker": "[1]",
+          "cited_chunk_id": "circular_dor_2024_108_txt_tokenaware_002",
+          "source_document": "circular_dor_2024_108.txt",
+          "is_valid_marker": true,
+          "is_fabricated": false,
+          "supports_claim": true,
+          "verbatim_evidence_snippet": "Regulated entities must undertake client identification and verification procedures before establishing a",
+          "claim_sentence": "Here is the answer:\n\nWhen onboarding an individual customer account, regulated entities must undertake client identification and verification procedures, as per [1] and [2].",
+          "audit_notes": "Verified: Citation maps to valid chunk containing direct supporting evidence."
+        },
+        {
+          "marker": "[2]",
+          "cited_chunk_id": "sample_regulatory_circular_txt_tokenaware_002",
+          "source_document": "sample_regulatory_circular.txt",
+          "is_valid_marker": true,
+          "is_fabricated": false,
+          "supports_claim": true,
+          "verbatim_evidence_snippet": "Regulated entities must undertake client identification and verification procedures before establishing a",
+          "claim_sentence": "Here is the answer:\n\nWhen onboarding an individual customer account, regulated entities must undertake client identification and verification procedures, as per [1] and [2].",
+          "audit_notes": "Verified: Citation maps to valid chunk containing direct supporting evidence."
+        }
+      ]
+    },
+    {
+      "test_id": "EVAL-04",
+      "query": "What are the mandatory AML record retention requirements for customer transaction records and account files after an account has been closed?",
+      "category": "AML Record Retention",
+      "is_answerable": true,
+      "is_refusal": false,
+      "generated_answer": "Based on the provided regulatory context, the mandatory AML record retention requirements for customer transaction records and account files after an account has been closed are:\n\n* Customer Identification and Account Files: All account opening records, KYC verification dossiers, business correspondence, and internal audit notes must be safely retained for at least five years after the business relationship has ended or the account has been closed. [1], [2]\n\nThis requirement is specified in Section 5 of the circular, under the subheading \"Record Retention Obligations\".",
+      "correctness_score": 0.32,
+      "grounding_score": 0.5,
+      "citation_precision": 0.0,
+      "overall_score": 0.319,
+      "source_recall": 1.0,
+      "verdict": "FAIL",
+      "matched_key_facts": [
+        "transaction records"
+      ],
+      "missing_key_facts": [
+        "five (5) years",
+        "5 years",
+        "closure",
+        "termination"
+      ],
+      "retrieved_chunk_ids": [
+        "circular_dor_2024_108_txt_tokenaware_004",
+        "sample_regulatory_circular_txt_tokenaware_004"
+      ],
+      "retrieved_sources": [
+        "circular_dor_2024_108.txt",
+        "sample_regulatory_circular.txt"
+      ],
+      "expected_sources": [
+        "circular_dor_2024_108.txt",
+        "sample_regulatory_circular.txt"
+      ],
+      "failure_category": "FABRICATED_CITATIONS",
+      "failure_root_cause": "The response contains citations pointing to unindexed chunks or chunks without evidentiary support.",
+      "remediation_advice": "Enforce strict post-generation citation validation to strip unindexed markers or reject non-evidentiary spans.",
+      "latency_seconds": 49.7003,
+      "citation_checks": [
+        {
+          "marker": "[1]",
+          "cited_chunk_id": "circular_dor_2024_108_txt_tokenaware_004",
+          "source_document": "circular_dor_2024_108.txt",
+          "is_valid_marker": true,
+          "is_fabricated": false,
+          "supports_claim": false,
+          "verbatim_evidence_snippet": null,
+          "claim_sentence": "[1], [2]\n\nThis requirement is specified in Section 5 of the circular, under the subheading \"Record Retention Obligations\".",
+          "audit_notes": "FLAGGED: Citation marker is valid, but cited chunk lacks sufficient textual evidence for claim."
+        },
+        {
+          "marker": "[2]",
+          "cited_chunk_id": "sample_regulatory_circular_txt_tokenaware_004",
+          "source_document": "sample_regulatory_circular.txt",
+          "is_valid_marker": true,
+          "is_fabricated": false,
+          "supports_claim": false,
+          "verbatim_evidence_snippet": null,
+          "claim_sentence": "[1], [2]\n\nThis requirement is specified in Section 5 of the circular, under the subheading \"Record Retention Obligations\".",
+          "audit_notes": "FLAGGED: Citation marker is valid, but cited chunk lacks sufficient textual evidence for claim."
+        }
+      ]
+    },
+    {
+      "test_id": "EVAL-05",
+      "query": "Between what permitted hours are recovery agents authorized to contact delinquent borrowers under digital lending compliance regulations?",
+      "category": "Digital Lending Conduct",
+      "is_answerable": true,
+      "is_refusal": false,
+      "generated_answer": "According to the regulatory context, recovery agents are authorized to contact delinquent borrowers between 8:00 AM and 7:00 PM.\n\n\u2022 Strict Prohibition: Regulated entities and their engaged recovery agents are strictly prohibited from contacting borrowers before 8:00 AM or after 7:00 PM. [1], [2]\n\nNote: This answer is grounded in the provided regulatory context and adheres to the strict context boundary, mandatory source citations, and response constraints.",
+      "correctness_score": 0.575,
+      "grounding_score": 0.6667,
+      "citation_precision": 0.0,
+      "overall_score": 0.4921,
+      "source_recall": 1.0,
+      "verdict": "FAIL",
+      "matched_key_facts": [
+        "recovery agents",
+        "contact"
+      ],
+      "missing_key_facts": [
+        "08:00",
+        "19:00"
+      ],
+      "retrieved_chunk_ids": [
+        "digital_lending_compliance_note_html_tokenaware_001",
+        "digital_lending_compliance_note_html_tokenaware_002"
+      ],
+      "retrieved_sources": [
+        "digital_lending_compliance_note.html"
+      ],
+      "expected_sources": [
+        "digital_lending_compliance_note.html"
+      ],
+      "failure_category": "FABRICATED_CITATIONS",
+      "failure_root_cause": "The response contains citations pointing to unindexed chunks or chunks without evidentiary support.",
+      "remediation_advice": "Enforce strict post-generation citation validation to strip unindexed markers or reject non-evidentiary spans.",
+      "latency_seconds": 43.9669,
+      "citation_checks": [
+        {
+          "marker": "[1]",
+          "cited_chunk_id": "digital_lending_compliance_note_html_tokenaware_001",
+          "source_document": "digital_lending_compliance_note.html",
+          "is_valid_marker": true,
+          "is_fabricated": false,
+          "supports_claim": false,
+          "verbatim_evidence_snippet": null,
+          "claim_sentence": "[1], [2]\n\nNote: This answer is grounded in the provided regulatory context and adheres to the strict context boundary, mandatory source citations, and response constraints.",
+          "audit_notes": "FLAGGED: Citation marker is valid, but cited chunk lacks sufficient textual evidence for claim."
+        },
+        {
+          "marker": "[2]",
+          "cited_chunk_id": "digital_lending_compliance_note_html_tokenaware_002",
+          "source_document": "digital_lending_compliance_note.html",
+          "is_valid_marker": true,
+          "is_fabricated": false,
+          "supports_claim": false,
+          "verbatim_evidence_snippet": null,
+          "claim_sentence": "[1], [2]\n\nNote: This answer is grounded in the provided regulatory context and adheres to the strict context boundary, mandatory source citations, and response constraints.",
+          "audit_notes": "FLAGGED: Citation marker is valid, but cited chunk lacks sufficient textual evidence for claim."
+        }
+      ]
+    },
+    {
+      "test_id": "EVAL-06",
+      "query": "What are the mandatory periodic review and re-KYC update intervals for high, medium, and low risk customer accounts under PML rules?",
+      "category": "Customer Risk Categorization",
+      "is_answerable": true,
+      "is_refusal": false,
+      "generated_answer": "Based on the provided regulatory context, the answer to the compliance inquiry is:\n\nAccording to the Internal Compliance Guidelines: CDD & Prevention of Money Laundering (PML) Rules [1], every account is assigned a risk tier during onboarding, and the review frequency is as follows:\n\n* **Tier 1 (Low)**: Every 10 years\n* **Tier 2 (Medium)**: Every 8 years\n* **Tier 3 (High)**: Every 2 years\n\nThese review frequencies are specified in the Customer Risk Categorization section [1].\n\nNote: The provided regulatory context does not contain sufficient information to answer this question.",
+      "correctness_score": 0.575,
+      "grounding_score": 0.5,
+      "citation_precision": 1.0,
+      "overall_score": 0.6338,
+      "source_recall": 1.0,
+      "verdict": "FAIL",
+      "matched_key_facts": [
+        "2 years",
+        "8 years",
+        "10 years"
+      ],
+      "missing_key_facts": [
+        "two (2) years",
+        "eight (8) years",
+        "ten (10) years"
+      ],
+      "retrieved_chunk_ids": [
+        "guidelines_cdd_pml_rules_md_tokenaware_001",
+        "circular_dor_2024_108_txt_tokenaware_004",
+        "sample_regulatory_circular_txt_tokenaware_004"
+      ],
+      "retrieved_sources": [
+        "guidelines_cdd_pml_rules.md",
+        "circular_dor_2024_108.txt",
+        "sample_regulatory_circular.txt"
+      ],
+      "expected_sources": [
+        "guidelines_cdd_pml_rules.md"
+      ],
+      "failure_category": "UNGROUNDED_SPECULATION",
+      "failure_root_cause": "Generated assertions contain information not present in the retrieved regulatory context chunks.",
+      "remediation_advice": "Tighten prompt constraints by reducing generation temperature to 0.0 and emphasizing negative constraints.",
+      "latency_seconds": 75.9995,
+      "citation_checks": [
+        {
+          "marker": "[1]",
+          "cited_chunk_id": "guidelines_cdd_pml_rules_md_tokenaware_001",
+          "source_document": "guidelines_cdd_pml_rules.md",
+          "is_valid_marker": true,
+          "is_fabricated": false,
+          "supports_claim": true,
+          "verbatim_evidence_snippet": "Internal Compliance Guidelines: CDD & Prevention of Money Laundering (PML) Rules\n\n**Document Ident",
+          "claim_sentence": "Based on the provided regulatory context, the answer to the compliance inquiry is:\n\nAccording to the Internal Compliance Guidelines: CDD & Prevention of Money Laundering (PML) Rules [1], every account is assigned a risk tier during onboarding, and the review frequency is as follows:\n\n* **Tier 1 (Low)**: Every 10 years\n* **Tier 2 (Medium)**: Every 8 years\n* **Tier 3 (High)**: Every 2 years\n\nThese review frequencies are specified in the Customer Risk Categorization section [1].",
+          "audit_notes": "Verified: Citation maps to valid chunk containing direct supporting evidence."
+        },
+        {
+          "marker": "[1]",
+          "cited_chunk_id": "guidelines_cdd_pml_rules_md_tokenaware_001",
+          "source_document": "guidelines_cdd_pml_rules.md",
+          "is_valid_marker": true,
+          "is_fabricated": false,
+          "supports_claim": true,
+          "verbatim_evidence_snippet": "Internal Compliance Guidelines: CDD & Prevention of Money Laundering (PML) Rules\n\n**Document Ident",
+          "claim_sentence": "Based on the provided regulatory context, the answer to the compliance inquiry is:\n\nAccording to the Internal Compliance Guidelines: CDD & Prevention of Money Laundering (PML) Rules [1], every account is assigned a risk tier during onboarding, and the review frequency is as follows:\n\n* **Tier 1 (Low)**: Every 10 years\n* **Tier 2 (Medium)**: Every 8 years\n* **Tier 3 (High)**: Every 2 years\n\nThese review frequencies are specified in the Customer Risk Categorization section [1].",
+          "audit_notes": "Verified: Citation maps to valid chunk containing direct supporting evidence."
+        }
+      ]
+    },
+    {
+      "test_id": "EVAL-07",
+      "query": "What ownership percentage threshold defines a Beneficial Owner for corporate companies and unincorporated associations under PML guidelines?",
+      "category": "Beneficial Ownership Thresholds",
+      "is_answerable": true,
+      "is_refusal": false,
+      "generated_answer": "Based on the retrieved regulatory context, the answer to the compliance inquiry is:\n\n**Answer:** 10% [1]\n\n**Operative Compliance Obligations:**\n\n* For corporate companies, a natural person(s) who, acting alone or together, hold more than 10% of shares, capital, or profits is considered a Beneficial Owner [1].\n* For unincorporated associations/trusts, a natural person(s) who hold more than 10% of property, capital, or profits is considered a Beneficial Owner [1].\n\n**Source Citation:** [1] guidelines_cdd_pml_rules.md, Section 4. Beneficial Ownership Thresholds",
+      "correctness_score": 0.7875,
+      "grounding_score": 0.6667,
+      "citation_precision": 1.0,
+      "overall_score": 0.7877,
+      "source_recall": 1.0,
+      "verdict": "FLAGGED",
+      "matched_key_facts": [
+        "10%",
+        "companies",
+        "unincorporated"
+      ],
+      "missing_key_facts": [
+        "15%"
+      ],
+      "retrieved_chunk_ids": [
+        "guidelines_cdd_pml_rules_md_tokenaware_002"
+      ],
+      "retrieved_sources": [
+        "guidelines_cdd_pml_rules.md"
+      ],
+      "expected_sources": [
+        "guidelines_cdd_pml_rules.md"
+      ],
+      "failure_category": "MARGINAL_QUALITY",
+      "failure_root_cause": "Score satisfies threshold but exhibits minor stylistic or keyword variances.",
+      "remediation_advice": "Review prompt formatting guidelines.",
+      "latency_seconds": 42.3717,
+      "citation_checks": [
+        {
+          "marker": "[1]",
+          "cited_chunk_id": "guidelines_cdd_pml_rules_md_tokenaware_002",
+          "source_document": "guidelines_cdd_pml_rules.md",
+          "is_valid_marker": true,
+          "is_fabricated": false,
+          "supports_claim": true,
+          "verbatim_evidence_snippet": "Natural person(s) who, acting alone or together, hold more than **10%** of shares, capit",
+          "claim_sentence": "Based on the retrieved regulatory context, the answer to the compliance inquiry is:\n\n**Answer:** 10% [1]\n\n**Operative Compliance Obligations:**\n\n* For corporate companies, a natural person(s) who, acting alone or together, hold more than 10% of shares, capital, or profits is considered a Beneficial Owner [1].",
+          "audit_notes": "Verified: Citation maps to valid chunk containing direct supporting evidence."
+        },
+        {
+          "marker": "[1]",
+          "cited_chunk_id": "guidelines_cdd_pml_rules_md_tokenaware_002",
+          "source_document": "guidelines_cdd_pml_rules.md",
+          "is_valid_marker": true,
+          "is_fabricated": false,
+          "supports_claim": true,
+          "verbatim_evidence_snippet": "Natural person(s) who, acting alone or together, hold more than **10%** of shares, capit",
+          "claim_sentence": "Based on the retrieved regulatory context, the answer to the compliance inquiry is:\n\n**Answer:** 10% [1]\n\n**Operative Compliance Obligations:**\n\n* For corporate companies, a natural person(s) who, acting alone or together, hold more than 10% of shares, capital, or profits is considered a Beneficial Owner [1].",
+          "audit_notes": "Verified: Citation maps to valid chunk containing direct supporting evidence."
+        },
+        {
+          "marker": "[1]",
+          "cited_chunk_id": "guidelines_cdd_pml_rules_md_tokenaware_002",
+          "source_document": "guidelines_cdd_pml_rules.md",
+          "is_valid_marker": true,
+          "is_fabricated": false,
+          "supports_claim": true,
+          "verbatim_evidence_snippet": "Natural person(s) who, acting alone or together, hold more than **10%** of shares, capit",
+          "claim_sentence": "Based on the retrieved regulatory context, the answer to the compliance inquiry is:\n\n**Answer:** 10% [1]\n\n**Operative Compliance Obligations:**\n\n* For corporate companies, a natural person(s) who, acting alone or together, hold more than 10% of shares, capital, or profits is considered a Beneficial Owner [1].",
+          "audit_notes": "Verified: Citation maps to valid chunk containing direct supporting evidence."
+        },
+        {
+          "marker": "[1]",
+          "cited_chunk_id": "guidelines_cdd_pml_rules_md_tokenaware_002",
+          "source_document": "guidelines_cdd_pml_rules.md",
+          "is_valid_marker": true,
+          "is_fabricated": false,
+          "supports_claim": true,
+          "verbatim_evidence_snippet": "Natural person(s) who, acting alone or together, hold more than **10%** of shares, capit",
+          "claim_sentence": "Based on the retrieved regulatory context, the answer to the compliance inquiry is:\n\n**Answer:** 10% [1]\n\n**Operative Compliance Obligations:**\n\n* For corporate companies, a natural person(s) who, acting alone or together, hold more than 10% of shares, capital, or profits is considered a Beneficial Owner [1].",
+          "audit_notes": "Verified: Citation maps to valid chunk containing direct supporting evidence."
+        }
+      ]
+    },
+    {
+      "test_id": "EVAL-08",
+      "query": "What are the Basel III Common Equity Tier 1 (CET1) capital adequacy ratios and countercyclical buffer requirements for regional rural banks?",
+      "category": "Out-of-Corpus Fallback & Refusal",
+      "is_answerable": false,
+      "is_refusal": true,
+      "generated_answer": "The provided regulatory context does not contain sufficient information to answer this question reliably.\n\n**Guardrail Diagnostic**: LOW_SIMILARITY_SCORE\n- **Top Similarity Score**: `0.4050` (Threshold Required: `0.5000`)\n- **Qualifying Chunks**: `0` (Minimum Required: `1`)\n- **Refusal Details**: The highest matching regulatory chunk achieved a similarity score of 0.4050, which is below the minimum required confidence threshold of 0.5000. To prevent hallucination, an answer cannot be generated.",
+      "correctness_score": 1.0,
+      "grounding_score": 1.0,
+      "citation_precision": 1.0,
+      "overall_score": 1.0,
+      "source_recall": 1.0,
+      "verdict": "PASS",
+      "matched_key_facts": [
+        "safe_refusal_triggered"
+      ],
+      "missing_key_facts": [],
+      "retrieved_chunk_ids": [],
+      "retrieved_sources": [],
+      "expected_sources": [],
+      "failure_category": null,
+      "failure_root_cause": null,
+      "remediation_advice": null,
+      "latency_seconds": 0.0608,
+      "citation_checks": []
+    }
+  ]
+}
