@@ -1,0 +1,106 @@
+# RegulSense Backend API Specification & Verification Report
+
+> **API Framework**: FastAPI with Pydantic v2 & Uvicorn  
+> **Generated**: 2026-09-15 06:11:51 UTC  
+> **API Version**: `v1.0.0` | **Environment**: `production`
+
+## 1. Overview & Architecture
+
+The RegulSense Backend API provides a RESTful interface enabling frontend web applications, compliance audit portals, and downstream banking microservices to query regulatory frameworks. The endpoint orchestrates vector retrieval, hallucination guardrails, and citation-provenance extraction, returning grounded compliance answers in structured JSON.
+
+### Key API Capabilities
+- **Structured JSON Output**: Every response contains `answer`, `sources` array with physical chunk IDs and similarity scores, `citations` list, and `metadata`.
+- **Robust Input Validation**: Validates character boundaries, empty/whitespace payloads, and parameters using Pydantic.
+- **Zero Hardcoding**: All endpoints, database paths, thresholds, and model names are loaded dynamically from environment variables.
+- **Standardized Error Envelopes**: Clean JSON error responses (`400`, `422`, `500`) without exposing internal server traces.
+
+---
+
+## 2. API Endpoints Reference
+
+| Method | Endpoint Path | Description | Status Codes |
+|:---|:---|:---|:---:|
+| `POST` | `/api/v1/query` | Primary RAG compliance inquiry endpoint | `200`, `400`, `422`, `500` |
+| `POST` | `/query` | Convenience root alias for RAG inquiry | `200`, `400`, `422`, `500` |
+| `GET` | `/api/v1/health` | System health, vector DB reachability, and active models | `200` |
+| `GET` | `/api/v1/config` | Redacted view of environment configurations | `200` |
+| `GET` | `/docs` | Interactive Swagger / OpenAPI documentation UI | `200` |
+
+---
+
+## 3. Sample Live Request & Response Demonstration
+
+### Request (`POST /api/v1/query`):
+```json
+{
+  "question": "What are the mandatory timeframe and reporting procedures for banks to notify CERT-In and RBI regarding Severity 1 cyber security incidents?",
+  "top_k": 3,
+  "include_metadata": true
+}
+```
+
+### Structured Response (`HTTP 200 OK`):
+```json
+{
+  "status": "success",
+  "answer": "Based on the retrieved regulatory context, the answer to the compliance inquiry is:\n\nAccording to the Master Direction on Cyber Resilience and Digital Payment Security Controls [1], banks must report any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial of service (DoS) affecting customer-facing channels to the RBI Cyber Security Cell (CSITE) and CERT-In within 6 hours of detection [1, Section 2].\n\nInitial reports must be followed by a comprehensive forensic analysis report within 7 business days [1, Section 2].\n\nNote: The provided regulatory context does not contain sufficient information to answer this question.",
+  "sources": [
+    {
+      "marker": "[1]",
+      "source_document": "cyber_resilience_framework.pdf",
+      "chunk_id": "cyber_resilience_framework_pdf_tokenaware_001",
+      "section": "Preamble / Document Header",
+      "page_number": 1,
+      "similarity_score": 0.6436,
+      "verbatim_text": "RESERVE BANK OF INDIA DEPARTMENT OF CYBER SECURITY AND INFORMATION TECHNOLOGY CENTRAL OFFICE, MUMBAI Circular No: RBI/2024-25/19 - DoS.CO.CSITE.No.03/11.01.005/2024-25 Date: March 12, 2024 Subject: Master Direction on Cyber Resilience and Digital Payment Security Controls 1. Mandatory Two-Factor Authentication (2FA) All regulated payment system operators and scheduled commercial banks must enforce dynamic two-factor authentication (2FA) for all domestic electronic fund transfers (NEFT, RTGS, IMPS, and UPI). At least one factor must be dynamic, such as a time-based one-time password (TOTP) or biometric verification. 2. Incident Reporting Timelines (6-Hour Rule) Any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial of service (DoS) affecting customer-facing channels must be reported to the RBI Cyber Security Cell (CSITE) and CERT-In within 6 hours of detection. Initial reports must be followed by a comprehensive forensic analysis report within 7 business days. 3. Security Operations Centre (SOC) Operations Banks must operate a 24x7x365 Security Operations Centre (SOC) equipped with continuous automated log monitoring, SIEM analytics, and automated threat hunting capabilities.\n\n4. API Security and Third-Party Risk Management\n(a) All open banking and fintech integrations must mandate"
+    },
+    {
+      "marker": "[2]",
+      "source_document": "circular_dor_2024_108.txt",
+      "chunk_id": "circular_dor_2024_108_txt_tokenaware_003",
+      "section": "3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs",
+      "page_number": 1,
+      "similarity_score": 0.5709,
+      "verbatim_text": "officer not below the rank of Deputy General Manager.\n(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.\n(c) Heightened Transaction Monitoring: High-risk accounts shall be subjected to quarterly reviews, compared against the standard biennial review for low-risk customers.\n\n4. Transaction Monitoring and Reporting Thresholds\nBanks shall deploy rule-based and behavioral automated transaction monitoring systems to identify suspicious transaction patterns:\n(a) Cash Transaction Reports (CTRs): All cash transactions of the value of more than rupees ten lakhs or its equivalent in foreign currency must be reported monthly to the Financial Intelligence Unit - India (FIU-IND) by the 15th day of the succeeding month.\n(b) Counterfeit Currency Reports (CCRs) and Non-Profit Organization Transaction Reports (NTRs): All cross-border non-profit transactions exceeding rupees ten lakhs must be logged and monitored.\n(c) Suspicious Transaction Reports (STRs): If any transaction gives rise to reasonable suspicion of illicit funds, evasion, or terrorism financing, an STR shall be furnished to FIU-IND within seven working days of arriving at such a conclusion.\n\n5. Record Retention Obligations\nUnder Rule 3 and Rule 10 of the PML Rules, 2005, all regulated entities shall maintain:\n(a) Transaction Records: Comprehensive records of all transactions, whether completed or attempted, domestic or international, for a minimum"
+    },
+    {
+      "marker": "[3]",
+      "source_document": "sample_regulatory_circular.txt",
+      "chunk_id": "sample_regulatory_circular_txt_tokenaware_003",
+      "section": "3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs",
+      "page_number": 1,
+      "similarity_score": 0.5709,
+      "verbatim_text": "officer not below the rank of Deputy General Manager.\n(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.\n(c) Heightened Transaction Monitoring: High-risk accounts shall be subjected to quarterly reviews, compared against the standard biennial review for low-risk customers.\n\n4. Transaction Monitoring and Reporting Thresholds\nBanks shall deploy rule-based and behavioral automated transaction monitoring systems to identify suspicious transaction patterns:\n(a) Cash Transaction Reports (CTRs): All cash transactions of the value of more than rupees ten lakhs or its equivalent in foreign currency must be reported monthly to the Financial Intelligence Unit - India (FIU-IND) by the 15th day of the succeeding month.\n(b) Counterfeit Currency Reports (CCRs) and Non-Profit Organization Transaction Reports (NTRs): All cross-border non-profit transactions exceeding rupees ten lakhs must be logged and monitored.\n(c) Suspicious Transaction Reports (STRs): If any transaction gives rise to reasonable suspicion of illicit funds, evasion, or terrorism financing, an STR shall be furnished to FIU-IND within seven working days of arriving at such a conclusion.\n\n5. Record Retention Obligations\nUnder Rule 3 and Rule 10 of the PML Rules, 2005, all regulated entities shall maintain:\n(a) Transaction Records: Comprehensive records of all transactions, whether completed or attempted, domestic or international, for a minimum"
+    }
+  ],
+  "citations": [
+    "[1]"
+  ],
+  "metadata": {
+    "latency_seconds": 103.6306,
+    "model": "llama3:latest",
+    "top_k": 3,
+    "is_refusal": false,
+    "action_taken": "ANSWER",
+    "guardrail_status": "SUFFICIENT_CONTEXT",
+    "top_similarity_score": 0.6436,
+    "total_sources_returned": 3,
+    "timestamp": "2026-09-15T06:11:51.213026+00:00",
+    "prompt_tokens": 1520,
+    "completion_tokens": 128
+  }
+}
+```
+
+---
+
+## 4. Input Validation & Error Handling Matrix
+
+| Scenario | Input Tested | Expected Status Code | Returned Error Code |
+|:---|:---|:---:|:---|
+| **Missing Question** | `{}` | `422 Unprocessable Entity` | `VALIDATION_ERROR` |
+| **Empty / Whitespace** | `{"question": "   "}` | `422 Unprocessable Entity` | `VALIDATION_ERROR` |
+| **Question Too Short** | `{"question": "hi"}` | `422 Unprocessable Entity` | `VALIDATION_ERROR` |
+| **Out-of-Bounds top_k** | `{"question": "...", "top_k": 50}` | `422 Unprocessable Entity` | `VALIDATION_ERROR` |
+| **Out-of-Corpus Query** | *"Basel III rural bank buffer"* | `200 OK (Safe Refusal)` | `refusal` (Zero Hallucination) |
+| **Downstream Error** | Disconnected DB or network fault | `500 Internal Server Error` | `INTERNAL_SERVER_ERROR` |

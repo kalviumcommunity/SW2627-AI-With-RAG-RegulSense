@@ -79,6 +79,9 @@ outputs/*
 !outputs/conversational_rag_results.json
 !outputs/rag_evaluation_report.md
 !outputs/rag_evaluation_results.json
+!outputs/api_sample_request.json
+!outputs/api_sample_response.json
+!outputs/api_demonstration_report.md
 
 
 # Python cache
