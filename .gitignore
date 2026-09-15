@@ -77,6 +77,8 @@ outputs/*
 !outputs/hallucination_guardrails_results.json
 !outputs/conversational_rag_results.md
 !outputs/conversational_rag_results.json
+!outputs/rag_evaluation_report.md
+!outputs/rag_evaluation_results.json
 
 
 # Python cache
