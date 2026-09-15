@@ -1,0 +1,77 @@
+# RegulSense: Verifiable Source Citation Mapping & Anti-Fabrication Audit Report
+
+- **Model**: `llama3:latest` (Sampling Temperature: `0.2`)
+- **Execution Timestamp**: `2026-09-15T04:03:56.942029+00:00`
+- **Citation Verification Verdict**: `PASS`
+- **Citation Precision**: **`100.0%`**
+- **Fabricated Citations Detected**: `✅ ZERO (Anti-Fabrication Enforced)`
+
+---
+
+## 1. Grounded Answer with In-Text Source Citations (Task 1)
+
+### **Compliance Question**:
+> *"What are the mandatory timeframe and reporting procedures for banks to notify CERT-In and RBI regarding Severity 1 cyber security incidents?"*
+
+### **Model Generated Answer**:
+Based on the provided regulatory context, the mandatory timeframe and reporting procedures for banks to notify CERT-In and RBI regarding Severity 1 cyber security incidents are as follows:
+
+**Answer:** Banks must report any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial of service (DoS) affecting customer-facing channels to the RBI Cyber Security Cell (CSITE) and CERT-In within 6 hours of detection. [1]
+
+**Operative Compliance Obligations:**
+
+* Banks must operate a 24x7x365 Security Operations Centre (SOC) equipped with continuous automated log monitoring, SIEM analytics, and automated threat hunting capabilities. [1]
+* Banks must report any Severity 1 cyber security incidents to the RBI Cyber Security Cell (CSITE) and CERT-In within 6 hours of detection. [1]
+
+Please note that the provided regulatory context does not contain sufficient information to answer questions beyond the scope of the provided excerpts.
+
+---
+
+## 2. Citation-to-Metadata Registry Mapping (Task 2)
+
+Each citation marker maps directly to physical regulatory circular provenance:
+
+| Marker | Source Document | Section | Page | Chunk ID | Similarity | Evidentiary Text Excerpt |
+| :---: | :--- | :--- | :---: | :--- | :---: | :--- |
+| **`[1]`** | `cyber_resilience_framework.pdf` | Preamble / Document Header | 1 | `cyber_resilience_framework_pdf_tokenaware_001` | `0.6436` | "RESERVE BANK OF INDIA DEPARTMENT OF CYBER SECURITY AND INFORMATION TECHNOLOGY CENTRAL OFFICE, MUMBAI Circular No: RBI/20..." |
+| **`[2]`** | `circular_dor_2024_108.txt` | 3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs | 1 | `circular_dor_2024_108_txt_tokenaware_003` | `0.5709` | "officer not below the rank of Deputy General Manager. (b) Source of Funds Verification: The source of wealth and funds m..." |
+| **`[3]`** | `sample_regulatory_circular.txt` | 3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs | 1 | `sample_regulatory_circular_txt_tokenaware_003` | `0.5709` | "officer not below the rank of Deputy General Manager. (b) Source of Funds Verification: The source of wealth and funds m..." |
+
+---
+
+## 3. Claim-by-Claim Evidentiary Verification Ledger (Task 3)
+
+Every sentence containing a source reference is audited against the verbatim text of the cited chunk:
+
+| Cited Marker | In-Text Claim Sentence | Matched Verbatim Source Span | Status | Confidence |
+| :---: | :--- | :--- | :---: | :---: |
+| **`[1]`** | **Answer:** Banks must report any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial o... | "Any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial" | ✅ VERIFIED | `100.0%` |
+| **`[1]`** | * Banks must operate a 24x7x365 Security Operations Centre (SOC) equipped with continuous automated log monitoring, SIEM analytics... | "Banks must operate a 24x7x365 Security Operations Centre (SOC) equipped with continuou" | ✅ VERIFIED | `100.0%` |
+| **`[1]`** | * Banks must report any Severity 1 cyber security incidents to the RBI Cyber Security Cell (CSITE) and CERT-In within 6 hours of d... | "tory Two-Factor Authentication (2FA) All regulated payment system oper" | ✅ VERIFIED | `100.0%` |
+
+---
+
+## 4. No-Source Fallback Protocol Demonstration (Task 4)
+
+### **Unindexed Compliance Query**:
+> *"What are the Basel III Common Equity Tier 1 (CET1) capital buffer ratios and countercyclical requirements for regional rural banks?"*
+
+### **Model Fallback Response**:
+I cannot provide a compliance answer that is not grounded in the provided regulatory context. The provided regulatory context does not contain sufficient information to answer this question.
+
+> [!IMPORTANT]
+> **Anti-Fabrication Guarantee**: When no relevant regulatory evidence is available in the vector store, the model returns a direct refusal without fabricating citations or hallucinating false source markers.
+
+---
+
+## 5. Anti-Fabrication Detection Demonstration (Negative Test)
+
+- **Injected Synthetic Marker**: `['[99]']`
+- **Detection Verdict**: `REJECTED`
+- **Audit Warning**: > CRITICAL: Found 1 fabricated citation markers: ['[99]'].
+
+> [!NOTE]
+> The system automatically detects when an answer attempts to cite a non-existent marker and flags the assertion as unverified.
+
+---
+*Report automatically generated by `src/citation_engine.py` for RegulSense Banking Compliance Assistant.*

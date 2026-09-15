@@ -1,5 +1,13 @@
 """RegulSense Package Initialization."""
 
+from src.citation_engine import (
+    CitationAuditReport,
+    CitationEngine,
+    CitationMetadataRecord,
+    CitedAnswerOutput,
+    ClaimVerificationDetail,
+    run_citation_evaluation_suite,
+)
 from src.context_assembler import (
     AugmentedPrompt,
     ContextAssembler,
@@ -40,6 +48,11 @@ __all__ = [
     "AssembledContext",
     "AugmentedPrompt",
     "BaselineGenerationOutput",
+    "CitationAuditReport",
+    "CitationEngine",
+    "CitationMetadataRecord",
+    "CitedAnswerOutput",
+    "ClaimVerificationDetail",
     "ContextAssembler",
     "GenerationResult",
     "GroundedGenerationOutput",
@@ -61,6 +74,7 @@ __all__ = [
     "embed_query_stage",
     "generate_answer_stage",
     "retrieve_chunks_stage",
+    "run_citation_evaluation_suite",
     "run_grounded_generation_suite",
     "run_sample_augmented_prompt",
     "run_sample_pipeline",
