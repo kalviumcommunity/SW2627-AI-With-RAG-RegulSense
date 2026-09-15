@@ -71,6 +71,8 @@ outputs/*
 !outputs/augmented_prompt_sample.json
 !outputs/grounded_generation_results.md
 !outputs/grounded_generation_results.json
+!outputs/citation_verification_results.md
+!outputs/citation_verification_results.json
 
 
 # Python cache

@@ -1,0 +1,173 @@
+{
+  "cited_output": {
+    "timestamp": "2026-09-15T04:03:56.942029+00:00",
+    "query": "What are the mandatory timeframe and reporting procedures for banks to notify CERT-In and RBI regarding Severity 1 cyber security incidents?",
+    "answer": "Based on the provided regulatory context, the mandatory timeframe and reporting procedures for banks to notify CERT-In and RBI regarding Severity 1 cyber security incidents are as follows:\n\n**Answer:** Banks must report any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial of service (DoS) affecting customer-facing channels to the RBI Cyber Security Cell (CSITE) and CERT-In within 6 hours of detection. [1]\n\n**Operative Compliance Obligations:**\n\n* Banks must operate a 24x7x365 Security Operations Centre (SOC) equipped with continuous automated log monitoring, SIEM analytics, and automated threat hunting capabilities. [1]\n* Banks must report any Severity 1 cyber security incidents to the RBI Cyber Security Cell (CSITE) and CERT-In within 6 hours of detection. [1]\n\nPlease note that the provided regulatory context does not contain sufficient information to answer questions beyond the scope of the provided excerpts.",
+    "is_fallback": false,
+    "has_fabricated_citations": false,
+    "citation_registry": {
+      "[1]": {
+        "marker_id": "[1]",
+        "index": 1,
+        "source_document": "cyber_resilience_framework.pdf",
+        "chunk_id": "cyber_resilience_framework_pdf_tokenaware_001",
+        "chunk_index": 0,
+        "section": "Preamble / Document Header",
+        "page_number": 1,
+        "similarity_score": 0.6436,
+        "verbatim_text": "RESERVE BANK OF INDIA DEPARTMENT OF CYBER SECURITY AND INFORMATION TECHNOLOGY CENTRAL OFFICE, MUMBAI Circular No: RBI/2024-25/19 - DoS.CO.CSITE.No.03/11.01.005/2024-25 Date: March 12, 2024 Subject: Master Direction on Cyber Resilience and Digital Payment Security Controls 1. Mandatory Two-Factor Authentication (2FA) All regulated payment system operators and scheduled commercial banks must enforce dynamic two-factor authentication (2FA) for all domestic electronic fund transfers (NEFT, RTGS, IMPS, and UPI). At least one factor must be dynamic, such as a time-based one-time password (TOTP) or biometric verification. 2. Incident Reporting Timelines (6-Hour Rule) Any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial of service (DoS) affecting customer-facing channels must be reported to the RBI Cyber Security Cell (CSITE) and CERT-In within 6 hours of detection. Initial reports must be followed by a comprehensive forensic analysis report within 7 business days. 3. Security Operations Centre (SOC) Operations Banks must operate a 24x7x365 Security Operations Centre (SOC) equipped with continuous automated log monitoring, SIEM analytics, and automated threat hunting capabilities."
+      },
+      "[2]": {
+        "marker_id": "[2]",
+        "index": 2,
+        "source_document": "circular_dor_2024_108.txt",
+        "chunk_id": "circular_dor_2024_108_txt_tokenaware_003",
+        "chunk_index": 2,
+        "section": "3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs",
+        "page_number": 1,
+        "similarity_score": 0.5709,
+        "verbatim_text": "officer not below the rank of Deputy General Manager.\n(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.\n(c) Heightened Transaction Monitoring: High-risk accounts shall be subjected to quarterly reviews, compared against the standard biennial review for low-risk customers.\n\n4. Transaction Monitoring and Reporting Thresholds\nBanks shall deploy rule-based and behavioral automated transaction monitoring systems to identify suspicious transaction patterns:\n(a) Cash Transaction Reports (CTRs): All cash transactions of the value of more than rupees ten lakhs or its equivalent in foreign currency must be reported monthly to the Financial Intelligence Unit - India (FIU-IND) by the 15th day of the succeeding month."
+      },
+      "[3]": {
+        "marker_id": "[3]",
+        "index": 3,
+        "source_document": "sample_regulatory_circular.txt",
+        "chunk_id": "sample_regulatory_circular_txt_tokenaware_003",
+        "chunk_index": 2,
+        "section": "3. Enhanced Due Diligence (EDD) for High-Risk Accounts and PEPs",
+        "page_number": 1,
+        "similarity_score": 0.5709,
+        "verbatim_text": "officer not below the rank of Deputy General Manager.\n(b) Source of Funds Verification: The source of wealth and funds must be explicitly documented with corroborating financial statements, tax returns, or audited balance sheets.\n(c) Heightened Transaction Monitoring: High-risk accounts shall be subjected to quarterly reviews, compared against the standard biennial review for low-risk customers."
+      }
+    },
+    "audit_report": {
+      "total_citations_found": 3,
+      "unique_markers_cited": [
+        "[1]"
+      ],
+      "verified_citations_count": 3,
+      "fabricated_citations_count": 0,
+      "unsupported_claims_count": 0,
+      "citation_precision": 1.0,
+      "fabricated_markers": [],
+      "overall_verdict": "PASS",
+      "audit_notes": "All 3 citations successfully verified against source chunk text with 100% evidentiary fidelity.",
+      "claim_verifications": [
+        {
+          "claim_sentence": "**Answer:** Banks must report any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial of service (DoS) affecting customer-facing channels to the RBI Cyber Security Cell (CSITE) and CERT-In within 6 hours of detection. [1]",
+          "cited_marker": "[1]",
+          "source_document": "cyber_resilience_framework.pdf",
+          "section": "Preamble / Document Header",
+          "chunk_id": "cyber_resilience_framework_pdf_tokenaware_001",
+          "is_verified": true,
+          "status": "VERIFIED",
+          "matched_verbatim_span": "Any cyber security incident, ransomware compromise, unauthorized system intrusion, or major denial",
+          "matched_keywords": [
+            "banks",
+            "any",
+            "cyber",
+            "security",
+            "incident",
+            "ransomware"
+          ],
+          "confidence_score": 1.0
+        },
+        {
+          "claim_sentence": "* Banks must operate a 24x7x365 Security Operations Centre (SOC) equipped with continuous automated log monitoring, SIEM analytics, and automated threat hunting capabilities. [1]",
+          "cited_marker": "[1]",
+          "source_document": "cyber_resilience_framework.pdf",
+          "section": "Preamble / Document Header",
+          "chunk_id": "cyber_resilience_framework_pdf_tokenaware_001",
+          "is_verified": true,
+          "status": "VERIFIED",
+          "matched_verbatim_span": "Banks must operate a 24x7x365 Security Operations Centre (SOC) equipped with continuou",
+          "matched_keywords": [
+            "banks",
+            "operate",
+            "24x7x365",
+            "security",
+            "operations",
+            "centre"
+          ],
+          "confidence_score": 1.0
+        },
+        {
+          "claim_sentence": "* Banks must report any Severity 1 cyber security incidents to the RBI Cyber Security Cell (CSITE) and CERT-In within 6 hours of detection. [1]",
+          "cited_marker": "[1]",
+          "source_document": "cyber_resilience_framework.pdf",
+          "section": "Preamble / Document Header",
+          "chunk_id": "cyber_resilience_framework_pdf_tokenaware_001",
+          "is_verified": true,
+          "status": "VERIFIED",
+          "matched_verbatim_span": "tory Two-Factor Authentication (2FA) All regulated payment system oper",
+          "matched_keywords": [
+            "banks",
+            "any",
+            "cyber",
+            "security",
+            "rbi",
+            "cyber"
+          ],
+          "confidence_score": 1.0
+        }
+      ]
+    },
+    "prompt_tokens": 2005,
+    "completion_tokens": 156,
+    "latency_seconds": 126.86,
+    "model": "llama3:latest"
+  },
+  "fallback_output": {
+    "timestamp": "2026-09-15T04:03:56.942057+00:00",
+    "query": "What are the Basel III Common Equity Tier 1 (CET1) capital buffer ratios and countercyclical requirements for regional rural banks?",
+    "answer": "I cannot provide a compliance answer that is not grounded in the provided regulatory context. The provided regulatory context does not contain sufficient information to answer this question.",
+    "is_fallback": true,
+    "has_fabricated_citations": false,
+    "citation_registry": {},
+    "audit_report": {
+      "total_citations_found": 0,
+      "unique_markers_cited": [],
+      "verified_citations_count": 0,
+      "fabricated_citations_count": 0,
+      "unsupported_claims_count": 0,
+      "citation_precision": 1.0,
+      "fabricated_markers": [],
+      "overall_verdict": "PASS",
+      "audit_notes": "Answer correctly invoked the missing-context fallback protocol without fabricating citations.",
+      "claim_verifications": []
+    },
+    "prompt_tokens": 1991,
+    "completion_tokens": 32,
+    "latency_seconds": 66.62,
+    "model": "llama3:latest"
+  },
+  "fabricated_test_audit": {
+    "total_citations_found": 1,
+    "unique_markers_cited": [
+      "[99]"
+    ],
+    "verified_citations_count": 0,
+    "fabricated_citations_count": 1,
+    "unsupported_claims_count": 1,
+    "citation_precision": 0.0,
+    "fabricated_markers": [
+      "[99]"
+    ],
+    "overall_verdict": "REJECTED",
+    "audit_notes": "CRITICAL: Found 1 fabricated citation markers: ['[99]'].",
+    "claim_verifications": [
+      {
+        "claim_sentence": "Under [99], regional rural banks must maintain 15% CET1 capital buffers.",
+        "cited_marker": "[99]",
+        "source_document": "[FABRICATED SOURCE]",
+        "section": "None",
+        "chunk_id": "None",
+        "is_verified": false,
+        "status": "FABRICATED_MARKER",
+        "matched_verbatim_span": null,
+        "matched_keywords": [],
+        "confidence_score": 0.0
+      }
+    ]
+  }
+}
