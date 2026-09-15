@@ -1,0 +1,26 @@
+{
+  "status": "success",
+  "filename": "circular_dor_2024_lcr_framework.txt",
+  "stored_path": "C:\\Users\\uppal\\OneDrive\\Desktop\\WI-sprint-2\\SW2627-AI-With-RAG-RegulSense\\data\\uploads\\circular_dor_2024_lcr_framework.txt",
+  "file_type": ".txt",
+  "file_size_bytes": 2456,
+  "raw_character_count": 2451,
+  "cleaned_character_count": 2451,
+  "chunks_created": 3,
+  "records_indexed": 3,
+  "collection_name": "regulsense_regulatory_chunks",
+  "total_collection_records": 18,
+  "chunk_ids": [
+    "circular_dor_2024_lcr_framework_txt_tokenaware_001",
+    "circular_dor_2024_lcr_framework_txt_tokenaware_002",
+    "circular_dor_2024_lcr_framework_txt_tokenaware_003"
+  ],
+  "searchable_immediately": true,
+  "metadata": {
+    "latency_seconds": 0.2808,
+    "embedding_model": "all-minilm",
+    "chunk_size": 300,
+    "chunk_overlap": 50,
+    "timestamp": "2026-09-15T08:15:03.473663+00:00"
+  }
+}

@@ -82,6 +82,10 @@ outputs/*
 !outputs/api_sample_request.json
 !outputs/api_sample_response.json
 !outputs/api_demonstration_report.md
+!outputs/upload_sample_request.json
+!outputs/upload_sample_response.json
+!outputs/upload_searchability_query_response.json
+!outputs/document_upload_report.md
 
 
 # Python cache
