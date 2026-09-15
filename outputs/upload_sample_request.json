@@ -1,0 +1,11 @@
+{
+  "endpoint": "POST /api/v1/upload",
+  "filename": "circular_dor_2024_lcr_framework.txt",
+  "content_type": "text/plain",
+  "file_size_bytes": 2456,
+  "parameters": {
+    "chunk_size": 300,
+    "chunk_overlap": 50
+  },
+  "description": "Upload of RBI Master Direction on Basel III Liquidity Coverage Ratio (LCR) standards."
+}
