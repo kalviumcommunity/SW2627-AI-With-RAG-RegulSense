@@ -402,12 +402,21 @@ st.markdown(
 # Helper to Render Retrieved Sources (Task 3)
 # ==============================================================================
 
-def render_sources_tray(sources: List[Dict[str, Any]]):
-    """Renders structured expander cards for each retrieved regulatory source chunk."""
+def render_sources_tray(sources: List[Dict[str, Any]], citations: Optional[List[str]] = None):
+    """Renders structured expander cards for each retrieved regulatory source chunk (Tasks 2 & 3)."""
     if not sources:
         return
 
-    with st.expander(f"📚 Inspect Retrieved Sources ({len(sources)} Chunks)", expanded=False):
+    # Task 2: Display citations clearly beside or below the answer
+    if citations:
+        pills_html = " ".join([f"<span class='citation-pill'>{c}</span>" for c in citations])
+        st.markdown(
+            f"<div style='margin-top: 6px; margin-bottom: 8px;'><strong>📌 Verified Citations:</strong> {pills_html}</div>",
+            unsafe_allow_html=True,
+        )
+
+    # Task 3: Let users view cited source content in an interactive expander
+    with st.expander(f"📚 Inspect Retrieved Sources & Citations ({len(sources)} Chunks)", expanded=False):
         for idx, src in enumerate(sources, start=1):
             marker = src.get("marker", f"[{idx}]")
             doc_name = src.get("source_document", "Unknown Circular")
@@ -421,13 +430,13 @@ def render_sources_tray(sources: List[Dict[str, Any]]):
                 f"""
                 <div class="source-card">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                        <span style="font-weight: 600; color: #38bdf8;">
+                        <span style="font-weight: 600; color: #0284c7;">
                             <span class="citation-pill">{marker}</span> {doc_name}
                         </span>
                         <span class="badge badge-info">Similarity: {score:.3f}</span>
                     </div>
                     <div class="source-meta">
-                        <span>🆔 <strong>Chunk:</strong> <code>{chunk_id}</code></span>
+                        <span>🆔 <strong>Chunk ID:</strong> <code>{chunk_id}</code></span>
                         <span>📑 <strong>Section:</strong> {section}</span>
                         <span>📄 <strong>Page:</strong> {page}</span>
                     </div>
@@ -474,7 +483,7 @@ for msg in st.session_state.messages:
 
         # Display retrieved sources alongside assistant answer (Task 3)
         if role == "assistant" and sources:
-            render_sources_tray(sources)
+            render_sources_tray(sources, citations=citations)
 
         # Diagnostic metadata pill
         if role == "assistant" and meta:
@@ -502,7 +511,7 @@ for msg in st.session_state.messages:
 
 
 # ==============================================================================
-# User Input & Query Execution (Tasks 1, 2, 4)
+# User Input & Query Execution (Tasks 1, 2, 3, 4)
 # ==============================================================================
 
 # Check for pending prompt from quick queries
@@ -532,89 +541,106 @@ if user_query:
         with st.chat_message("user", avatar="🧑‍💼"):
             st.markdown(cleaned_query)
 
-        # 2. Execute RAG query with animated loading state (Task 4)
+        # 2. Execute RAG query with progressive streaming (Tasks 1, 2, 3, 4)
         with st.chat_message("assistant", avatar="⚖️"):
-            status_container = st.status("🔍 Analyzing regulatory corpus & verifying ground truth...", expanded=True)
+            badge_placeholder = st.empty()
+            answer_placeholder = st.empty()
+            sources_placeholder = st.empty()
+            meta_placeholder = st.empty()
+
+            accumulated_text = ""
+            retrieved_sources: List[Dict[str, Any]] = []
+            final_citations: List[str] = []
+            final_metadata: Dict[str, Any] = {}
+            outcome_status = "success"
+            stream_error: Optional[str] = None
+
+            status_container = st.status("🔍 Analyzing regulatory corpus & streaming response...", expanded=True)
             with status_container:
-                st.write("1. Retrieving top candidate regulatory chunks from ChromaDB...")
-                time.sleep(0.1)
-                st.write("2. Evaluating hallucination guardrails and similarity thresholds...")
-                time.sleep(0.1)
-                st.write("3. Calling grounded generation model with verbatim citations...")
+                st.write("1. Retrieving candidate regulatory chunks from ChromaDB...")
+                st.write("2. Evaluating hallucination guardrails and relevance...")
+                st.write("3. Progressive token streaming active...")
 
-                # Call API (Task 2)
-                response: ClientResponse = client.submit_query(
-                    question=cleaned_query,
-                    top_k=st.session_state.top_k,
-                    include_metadata=True,
-                )
+            stream_gen = client.submit_query_stream(
+                question=cleaned_query,
+                top_k=st.session_state.top_k,
+                include_metadata=True,
+            )
 
-                if response.success:
-                    status_container.update(label="✅ Grounded answer generated!", state="complete", expanded=False)
-                elif response.is_refusal:
-                    status_container.update(label="🟠 Guardrail refusal triggered.", state="complete", expanded=False)
+            for event in stream_gen:
+                evt_type = event.get("type")
+
+                if evt_type == "sources":
+                    retrieved_sources = event.get("sources", [])
+                    # Render sources immediately while LLM streams! (Task 3)
+                    if retrieved_sources:
+                        with sources_placeholder.container():
+                            render_sources_tray(retrieved_sources)
+
+                elif evt_type == "token":
+                    token = event.get("token", "")
+                    accumulated_text += token
+                    answer_placeholder.markdown(accumulated_text + "▌")
+
+                elif evt_type == "done":
+                    outcome_status = event.get("status", "success")
+                    final_answer = event.get("answer") or accumulated_text
+                    final_citations = event.get("citations", [])
+                    final_metadata = event.get("metadata", {})
+                    accumulated_text = final_answer
+
+                elif evt_type == "error":
+                    stream_error = event.get("message") or event.get("error_code")
+                    err_code = event.get("error_code", "STREAM_ERROR")
+                    outcome_status = "error"
+
+            # Finalize Streamlit status indicator and badges (Tasks 1 & 4)
+            if outcome_status == "error":
+                status_container.update(label="🔴 Streaming interrupted or failed.", state="error", expanded=True)
+                badge_placeholder.markdown("<span class='badge badge-error'>🔴 Request Error</span>", unsafe_allow_html=True)
+                if not accumulated_text:
+                    answer_placeholder.error(f"**Streaming Error**: {stream_error or 'Stream was interrupted.'}")
                 else:
-                    status_container.update(label="🔴 Request failed.", state="error", expanded=True)
-
-            # Handle Response / Error States (Task 4)
-            if response.success:
-                resp_data = response.data
-                answer = resp_data.get("answer", "No answer returned.")
-                sources = resp_data.get("sources", [])
-                citations = resp_data.get("citations", [])
-                meta = resp_data.get("metadata", {})
-                outcome_status = resp_data.get("status", "success")
-
-                if outcome_status == "refusal":
-                    st.markdown("<span class='badge badge-refusal'>🟠 Safe Guardrail Refusal</span>", unsafe_allow_html=True)
-                else:
-                    st.markdown("<span class='badge badge-success'>🟢 Grounded Answer</span>", unsafe_allow_html=True)
-
-                st.markdown(answer)
-
-                # Render sources alongside answer (Task 3)
-                if sources:
-                    render_sources_tray(sources)
-
-                # Append assistant message to chat history
-                st.session_state.messages.append({
-                    "role": "assistant",
-                    "content": answer,
-                    "status": outcome_status,
-                    "sources": sources,
-                    "citations": citations,
-                    "metadata": meta,
-                    "timestamp": datetime.now(timezone.utc).strftime("%H:%M:%S UTC"),
-                })
-
+                    answer_placeholder.markdown(accumulated_text)
+                    st.error(f"⚠️ **Stream Interrupted**: {stream_error}")
+            elif outcome_status == "refusal":
+                status_container.update(label="🟠 Guardrail refusal triggered.", state="complete", expanded=False)
+                badge_placeholder.markdown("<span class='badge badge-refusal'>🟠 Safe Guardrail Refusal</span>", unsafe_allow_html=True)
+                answer_placeholder.markdown(accumulated_text)
             else:
-                # Error State (Task 4)
-                err_code = response.error_code or "QUERY_ERROR"
-                err_msg = response.error_message or "An error occurred while contacting the RAG backend."
+                status_container.update(label="✅ Answer streamed successfully!", state="complete", expanded=False)
+                badge_placeholder.markdown("<span class='badge badge-success'>🟢 Grounded Answer (Streamed)</span>", unsafe_allow_html=True)
+                answer_placeholder.markdown(accumulated_text)
 
-                st.markdown("<span class='badge badge-error'>🔴 Request Error</span>", unsafe_allow_html=True)
-                if err_code == "BACKEND_OFFLINE":
-                    st.error(
-                        f"**Backend Service Unreachable**\n\n"
-                        f"{err_msg}\n\n"
-                        f"*Tip:* You can start the backend service in your terminal:\n"
-                        f"```powershell\n"
-                        f"uvicorn src.api:app --host 0.0.0.0 --port 8000\n"
-                        f"```\n"
-                        f"Or enable **Direct Pipeline Fallback** in the sidebar."
-                    )
-                else:
-                    st.error(f"**Error `{err_code}`**: {err_msg}")
+            # Re-render sources and verified citations tray (Tasks 2 & 3)
+            if retrieved_sources:
+                with sources_placeholder.container():
+                    render_sources_tray(retrieved_sources, citations=final_citations)
 
-                st.session_state.messages.append({
-                    "role": "assistant",
-                    "content": f"⚠️ **Error ({err_code})**: {err_msg}",
-                    "status": "error",
-                    "sources": [],
-                    "citations": [],
-                    "metadata": {"error_code": err_code, "latency_seconds": response.latency_seconds},
-                    "timestamp": datetime.now(timezone.utc).strftime("%H:%M:%S UTC"),
-                })
+            # Diagnostic metadata
+            if final_metadata:
+                lat = final_metadata.get("latency_seconds")
+                top_score = final_metadata.get("top_similarity_score")
+                model_name = final_metadata.get("model", "llama3:latest")
+                meta_parts = []
+                if lat is not None:
+                    meta_parts.append(f"⏱️ {lat}s")
+                if model_name:
+                    meta_parts.append(f"🧠 {model_name} (Streamed)")
+                if top_score is not None:
+                    meta_parts.append(f"🎯 Score: {top_score:.3f}")
+                meta_placeholder.markdown(f"<div class='meta-pill'>{' • '.join(meta_parts)}</div>", unsafe_allow_html=True)
+
+            # Append assistant message to chat history
+            st.session_state.messages.append({
+                "role": "assistant",
+                "content": accumulated_text if not stream_error else f"{accumulated_text}\n\n⚠️ **Error**: {stream_error}",
+                "status": outcome_status,
+                "sources": retrieved_sources,
+                "citations": final_citations,
+                "metadata": final_metadata,
+                "timestamp": datetime.now(timezone.utc).strftime("%H:%M:%S UTC"),
+            })
 
         st.rerun()
 

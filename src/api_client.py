@@ -285,6 +285,173 @@ class RegulSenseAPIClient:
                 latency_seconds=round(time.time() - start_time, 4),
             )
 
+    def submit_query_stream(
+        self,
+        question: str,
+        top_k: int = 3,
+        include_metadata: bool = True,
+        timeout: Optional[float] = None,
+        use_direct: bool = False,
+    ):
+        """Streams a compliance inquiry via Server-Sent Events (SSE) or in-process generator.
+
+        Yields dictionaries with 'type':
+        - {"type": "sources", "sources": [...]}
+        - {"type": "token", "token": "..."}
+        - {"type": "done", "status": "success"|"refusal", "answer": str, "citations": [...], "metadata": {...}}
+        - {"type": "error", "error_code": "...", "message": "..."}
+        """
+        eff_timeout = timeout or self.default_timeout
+
+        cleaned_q = question.strip() if question else ""
+        if not cleaned_q:
+            yield {
+                "type": "error",
+                "error_code": "EMPTY_QUESTION",
+                "message": "Question cannot be empty or whitespace only.",
+            }
+            return
+        if len(cleaned_q) < 3:
+            yield {
+                "type": "error",
+                "error_code": "QUESTION_TOO_SHORT",
+                "message": "Question must be at least 3 characters long.",
+            }
+            return
+
+        payload = {
+            "question": cleaned_q,
+            "top_k": top_k,
+            "include_metadata": include_metadata,
+        }
+
+        if use_direct:
+            try:
+                from src.api import app
+                stream_gen = app.state.guardrail.execute_stream(query=cleaned_q, top_k=top_k)
+
+                for item in stream_gen:
+                    event_type = item[0]
+                    if event_type == "sources":
+                        _, registry_serialized, candidate_chunks = item
+                        sources_list: List[Dict[str, Any]] = []
+                        if registry_serialized:
+                            for marker, meta in registry_serialized.items():
+                                sources_list.append({
+                                    "marker": marker,
+                                    "source_document": meta.get("source_document", "Unknown"),
+                                    "chunk_id": meta.get("chunk_id", "None"),
+                                    "section": meta.get("section", ""),
+                                    "page_number": meta.get("page_number", 1),
+                                    "similarity_score": meta.get("similarity_score", 0.0),
+                                    "verbatim_text": meta.get("verbatim_text", ""),
+                                })
+                        elif candidate_chunks:
+                            for idx, c in enumerate(candidate_chunks, start=1):
+                                doc = getattr(c, "metadata", {}).get("source_document", "Unknown") if hasattr(c, "metadata") else "Unknown"
+                                cid = getattr(c, "id", None) or getattr(c, "chunk_id", f"chunk_{idx}")
+                                sec = getattr(c, "metadata", {}).get("section", "") if hasattr(c, "metadata") else ""
+                                txt = getattr(c, "document", "") or getattr(c, "verbatim_text", "")
+                                score = float(getattr(c, "similarity_score", 0.0))
+                                sources_list.append({
+                                    "marker": f"[{idx}]",
+                                    "source_document": doc,
+                                    "chunk_id": cid,
+                                    "section": sec,
+                                    "page_number": 1,
+                                    "similarity_score": score,
+                                    "verbatim_text": txt,
+                                })
+                        yield {"type": "sources", "sources": sources_list}
+                    elif event_type == "token":
+                        _, delta = item
+                        yield {"type": "token", "token": delta}
+                    elif event_type == "done":
+                        _, guard_res = item
+                        yield {
+                            "type": "done",
+                            "status": "refusal" if guard_res.is_refusal else "success",
+                            "answer": guard_res.answer,
+                            "citations": guard_res.citations,
+                            "is_refusal": guard_res.is_refusal,
+                            "metadata": {
+                                "latency_seconds": guard_res.latency_seconds,
+                                "model": guard_res.model,
+                                "top_k": top_k,
+                                "guardrail_status": guard_res.quality_assessment.status if guard_res.quality_assessment else "UNKNOWN",
+                                "top_similarity_score": round(guard_res.quality_assessment.top_score, 4) if guard_res.quality_assessment else 0.0,
+                            },
+                        }
+            except Exception as exc:
+                logger.error("Direct streaming error: %s", exc, exc_info=True)
+                yield {
+                    "type": "error",
+                    "error_code": "DIRECT_STREAM_ERROR",
+                    "message": str(exc),
+                }
+            return
+
+        url = f"{self.base_url}/api/v1/query/stream"
+        try:
+            resp = requests.post(url, json=payload, stream=True, timeout=eff_timeout)
+            if resp.status_code != 200:
+                try:
+                    err_data = resp.json()
+                    err_code = err_data.get("error_code", f"HTTP_{resp.status_code}")
+                    err_msg = err_data.get("message", f"Streaming request failed with HTTP {resp.status_code}")
+                except Exception:
+                    err_code = f"HTTP_{resp.status_code}"
+                    err_msg = f"Streaming request failed with status {resp.status_code}: {resp.text[:200]}"
+                yield {"type": "error", "error_code": err_code, "message": err_msg}
+                return
+
+            for line in resp.iter_lines(decode_unicode=True):
+                if not line:
+                    continue
+                if line.startswith("data:"):
+                    json_str = line[5:].strip()
+                    if not json_str:
+                        continue
+                    try:
+                        parsed = json.loads(json_str)
+                        evt = parsed.get("event")
+                        evt_data = parsed.get("data", {})
+                        if evt == "sources":
+                            yield {"type": "sources", "sources": evt_data.get("sources", [])}
+                        elif evt == "token":
+                            yield {"type": "token", "token": evt_data.get("token", "")}
+                        elif evt == "done":
+                            yield {"type": "done", **evt_data}
+                        elif evt == "error":
+                            yield {"type": "error", **evt_data}
+                    except json.JSONDecodeError:
+                        continue
+
+        except (requests.exceptions.ConnectionError, requests.exceptions.Timeout) as exc:
+            if self.enable_direct_fallback:
+                logger.info("Backend HTTP unreachable for stream, falling back to direct mode.")
+                yield from self.submit_query_stream(
+                    question=question,
+                    top_k=top_k,
+                    include_metadata=include_metadata,
+                    timeout=timeout,
+                    use_direct=True,
+                )
+                return
+
+            yield {
+                "type": "error",
+                "error_code": "BACKEND_OFFLINE",
+                "message": f"Backend service unreachable at {self.base_url}. Start backend with 'uvicorn src.api:app --port 8000'.",
+            }
+        except Exception as exc:
+            logger.error("Client error during streaming query: %s", exc, exc_info=True)
+            yield {
+                "type": "error",
+                "error_code": "STREAM_CLIENT_ERROR",
+                "message": str(exc),
+            }
+
     def upload_document(
         self,
         file_bytes: bytes,

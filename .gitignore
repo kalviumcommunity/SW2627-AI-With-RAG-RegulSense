@@ -90,6 +90,11 @@ outputs/*
 !outputs/chat_interface_error_case.json
 !outputs/chat_interface_demonstration.md
 !outputs/chat_interface_screenshot.png
+!outputs/streaming_sample_interaction.json
+!outputs/streaming_error_case.json
+!outputs/streaming_citation_demonstration.md
+!outputs/streaming_chat_screenshot.png
+
 
 
 # Python cache

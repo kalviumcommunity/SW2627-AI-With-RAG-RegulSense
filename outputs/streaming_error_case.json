@@ -1,0 +1,51 @@
+{
+  "scenario": "RegulSense Streaming - Guardrail Refusals and Fault-Tolerant Error Handling",
+  "timestamp": "2026-09-16T03:45:29.771229+00:00",
+  "cases": [
+    {
+      "case_type": "STREAMED_GUARDRAIL_REFUSAL",
+      "description": "Hallucination guardrail identifies low relevance or out-of-corpus query and streams safe refusal.",
+      "query": "What are the reserve capital requirements for Martian colony commercial banks?",
+      "status": "refusal",
+      "is_refusal": true,
+      "answer": "The provided regulatory context does not contain sufficient information to answer this question reliably.\n\n**Guardrail Diagnostic**: LOW_SIMILARITY_SCORE\n- **Top Similarity Score**: `0.3949` (Threshold Required: `0.5000`)\n- **Qualifying Chunks**: `0` (Minimum Required: `1`)\n- **Refusal Details**: The highest matching regulatory chunk achieved a similarity score of 0.3949, which is below the minimum required confidence threshold of 0.5000. To prevent hallucination, an answer cannot be generated.",
+      "tokens_streamed": 60
+    },
+    {
+      "case_type": "INPUT_VALIDATION_TOO_SHORT",
+      "description": "Client validates query length before dispatching stream request.",
+      "query": "hi",
+      "events": [
+        {
+          "type": "error",
+          "error_code": "QUESTION_TOO_SHORT",
+          "message": "Question must be at least 3 characters long."
+        }
+      ]
+    },
+    {
+      "case_type": "INPUT_VALIDATION_EMPTY",
+      "description": "Client validates non-empty query before dispatching stream request.",
+      "query": "",
+      "events": [
+        {
+          "type": "error",
+          "error_code": "EMPTY_QUESTION",
+          "message": "Question cannot be empty or whitespace only."
+        }
+      ]
+    },
+    {
+      "case_type": "BACKEND_OFFLINE_STREAMING_RECOVERY",
+      "description": "Client catches connection failure or timeout and emits structured BACKEND_OFFLINE error.",
+      "query": "Is the service reachable?",
+      "events": [
+        {
+          "type": "error",
+          "error_code": "BACKEND_OFFLINE",
+          "message": "Backend service unreachable at http://127.0.0.1:59999. Start backend with 'uvicorn src.api:app --port 8000'."
+        }
+      ]
+    }
+  ]
+}

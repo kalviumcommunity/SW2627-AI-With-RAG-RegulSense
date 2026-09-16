@@ -33,7 +33,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, StreamingResponse
 from openai import OpenAI
 from pydantic import BaseModel, Field, field_validator
 
@@ -695,6 +695,123 @@ def create_app(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail="An unexpected internal error occurred while processing the compliance query.",
             )
+
+    @app.post("/query/stream", tags=["RAG"])
+    @app.post("/api/v1/query/stream", tags=["RAG"])
+    async def query_rag_stream(payload: QueryRequest):
+        """Processes a compliance inquiry and streams answer tokens via Server-Sent Events (SSE)."""
+        question = payload.question.strip()
+        top_k = payload.top_k or app_cfg.default_top_k
+
+        if not question:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Question cannot be empty or whitespace only.",
+            )
+
+        logger.info("Received streaming query request (k=%d): '%s'...", top_k, question[:60])
+
+        async def sse_generator():
+            try:
+                stream_gen = app.state.guardrail.execute_stream(
+                    query=question,
+                    top_k=top_k,
+                )
+
+                for item in stream_gen:
+                    event_type = item[0]
+
+                    if event_type == "sources":
+                        _, registry_serialized, candidate_chunks = item
+                        sources_list: List[Dict[str, Any]] = []
+
+                        if registry_serialized:
+                            for marker, meta in registry_serialized.items():
+                                sources_list.append({
+                                    "marker": marker,
+                                    "source_document": meta.get("source_document", "Unknown"),
+                                    "chunk_id": meta.get("chunk_id", "None"),
+                                    "section": meta.get("section", ""),
+                                    "page_number": meta.get("page_number", 1),
+                                    "similarity_score": meta.get("similarity_score", 0.0),
+                                    "verbatim_text": meta.get("verbatim_text", ""),
+                                })
+                        elif candidate_chunks:
+                            for idx, c in enumerate(candidate_chunks, start=1):
+                                doc = getattr(c, "metadata", {}).get("source_document", "Unknown") if hasattr(c, "metadata") else "Unknown"
+                                cid = getattr(c, "id", None) or getattr(c, "chunk_id", f"chunk_{idx}")
+                                sec = getattr(c, "metadata", {}).get("section", "") if hasattr(c, "metadata") else ""
+                                txt = getattr(c, "document", "") or getattr(c, "verbatim_text", "")
+                                score = float(getattr(c, "similarity_score", 0.0))
+                                sources_list.append({
+                                    "marker": f"[{idx}]",
+                                    "source_document": doc,
+                                    "chunk_id": cid,
+                                    "section": sec,
+                                    "page_number": 1,
+                                    "similarity_score": score,
+                                    "verbatim_text": txt,
+                                })
+
+                        evt_payload = {
+                            "event": "sources",
+                            "data": {
+                                "sources": sources_list,
+                                "total_sources": len(sources_list),
+                            }
+                        }
+                        yield f"data: {json.dumps(evt_payload)}\n\n"
+
+                    elif event_type == "token":
+                        _, delta = item
+                        evt_payload = {
+                            "event": "token",
+                            "data": {
+                                "token": delta,
+                            }
+                        }
+                        yield f"data: {json.dumps(evt_payload)}\n\n"
+
+                    elif event_type == "done":
+                        _, guard_res = item
+                        evt_payload = {
+                            "event": "done",
+                            "data": {
+                                "status": "refusal" if guard_res.is_refusal else "success",
+                                "answer": guard_res.answer,
+                                "citations": guard_res.citations,
+                                "is_refusal": guard_res.is_refusal,
+                                "metadata": {
+                                    "latency_seconds": guard_res.latency_seconds,
+                                    "model": guard_res.model,
+                                    "top_k": top_k,
+                                    "guardrail_status": guard_res.quality_assessment.status if guard_res.quality_assessment else "UNKNOWN",
+                                    "top_similarity_score": round(guard_res.quality_assessment.top_score, 4) if guard_res.quality_assessment else 0.0,
+                                }
+                            }
+                        }
+                        yield f"data: {json.dumps(evt_payload)}\n\n"
+
+            except Exception as exc:
+                logger.error("Error during streaming response: %s", exc, exc_info=True)
+                err_payload = {
+                    "event": "error",
+                    "data": {
+                        "error_code": "STREAMING_ERROR",
+                        "message": str(exc),
+                    }
+                }
+                yield f"data: {json.dumps(err_payload)}\n\n"
+
+        return StreamingResponse(
+            sse_generator(),
+            media_type="text/event-stream",
+            headers={
+                "Cache-Control": "no-cache",
+                "Connection": "keep-alive",
+                "X-Accel-Buffering": "no",
+            },
+        )
 
     @app.post("/upload", response_model=UploadResponse, tags=["Ingestion"])
     @app.post("/api/v1/upload", response_model=UploadResponse, tags=["Ingestion"])
