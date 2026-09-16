@@ -55,6 +55,8 @@ from src.document_loader import (
 from src.hallucination_guardrails import GuardrailExecutionResult, HallucinationGuardrail
 from src.retriever import VectorRetriever
 from src.text_cleaner import TextCleaner
+from src.audit_logger import AuditLogger, AuditLogRecord
+from src.query_cache import CachedQueryEntry, QueryCache
 from src.vector_db import VectorDatabaseManager, VectorRecord
 
 load_dotenv()
@@ -443,6 +445,8 @@ def create_app(
     config: Optional[AppConfig] = None,
     guardrail: Optional[HallucinationGuardrail] = None,
     vector_db_manager: Optional[VectorDatabaseManager] = None,
+    query_cache: Optional[QueryCache] = None,
+    audit_logger: Optional[AuditLogger] = None,
 ) -> FastAPI:
     """Builds and configures the FastAPI application instance."""
     app_cfg = config or AppConfig()
@@ -473,6 +477,12 @@ def create_app(
         api_key=app_cfg.openai_api_key,
     )
     app.state.openai_client = openai_client
+
+    # Initialize Query Cache & Structured Audit Logger (Tasks 1-4)
+    app.state.query_cache = query_cache or QueryCache(max_size=500, default_ttl_seconds=3600.0)
+    app.state.audit_logger = audit_logger or AuditLogger(
+        log_file_path=PROJECT_ROOT / "outputs" / "sample_query_audit.log",
+    )
 
     # Initialize Vector DB & Guardrail
     if vector_db_manager:
@@ -601,7 +611,7 @@ def create_app(
     @app.post("/query", response_model=QueryResponse, tags=["RAG"])
     @app.post("/api/v1/query", response_model=QueryResponse, tags=["RAG"])
     async def query_rag(payload: QueryRequest):
-        """Processes a regulatory compliance question through the RAG pipeline (Tasks 1 & 2)."""
+        """Processes a regulatory compliance question through the RAG pipeline with caching (Tasks 1 & 2)."""
         start_time = time.time()
         question = payload.question.strip()
         top_k = payload.top_k or app_cfg.default_top_k
@@ -615,6 +625,58 @@ def create_app(
 
         logger.info("Received query request (k=%d): '%s'...", top_k, question[:60])
 
+        # Step 1: Check Query Cache (Task 1)
+        cached_entry = app.state.query_cache.get(
+            query=question,
+            top_k=top_k,
+            model=app_cfg.chat_model,
+        )
+
+        if cached_entry:
+            elapsed = time.time() - start_time
+            logger.info("Serving query from cache (key='%s', saved=$%.5f, latency=%.4fs)", cached_entry.cache_key, cached_entry.estimated_cost_usd, elapsed)
+
+            # Log cache hit (Tasks 2 & 3)
+            app.state.audit_logger.log_request(
+                question=question,
+                answer=cached_entry.answer,
+                sources=cached_entry.sources,
+                citations=cached_entry.citations,
+                cache_hit=True,
+                status=cached_entry.status,
+                latency_seconds=elapsed,
+                prompt_tokens=cached_entry.prompt_tokens,
+                completion_tokens=cached_entry.completion_tokens,
+                top_k=top_k,
+                model=app_cfg.chat_model,
+            )
+
+            sources = [SourceItem(**s) for s in cached_entry.sources]
+            metadata: Dict[str, Any] = {}
+            if payload.include_metadata:
+                metadata = {
+                    "latency_seconds": round(elapsed, 4),
+                    "model": app_cfg.chat_model,
+                    "top_k": top_k,
+                    "is_refusal": cached_entry.is_refusal,
+                    "cache_hit": True,
+                    "total_sources_returned": len(sources),
+                    "prompt_tokens": cached_entry.prompt_tokens,
+                    "completion_tokens": cached_entry.completion_tokens,
+                    "total_tokens": cached_entry.total_tokens,
+                    "estimated_cost_usd": 0.0,
+                    "cost_saved_usd": cached_entry.estimated_cost_usd,
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                }
+
+            return QueryResponse(
+                status=cached_entry.status,
+                answer=cached_entry.answer,
+                sources=sources,
+                citations=cached_entry.citations,
+                metadata=metadata,
+            )
+
         try:
             # Execute RAG through HallucinationGuardrail
             guard_res: GuardrailExecutionResult = app.state.guardrail.execute(
@@ -626,19 +688,20 @@ def create_app(
 
             # Format source items
             sources: List[SourceItem] = []
+            sources_dict_list: List[Dict[str, Any]] = []
             if guard_res.cited_output and guard_res.cited_output.citation_registry:
                 for marker, meta in guard_res.cited_output.citation_registry.items():
-                    sources.append(
-                        SourceItem(
-                            marker=marker,
-                            source_document=meta.get("source_document", "Unknown"),
-                            chunk_id=meta.get("chunk_id", "None"),
-                            section=meta.get("section", ""),
-                            page_number=meta.get("page_number", 1),
-                            similarity_score=meta.get("similarity_score", 0.0),
-                            verbatim_text=meta.get("verbatim_text", ""),
-                        )
-                    )
+                    s_dict = {
+                        "marker": marker,
+                        "source_document": meta.get("source_document", "Unknown"),
+                        "chunk_id": meta.get("chunk_id", "None"),
+                        "section": meta.get("section", ""),
+                        "page_number": meta.get("page_number", 1),
+                        "similarity_score": meta.get("similarity_score", 0.0),
+                        "verbatim_text": meta.get("verbatim_text", ""),
+                    }
+                    sources.append(SourceItem(**s_dict))
+                    sources_dict_list.append(s_dict)
             elif guard_res.quality_assessment and guard_res.quality_assessment.qualifying_chunks:
                 for idx, c in enumerate(guard_res.quality_assessment.qualifying_chunks, start=1):
                     doc = getattr(c, "metadata", {}).get("source_document", "Unknown") if hasattr(c, "metadata") else "Unknown"
@@ -646,20 +709,56 @@ def create_app(
                     sec = getattr(c, "metadata", {}).get("section", "") if hasattr(c, "metadata") else ""
                     txt = getattr(c, "document", "") or getattr(c, "verbatim_text", "")
                     score = float(getattr(c, "similarity_score", 0.0))
-                    sources.append(
-                        SourceItem(
-                            marker=f"[{idx}]",
-                            source_document=doc,
-                            chunk_id=cid,
-                            section=sec,
-                            page_number=1,
-                            similarity_score=score,
-                            verbatim_text=txt,
-                        )
-                    )
+                    s_dict = {
+                        "marker": f"[{idx}]",
+                        "source_document": doc,
+                        "chunk_id": cid,
+                        "section": sec,
+                        "page_number": 1,
+                        "similarity_score": score,
+                        "verbatim_text": txt,
+                    }
+                    sources.append(SourceItem(**s_dict))
+                    sources_dict_list.append(s_dict)
 
             # Determine response status
             resp_status = "refusal" if guard_res.is_refusal else "success"
+
+            # Token & Cost tracking (Task 3)
+            p_tokens = guard_res.cited_output.prompt_tokens if guard_res.cited_output else app.state.audit_logger.count_tokens(question)
+            c_tokens = guard_res.cited_output.completion_tokens if guard_res.cited_output else app.state.audit_logger.count_tokens(guard_res.answer)
+            cost_usd = app.state.audit_logger.calculate_cost(p_tokens, c_tokens)
+
+            # Store in query cache (Task 1)
+            app.state.query_cache.put(
+                query=question,
+                top_k=top_k,
+                answer=guard_res.answer,
+                citations=guard_res.citations,
+                sources=sources_dict_list,
+                status=resp_status,
+                is_refusal=guard_res.is_refusal,
+                prompt_tokens=p_tokens,
+                completion_tokens=c_tokens,
+                estimated_cost_usd=cost_usd,
+                original_latency_seconds=elapsed,
+                model=app_cfg.chat_model,
+            )
+
+            # Log request to structured audit log (Task 2)
+            app.state.audit_logger.log_request(
+                question=question,
+                answer=guard_res.answer,
+                sources=sources_dict_list,
+                citations=guard_res.citations,
+                cache_hit=False,
+                status=resp_status,
+                latency_seconds=elapsed,
+                prompt_tokens=p_tokens,
+                completion_tokens=c_tokens,
+                top_k=top_k,
+                model=app_cfg.chat_model,
+            )
 
             # Metadata dictionary
             metadata: Dict[str, Any] = {}
@@ -668,18 +767,21 @@ def create_app(
                     "latency_seconds": round(elapsed, 4),
                     "model": guard_res.model,
                     "top_k": top_k,
+                    "cache_hit": False,
                     "is_refusal": guard_res.is_refusal,
                     "action_taken": guard_res.action,
                     "guardrail_status": guard_res.quality_assessment.status if guard_res.quality_assessment else "UNKNOWN",
                     "top_similarity_score": round(guard_res.quality_assessment.top_score, 4) if guard_res.quality_assessment else 0.0,
                     "total_sources_returned": len(sources),
+                    "prompt_tokens": p_tokens,
+                    "completion_tokens": c_tokens,
+                    "total_tokens": p_tokens + c_tokens,
+                    "estimated_cost_usd": cost_usd,
+                    "cost_saved_usd": 0.0,
                     "timestamp": datetime.now(timezone.utc).isoformat(),
                 }
-                if guard_res.cited_output:
-                    metadata["prompt_tokens"] = guard_res.cited_output.prompt_tokens
-                    metadata["completion_tokens"] = guard_res.cited_output.completion_tokens
 
-            logger.info("Completed query request in %.2fs (status: %s, sources: %d)", elapsed, resp_status, len(sources))
+            logger.info("Completed query request in %.2fs (status: %s, sources: %d, cache_hit: False)", elapsed, resp_status, len(sources))
 
             return QueryResponse(
                 status=resp_status,
@@ -690,7 +792,20 @@ def create_app(
             )
 
         except Exception as exc:
+            elapsed = time.time() - start_time
             logger.error("Failed to process RAG query: %s", exc, exc_info=True)
+            app.state.audit_logger.log_request(
+                question=question,
+                answer="",
+                sources=[],
+                citations=[],
+                cache_hit=False,
+                status="error",
+                error=str(exc),
+                latency_seconds=elapsed,
+                top_k=top_k,
+                model=app_cfg.chat_model,
+            )
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail="An unexpected internal error occurred while processing the compliance query.",
@@ -699,7 +814,8 @@ def create_app(
     @app.post("/query/stream", tags=["RAG"])
     @app.post("/api/v1/query/stream", tags=["RAG"])
     async def query_rag_stream(payload: QueryRequest):
-        """Processes a compliance inquiry and streams answer tokens via Server-Sent Events (SSE)."""
+        """Processes a compliance inquiry and streams answer tokens via Server-Sent Events (SSE) with caching."""
+        start_time = time.time()
         question = payload.question.strip()
         top_k = payload.top_k or app_cfg.default_top_k
 
@@ -711,7 +827,84 @@ def create_app(
 
         logger.info("Received streaming query request (k=%d): '%s'...", top_k, question[:60])
 
+        # Step 1: Check Query Cache for Streaming (Task 1 & 2)
+        cached_entry = app.state.query_cache.get(
+            query=question,
+            top_k=top_k,
+            model=app_cfg.chat_model,
+        )
+
+        if cached_entry:
+            logger.info("Streaming query served from cache (key='%s')", cached_entry.cache_key)
+
+            async def cached_sse_generator():
+                # Yield sources immediately
+                evt_sources = {
+                    "event": "sources",
+                    "data": {
+                        "sources": cached_entry.sources,
+                        "total_sources": len(cached_entry.sources),
+                    }
+                }
+                yield f"data: {json.dumps(evt_sources)}\n\n"
+
+                # Yield cached answer tokens progressively
+                words = cached_entry.answer.split(" ")
+                for idx, word in enumerate(words):
+                    prefix = "" if idx == 0 else " "
+                    evt_tok = {"event": "token", "data": {"token": prefix + word}}
+                    yield f"data: {json.dumps(evt_tok)}\n\n"
+
+                elapsed = time.time() - start_time
+                app.state.audit_logger.log_request(
+                    question=question,
+                    answer=cached_entry.answer,
+                    sources=cached_entry.sources,
+                    citations=cached_entry.citations,
+                    cache_hit=True,
+                    status=cached_entry.status,
+                    latency_seconds=elapsed,
+                    prompt_tokens=cached_entry.prompt_tokens,
+                    completion_tokens=cached_entry.completion_tokens,
+                    top_k=top_k,
+                    model=app_cfg.chat_model,
+                )
+
+                evt_done = {
+                    "event": "done",
+                    "data": {
+                        "status": cached_entry.status,
+                        "answer": cached_entry.answer,
+                        "citations": cached_entry.citations,
+                        "is_refusal": cached_entry.is_refusal,
+                        "metadata": {
+                            "latency_seconds": round(elapsed, 4),
+                            "model": app_cfg.chat_model,
+                            "top_k": top_k,
+                            "cache_hit": True,
+                            "prompt_tokens": cached_entry.prompt_tokens,
+                            "completion_tokens": cached_entry.completion_tokens,
+                            "total_tokens": cached_entry.total_tokens,
+                            "estimated_cost_usd": 0.0,
+                            "cost_saved_usd": cached_entry.estimated_cost_usd,
+                        }
+                    }
+                }
+                yield f"data: {json.dumps(evt_done)}\n\n"
+
+            return StreamingResponse(
+                cached_sse_generator(),
+                media_type="text/event-stream",
+                headers={
+                    "Cache-Control": "no-cache",
+                    "Connection": "keep-alive",
+                    "X-Accel-Buffering": "no",
+                },
+            )
+
         async def sse_generator():
+            sources_list: List[Dict[str, Any]] = []
+            accumulated_tokens: List[str] = []
             try:
                 stream_gen = app.state.guardrail.execute_stream(
                     query=question,
@@ -723,7 +916,7 @@ def create_app(
 
                     if event_type == "sources":
                         _, registry_serialized, candidate_chunks = item
-                        sources_list: List[Dict[str, Any]] = []
+                        sources_list = []
 
                         if registry_serialized:
                             for marker, meta in registry_serialized.items():
@@ -764,6 +957,7 @@ def create_app(
 
                     elif event_type == "token":
                         _, delta = item
+                        accumulated_tokens.append(delta)
                         evt_payload = {
                             "event": "token",
                             "data": {
@@ -774,6 +968,44 @@ def create_app(
 
                     elif event_type == "done":
                         _, guard_res = item
+                        elapsed = time.time() - start_time
+
+                        # Token & Cost tracking (Task 3)
+                        p_tok = app.state.audit_logger.count_tokens(question)
+                        c_tok = app.state.audit_logger.count_tokens(guard_res.answer)
+                        cost_usd = app.state.audit_logger.calculate_cost(p_tok, c_tok)
+
+                        # Store in cache (Task 1)
+                        app.state.query_cache.put(
+                            query=question,
+                            top_k=top_k,
+                            answer=guard_res.answer,
+                            citations=guard_res.citations,
+                            sources=sources_list,
+                            status="refusal" if guard_res.is_refusal else "success",
+                            is_refusal=guard_res.is_refusal,
+                            prompt_tokens=p_tok,
+                            completion_tokens=c_tok,
+                            estimated_cost_usd=cost_usd,
+                            original_latency_seconds=elapsed,
+                            model=app_cfg.chat_model,
+                        )
+
+                        # Log request to audit logger (Task 2)
+                        app.state.audit_logger.log_request(
+                            question=question,
+                            answer=guard_res.answer,
+                            sources=sources_list,
+                            citations=guard_res.citations,
+                            cache_hit=False,
+                            status="refusal" if guard_res.is_refusal else "success",
+                            latency_seconds=elapsed,
+                            prompt_tokens=p_tok,
+                            completion_tokens=c_tok,
+                            top_k=top_k,
+                            model=app_cfg.chat_model,
+                        )
+
                         evt_payload = {
                             "event": "done",
                             "data": {
@@ -782,9 +1014,15 @@ def create_app(
                                 "citations": guard_res.citations,
                                 "is_refusal": guard_res.is_refusal,
                                 "metadata": {
-                                    "latency_seconds": guard_res.latency_seconds,
+                                    "latency_seconds": round(elapsed, 4),
                                     "model": guard_res.model,
                                     "top_k": top_k,
+                                    "cache_hit": False,
+                                    "prompt_tokens": p_tok,
+                                    "completion_tokens": c_tok,
+                                    "total_tokens": p_tok + c_tok,
+                                    "estimated_cost_usd": cost_usd,
+                                    "cost_saved_usd": 0.0,
                                     "guardrail_status": guard_res.quality_assessment.status if guard_res.quality_assessment else "UNKNOWN",
                                     "top_similarity_score": round(guard_res.quality_assessment.top_score, 4) if guard_res.quality_assessment else 0.0,
                                 }
@@ -793,7 +1031,20 @@ def create_app(
                         yield f"data: {json.dumps(evt_payload)}\n\n"
 
             except Exception as exc:
+                elapsed = time.time() - start_time
                 logger.error("Error during streaming response: %s", exc, exc_info=True)
+                app.state.audit_logger.log_request(
+                    question=question,
+                    answer="".join(accumulated_tokens),
+                    sources=sources_list,
+                    citations=[],
+                    cache_hit=False,
+                    status="error",
+                    error=str(exc),
+                    latency_seconds=elapsed,
+                    top_k=top_k,
+                    model=app_cfg.chat_model,
+                )
                 err_payload = {
                     "event": "error",
                     "data": {
@@ -812,6 +1063,29 @@ def create_app(
                 "X-Accel-Buffering": "no",
             },
         )
+
+    # -------------------------------------------------------------------------
+    # Usage & Caching Analytics Endpoints (Tasks 1 & 4)
+    # -------------------------------------------------------------------------
+
+    @app.get("/api/v1/analytics/usage", tags=["Analytics"])
+    @app.get("/analytics/usage", tags=["Analytics"])
+    async def get_usage_analytics():
+        """Returns aggregated usage statistics, cache efficiency, and cost metrics (Task 4)."""
+        return app.state.audit_logger.summarize_usage()
+
+    @app.get("/api/v1/analytics/cache", tags=["Analytics"])
+    @app.get("/analytics/cache", tags=["Analytics"])
+    async def get_cache_analytics():
+        """Returns in-memory query cache statistics and capacity (Task 1)."""
+        return app.state.query_cache.get_stats()
+
+    @app.post("/api/v1/analytics/cache/clear", tags=["Analytics"])
+    @app.post("/analytics/cache/clear", tags=["Analytics"])
+    async def clear_query_cache():
+        """Clears all cached query entries and resets hit/miss counters."""
+        app.state.query_cache.clear()
+        return {"status": "success", "message": "Query cache cleared successfully."}
 
     @app.post("/upload", response_model=UploadResponse, tags=["Ingestion"])
     @app.post("/api/v1/upload", response_model=UploadResponse, tags=["Ingestion"])

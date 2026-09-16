@@ -542,3 +542,170 @@ class RegulSenseAPIClient:
                 error_message=str(exc),
                 latency_seconds=round(time.time() - start_time, 4),
             )
+
+    def get_usage_summary(self, timeout: Optional[float] = None, use_direct: bool = False) -> ClientResponse:
+        """Retrieves aggregated usage metrics, cache hit rate, token counts, and cost economics (Task 4)."""
+        start_time = time.time()
+        eff_timeout = timeout or self.default_timeout
+
+        if use_direct:
+            client = self._get_direct_client()
+            if client:
+                try:
+                    resp = client.get("/api/v1/analytics/usage")
+                    elapsed = time.time() - start_time
+                    return ClientResponse(
+                        success=resp.status_code == 200,
+                        status_code=resp.status_code,
+                        data=resp.json(),
+                        latency_seconds=round(elapsed, 4),
+                    )
+                except Exception as exc:
+                    return ClientResponse(
+                        success=False,
+                        status_code=500,
+                        error_code="DIRECT_ANALYTICS_ERROR",
+                        error_message=str(exc),
+                        latency_seconds=round(time.time() - start_time, 4),
+                    )
+
+        url = f"{self.base_url}/api/v1/analytics/usage"
+        try:
+            resp = requests.get(url, timeout=eff_timeout)
+            elapsed = time.time() - start_time
+            return ClientResponse(
+                success=resp.status_code == 200,
+                status_code=resp.status_code,
+                data=resp.json() if resp.status_code == 200 else {},
+                error_code=resp.json().get("error_code") if resp.status_code != 200 else None,
+                error_message=resp.json().get("message") if resp.status_code != 200 else None,
+                latency_seconds=round(elapsed, 4),
+            )
+        except (requests.exceptions.ConnectionError, requests.exceptions.Timeout):
+            if self.enable_direct_fallback:
+                return self.get_usage_summary(timeout=timeout, use_direct=True)
+            return ClientResponse(
+                success=False,
+                status_code=503,
+                error_code="BACKEND_OFFLINE",
+                error_message=f"Backend service unreachable at {self.base_url}.",
+                latency_seconds=round(time.time() - start_time, 4),
+            )
+        except Exception as exc:
+            return ClientResponse(
+                success=False,
+                status_code=500,
+                error_code="CLIENT_ERROR",
+                error_message=str(exc),
+                latency_seconds=round(time.time() - start_time, 4),
+            )
+
+    def get_cache_stats(self, timeout: Optional[float] = None, use_direct: bool = False) -> ClientResponse:
+        """Retrieves in-memory query cache statistics and capacity (Task 1)."""
+        start_time = time.time()
+        eff_timeout = timeout or self.default_timeout
+
+        if use_direct:
+            client = self._get_direct_client()
+            if client:
+                try:
+                    resp = client.get("/api/v1/analytics/cache")
+                    elapsed = time.time() - start_time
+                    return ClientResponse(
+                        success=resp.status_code == 200,
+                        status_code=resp.status_code,
+                        data=resp.json(),
+                        latency_seconds=round(elapsed, 4),
+                    )
+                except Exception as exc:
+                    return ClientResponse(
+                        success=False,
+                        status_code=500,
+                        error_code="DIRECT_CACHE_ERROR",
+                        error_message=str(exc),
+                        latency_seconds=round(time.time() - start_time, 4),
+                    )
+
+        url = f"{self.base_url}/api/v1/analytics/cache"
+        try:
+            resp = requests.get(url, timeout=eff_timeout)
+            elapsed = time.time() - start_time
+            return ClientResponse(
+                success=resp.status_code == 200,
+                status_code=resp.status_code,
+                data=resp.json() if resp.status_code == 200 else {},
+                latency_seconds=round(elapsed, 4),
+            )
+        except (requests.exceptions.ConnectionError, requests.exceptions.Timeout):
+            if self.enable_direct_fallback:
+                return self.get_cache_stats(timeout=timeout, use_direct=True)
+            return ClientResponse(
+                success=False,
+                status_code=503,
+                error_code="BACKEND_OFFLINE",
+                error_message=f"Backend service unreachable at {self.base_url}.",
+                latency_seconds=round(time.time() - start_time, 4),
+            )
+        except Exception as exc:
+            return ClientResponse(
+                success=False,
+                status_code=500,
+                error_code="CLIENT_ERROR",
+                error_message=str(exc),
+                latency_seconds=round(time.time() - start_time, 4),
+            )
+
+    def clear_cache(self, timeout: Optional[float] = None, use_direct: bool = False) -> ClientResponse:
+        """Clears all cached query entries on the backend (Task 1)."""
+        start_time = time.time()
+        eff_timeout = timeout or self.default_timeout
+
+        if use_direct:
+            client = self._get_direct_client()
+            if client:
+                try:
+                    resp = client.post("/api/v1/analytics/cache/clear")
+                    elapsed = time.time() - start_time
+                    return ClientResponse(
+                        success=resp.status_code == 200,
+                        status_code=resp.status_code,
+                        data=resp.json(),
+                        latency_seconds=round(elapsed, 4),
+                    )
+                except Exception as exc:
+                    return ClientResponse(
+                        success=False,
+                        status_code=500,
+                        error_code="DIRECT_CLEAR_ERROR",
+                        error_message=str(exc),
+                        latency_seconds=round(time.time() - start_time, 4),
+                    )
+
+        url = f"{self.base_url}/api/v1/analytics/cache/clear"
+        try:
+            resp = requests.post(url, timeout=eff_timeout)
+            elapsed = time.time() - start_time
+            return ClientResponse(
+                success=resp.status_code == 200,
+                status_code=resp.status_code,
+                data=resp.json() if resp.status_code == 200 else {},
+                latency_seconds=round(elapsed, 4),
+            )
+        except (requests.exceptions.ConnectionError, requests.exceptions.Timeout):
+            if self.enable_direct_fallback:
+                return self.clear_cache(timeout=timeout, use_direct=True)
+            return ClientResponse(
+                success=False,
+                status_code=503,
+                error_code="BACKEND_OFFLINE",
+                error_message=f"Backend service unreachable at {self.base_url}.",
+                latency_seconds=round(time.time() - start_time, 4),
+            )
+        except Exception as exc:
+            return ClientResponse(
+                success=False,
+                status_code=500,
+                error_code="CLIENT_ERROR",
+                error_message=str(exc),
+                latency_seconds=round(time.time() - start_time, 4),
+            )

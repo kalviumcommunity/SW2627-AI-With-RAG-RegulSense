@@ -1,0 +1,54 @@
+{
+  "export_metadata": {
+    "title": "RegulSense Query Caching, Structured Logging & Usage Analytics Summary",
+    "timestamp": "2026-09-16T04:07:34.972321+00:00",
+    "environment": "production-simulation",
+    "tokenizer": "tiktoken (cl100k_base)"
+  },
+  "usage_metrics": {
+    "summary_timestamp": "2026-09-16T04:07:34.966889+00:00",
+    "total_requests": 7,
+    "cache_hits": 4,
+    "cache_misses": 3,
+    "cache_hit_rate_pct": 57.14,
+    "total_prompt_tokens": 4470,
+    "total_completion_tokens": 558,
+    "total_tokens": 5028,
+    "total_estimated_cost_usd": 0.000549,
+    "total_cost_saved_usd": 0.000791,
+    "average_latency_seconds": 0.39,
+    "average_cache_hit_latency_seconds": 0.0005,
+    "average_cache_miss_latency_seconds": 0.9094,
+    "latency_reduction_pct": 99.95,
+    "status_breakdown": {
+      "success": 5,
+      "refusal": 2,
+      "error": 0
+    },
+    "hourly_timeline": {
+      "2026-09-16T04:00:00Z": {
+        "requests": 7,
+        "hits": 4,
+        "tokens": 5028,
+        "cost_usd": 0.000549,
+        "saved_usd": 0.000791
+      }
+    },
+    "pricing_reference": {
+      "input_per_million_usd": 0.2,
+      "output_per_million_usd": 0.8
+    }
+  },
+  "cache_metrics": {
+    "current_size": 3,
+    "max_size": 100,
+    "total_requests": 7,
+    "hits": 4,
+    "misses": 3,
+    "hit_rate_pct": 57.14,
+    "evictions": 0,
+    "expirations": 0,
+    "total_cost_saved_usd": 0.000791,
+    "default_ttl_seconds": 3600.0
+  }
+}
