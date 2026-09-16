@@ -231,7 +231,7 @@ class CitationEngine:
         for idx, chunk in enumerate(chunks, start=1):
             marker_id = f"[{idx}]"
 
-            if hasattr(chunk, "marker") and hasattr(chunk.marker, "marker_id"):  # InjectedChunk
+            if hasattr(chunk, "marker") and hasattr(chunk.marker, "marker_id") and isinstance(chunk.marker.marker_id, str):  # InjectedChunk
                 m = chunk.marker
                 rec = CitationMetadataRecord(
                     marker_id=m.marker_id,
@@ -244,7 +244,7 @@ class CitationEngine:
                     similarity_score=m.similarity_score,
                     verbatim_text=chunk.raw_text,
                 )
-            elif hasattr(chunk, "chunk_id"):  # RetrievedContextChunk
+            elif hasattr(chunk, "chunk_id") and isinstance(chunk.chunk_id, str):  # RetrievedContextChunk
                 rec = CitationMetadataRecord(
                     marker_id=marker_id,
                     index=idx,
@@ -253,8 +253,8 @@ class CitationEngine:
                     chunk_index=getattr(chunk, "chunk_index", idx - 1),
                     section=getattr(chunk, "section", "General Provisions"),
                     page_number=getattr(chunk, "page_number", 1),
-                    similarity_score=getattr(chunk, "similarity_score", 0.0),
-                    verbatim_text=getattr(chunk, "text", ""),
+                    similarity_score=float(getattr(chunk, "similarity_score", 0.0)),
+                    verbatim_text=getattr(chunk, "text", getattr(chunk, "document", "")),
                 )
             elif hasattr(chunk, "id"):  # RetrievedRecord
                 meta = chunk.metadata or {}
@@ -715,6 +715,125 @@ class CitationEngine:
             latency_seconds=elapsed,
             model=self.model,
         )
+
+    def stream_cited_answer(
+        self,
+        query: str,
+        chunks: Optional[List[Any]] = None,
+        top_k: int = 3,
+        min_score: float = 0.40,
+    ):
+        """Streams cited answer tokens progressively while yielding sources and metadata (Tasks 1-4).
+
+        Yields:
+            ("sources", registry_dict, candidate_chunks)
+            ("token", delta_str)
+            ("done", CitedAnswerOutput)
+        """
+        start_time = time.time()
+        logger.info("Streaming cited answer generation for query: '%s'...", query[:60])
+
+        # Step 1: Retrieve candidate chunks if not provided
+        if chunks is None:
+            ret_result = self.retriever.retrieve(query_text=query, top_k=top_k)
+            candidate_chunks = [c for c in ret_result.chunks if c.similarity_score >= min_score]
+        else:
+            candidate_chunks = chunks
+
+        # Step 2: Build citation-to-metadata registry
+        registry = self.build_citation_registry(candidate_chunks)
+        registry_serialized = {k: v.to_dict() for k, v in registry.items()}
+
+        # Yield sources immediately so the caller can inspect sources before LLM generation finishes
+        yield ("sources", registry_serialized, candidate_chunks)
+
+        # Step 3: Handle empty context / no-source fallback
+        if not candidate_chunks:
+            logger.info("No chunks met relevance threshold. Triggering streaming fallback.")
+            augmented_prompt = self.assembler.assemble(
+                query=query,
+                chunks=[],
+            )
+            stream_resp = self.client.chat.completions.create(
+                model=self.model,
+                messages=augmented_prompt.messages,
+                temperature=self.temperature,
+                max_tokens=250,
+                stream=True,
+            )
+            accumulated: List[str] = []
+            for stream_chunk in stream_resp:
+                if stream_chunk.choices and stream_chunk.choices[0].delta and stream_chunk.choices[0].delta.content:
+                    delta = stream_chunk.choices[0].delta.content
+                    accumulated.append(delta)
+                    yield ("token", delta)
+
+            full_answer = "".join(accumulated).strip()
+            elapsed = time.time() - start_time
+            audit = self.verify_citations(answer=full_answer, registry={})
+            output = CitedAnswerOutput(
+                query=query,
+                answer=full_answer,
+                citation_registry={},
+                audit_report=audit,
+                is_fallback=True,
+                has_fabricated_citations=False,
+                prompt_tokens=0,
+                completion_tokens=len(accumulated),
+                latency_seconds=elapsed,
+                model=self.model,
+            )
+            yield ("done", output)
+            return
+
+        # Step 4: Assemble grounded prompt with source markers
+        augmented_prompt = self.assembler.assemble(
+            query=query,
+            chunks=candidate_chunks,
+        )
+
+        # Step 5: Invoke model with stream=True
+        stream_resp = self.client.chat.completions.create(
+            model=self.model,
+            messages=augmented_prompt.messages,
+            temperature=self.temperature,
+            max_tokens=450,
+            stream=True,
+        )
+        accumulated = []
+        for stream_chunk in stream_resp:
+            if stream_chunk.choices and stream_chunk.choices[0].delta and stream_chunk.choices[0].delta.content:
+                delta = stream_chunk.choices[0].delta.content
+                accumulated.append(delta)
+                yield ("token", delta)
+
+        full_answer = "".join(accumulated).strip()
+        elapsed = time.time() - start_time
+
+        # Step 6: Audit citations and verify against chunks
+        audit = self.verify_citations(answer=full_answer, registry=registry)
+        has_fabricated = len(audit.fabricated_markers) > 0
+        is_refusal = (
+            "not contain sufficient information" in full_answer.lower()
+            or "insufficient information" in full_answer.lower()
+            or "insufficient context" in full_answer.lower()
+            or "no information" in full_answer.lower()
+        )
+        is_fallback = (not candidate_chunks) or (is_refusal and len(audit.unique_markers_cited) == 0)
+
+        output = CitedAnswerOutput(
+            query=query,
+            answer=full_answer,
+            citation_registry=registry_serialized,
+            audit_report=audit,
+            is_fallback=is_fallback,
+            has_fabricated_citations=has_fabricated,
+            prompt_tokens=0,
+            completion_tokens=len(accumulated),
+            latency_seconds=elapsed,
+            model=self.model,
+        )
+        yield ("done", output)
 
 
 # ==============================================================================

@@ -423,6 +423,101 @@ class HallucinationGuardrail:
             model=self.model,
         )
 
+    def execute_stream(
+        self,
+        query: str,
+        chunks: Optional[List[Any]] = None,
+        top_k: int = 3,
+    ):
+        """Streams cited answer or safe refusal progressively (Tasks 1-4).
+
+        Yields:
+            ("sources", registry_dict, candidate_chunks)
+            ("token", token_delta)
+            ("done", GuardrailExecutionResult)
+        """
+        start_time = time.time()
+        logger.info("Streaming Hallucination Guardrail execution for query: '%s'...", query[:60])
+
+        # Step 1: Retrieve candidate chunks if not provided
+        if chunks is None:
+            ret_result = self.retriever.retrieve(query_text=query, top_k=top_k)
+            retrieved_chunks = ret_result.chunks
+        else:
+            retrieved_chunks = chunks
+
+        # Step 2: Evaluate retrieval quality against guardrail checks
+        assessment = self.evaluate_retrieval_quality(query=query, chunks=retrieved_chunks)
+
+        # Step 3: Trigger Safe Refusal if context is weak
+        if not assessment.is_sufficient:
+            refusal_text = self.build_safe_refusal(query=query, assessment=assessment)
+            logger.warning(
+                "Guardrail Triggered STREAMING REFUSAL (%s, top_score=%.4f, count=%d)",
+                assessment.status,
+                assessment.top_score,
+                assessment.qualifying_chunk_count,
+            )
+            # Yield empty sources immediately
+            yield ("sources", {}, [])
+
+            # Yield refusal text progressively in word chunks
+            words = refusal_text.split(" ")
+            for idx, word in enumerate(words):
+                prefix = "" if idx == 0 else " "
+                yield ("token", prefix + word)
+
+            result = GuardrailExecutionResult(
+                query=query,
+                action="REFUSE",
+                answer=refusal_text,
+                quality_assessment=assessment,
+                is_refusal=True,
+                citations=[],
+                cited_output=None,
+                latency_seconds=round(time.time() - start_time, 4),
+                model=self.model,
+            )
+            yield ("done", result)
+            return
+
+        # Step 4: Context is strong -> stream cited answer
+        logger.info(
+            "Guardrail PASSED (%s, top_score=%.4f, qualifying=%d). Streaming grounded answer...",
+            assessment.status,
+            assessment.top_score,
+            assessment.qualifying_chunk_count,
+        )
+
+        stream_gen = self.citation_engine.stream_cited_answer(
+            query=query,
+            chunks=assessment.qualifying_chunks,
+        )
+
+        for item in stream_gen:
+            event_type = item[0]
+            if event_type == "sources":
+                _, registry_serialized, candidate_chunks = item
+                yield ("sources", registry_serialized, candidate_chunks)
+            elif event_type == "token":
+                _, delta = item
+                yield ("token", delta)
+            elif event_type == "done":
+                _, cited_output = item
+                markers_cited = cited_output.audit_report.unique_markers_cited
+                result = GuardrailExecutionResult(
+                    query=query,
+                    action="ANSWER",
+                    answer=cited_output.answer,
+                    quality_assessment=assessment,
+                    is_refusal=False,
+                    citations=markers_cited,
+                    cited_output=cited_output,
+                    latency_seconds=round(time.time() - start_time, 4),
+                    model=self.model,
+                )
+                yield ("done", result)
+
 
 # ==============================================================================
 # Reporting & Artifact Serialization (Task 5)
