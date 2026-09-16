@@ -97,6 +97,8 @@ outputs/*
 !outputs/sample_query_audit.log
 !outputs/usage_summary_report.json
 !outputs/usage_summary_report.md
+!outputs/full_flow_demonstration_report.md
+!outputs/full_flow_trace.json
 
 
 
