@@ -94,6 +94,9 @@ outputs/*
 !outputs/streaming_error_case.json
 !outputs/streaming_citation_demonstration.md
 !outputs/streaming_chat_screenshot.png
+!outputs/sample_query_audit.log
+!outputs/usage_summary_report.json
+!outputs/usage_summary_report.md
 
 
 

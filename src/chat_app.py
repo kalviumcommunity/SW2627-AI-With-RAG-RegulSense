@@ -145,6 +145,13 @@ CUSTOM_CSS = """
         border: 1px solid rgba(56, 189, 248, 0.4);
     }
 
+    /* Cache hit badge */
+    .badge-cache {
+        background-color: #fef08a;
+        color: #854d0e;
+        border: 1px solid #facc15;
+    }
+
     /* Diagnostics pill */
     .meta-pill {
         font-size: 11.5px;
@@ -373,6 +380,32 @@ with st.sidebar:
 
     st.divider()
 
+    # Real-time Usage & Cache Metrics (Tasks 1 & 4)
+    st.markdown("#### 📊 Usage & Cache Analytics")
+    with st.expander("Usage & Cost Telemetry", expanded=False):
+        usage_res = client.get_usage_summary()
+        if usage_res.success and usage_res.data:
+            u = usage_res.data
+            st.metric("Total Requests", u.get("total_requests", 0))
+            col_m1, col_m2 = st.columns(2)
+            with col_m1:
+                st.metric("Cache Hit Rate", f"{u.get('cache_hit_rate_pct', 0.0):.1f}%")
+            with col_m2:
+                st.metric("Cost Saved", f"${u.get('total_cost_saved_usd', 0.0):.5f}")
+            st.caption(f"**Tokens Consumed:** {u.get('total_tokens', 0):,} | **Avg Latency:** {u.get('average_latency_seconds', 0.0):.3f}s")
+            st.caption(f"**Total Expenditure:** ${u.get('total_estimated_cost_usd', 0.0):.5f}")
+        else:
+            st.caption("No usage telemetry recorded yet.")
+
+        if st.button("🧹 Purge Query Cache", use_container_width=True):
+            clear_res = client.clear_cache()
+            if clear_res.success:
+                st.success("Query cache purged!")
+                time.sleep(0.5)
+                st.rerun()
+
+    st.divider()
+
     if st.button("🗑️ Clear Chat History", use_container_width=True):
         st.session_state.messages = []
         init_session_state()
@@ -462,21 +495,18 @@ for msg in st.session_state.messages:
     with st.chat_message(role, avatar="🧑‍💼" if role == "user" else "⚖️"):
         # Assistant status badges
         if role == "assistant" and msg_status != "system":
+            badges = []
             if msg_status == "refusal":
-                st.markdown(
-                    "<span class='badge badge-refusal'>🟠 Safe Guardrail Refusal</span>",
-                    unsafe_allow_html=True,
-                )
+                badges.append("<span class='badge badge-refusal'>🟠 Safe Guardrail Refusal</span>")
             elif msg_status == "error":
-                st.markdown(
-                    "<span class='badge badge-error'>🔴 System Error</span>",
-                    unsafe_allow_html=True,
-                )
+                badges.append("<span class='badge badge-error'>🔴 System Error</span>")
             else:
-                st.markdown(
-                    "<span class='badge badge-success'>🟢 Grounded Answer</span>",
-                    unsafe_allow_html=True,
-                )
+                badges.append("<span class='badge badge-success'>🟢 Grounded Answer</span>")
+
+            if meta.get("cache_hit"):
+                badges.append("<span class='badge badge-cache'>⚡ Cache Hit</span>")
+
+            st.markdown(" ".join(badges), unsafe_allow_html=True)
 
         # Message Body
         st.markdown(content)
@@ -492,16 +522,25 @@ for msg in st.session_state.messages:
             model_name = meta.get("model", "llama3:latest")
             p_tok = meta.get("prompt_tokens")
             c_tok = meta.get("completion_tokens")
+            is_hit = meta.get("cache_hit")
+            cost_usd = meta.get("estimated_cost_usd")
+            saved_usd = meta.get("cost_saved_usd")
 
             meta_parts = []
             if lat is not None:
                 meta_parts.append(f"⏱️ {lat}s")
             if model_name:
                 meta_parts.append(f"🧠 {model_name}")
+            if is_hit is not None:
+                meta_parts.append(f"⚡ {'Cache HIT' if is_hit else 'Cache MISS'}")
             if top_score is not None:
                 meta_parts.append(f"🎯 Score: {top_score:.3f}")
             if p_tok and c_tok:
                 meta_parts.append(f"📊 Tokens: {p_tok}+{c_tok}")
+            if saved_usd:
+                meta_parts.append(f"💰 Saved: ${saved_usd:.5f}")
+            elif cost_usd:
+                meta_parts.append(f"💰 Cost: ${cost_usd:.5f}")
 
             if meta_parts:
                 st.markdown(
@@ -595,6 +634,7 @@ if user_query:
                     outcome_status = "error"
 
             # Finalize Streamlit status indicator and badges (Tasks 1 & 4)
+            is_cached = final_metadata.get("cache_hit", False)
             if outcome_status == "error":
                 status_container.update(label="🔴 Streaming interrupted or failed.", state="error", expanded=True)
                 badge_placeholder.markdown("<span class='badge badge-error'>🔴 Request Error</span>", unsafe_allow_html=True)
@@ -605,11 +645,18 @@ if user_query:
                     st.error(f"⚠️ **Stream Interrupted**: {stream_error}")
             elif outcome_status == "refusal":
                 status_container.update(label="🟠 Guardrail refusal triggered.", state="complete", expanded=False)
-                badge_placeholder.markdown("<span class='badge badge-refusal'>🟠 Safe Guardrail Refusal</span>", unsafe_allow_html=True)
+                b_html = "<span class='badge badge-refusal'>🟠 Safe Guardrail Refusal</span>"
+                if is_cached:
+                    b_html += " <span class='badge badge-cache'>⚡ Cache Hit</span>"
+                badge_placeholder.markdown(b_html, unsafe_allow_html=True)
                 answer_placeholder.markdown(accumulated_text)
             else:
-                status_container.update(label="✅ Answer streamed successfully!", state="complete", expanded=False)
-                badge_placeholder.markdown("<span class='badge badge-success'>🟢 Grounded Answer (Streamed)</span>", unsafe_allow_html=True)
+                label_text = "⚡ Answer served from cache!" if is_cached else "✅ Answer streamed successfully!"
+                status_container.update(label=label_text, state="complete", expanded=False)
+                b_html = "<span class='badge badge-success'>🟢 Grounded Answer (Streamed)</span>"
+                if is_cached:
+                    b_html += " <span class='badge badge-cache'>⚡ Cache Hit</span>"
+                badge_placeholder.markdown(b_html, unsafe_allow_html=True)
                 answer_placeholder.markdown(accumulated_text)
 
             # Re-render sources and verified citations tray (Tasks 2 & 3)
@@ -622,13 +669,27 @@ if user_query:
                 lat = final_metadata.get("latency_seconds")
                 top_score = final_metadata.get("top_similarity_score")
                 model_name = final_metadata.get("model", "llama3:latest")
+                p_tok = final_metadata.get("prompt_tokens")
+                c_tok = final_metadata.get("completion_tokens")
+                cost_usd = final_metadata.get("estimated_cost_usd")
+                saved_usd = final_metadata.get("cost_saved_usd")
+
                 meta_parts = []
                 if lat is not None:
                     meta_parts.append(f"⏱️ {lat}s")
                 if model_name:
                     meta_parts.append(f"🧠 {model_name} (Streamed)")
+                if is_cached:
+                    meta_parts.append("⚡ Cache: HIT")
                 if top_score is not None:
                     meta_parts.append(f"🎯 Score: {top_score:.3f}")
+                if p_tok and c_tok:
+                    meta_parts.append(f"📊 Tokens: {p_tok}+{c_tok}")
+                if saved_usd:
+                    meta_parts.append(f"💰 Saved: ${saved_usd:.5f}")
+                elif cost_usd:
+                    meta_parts.append(f"💰 Cost: ${cost_usd:.5f}")
+
                 meta_placeholder.markdown(f"<div class='meta-pill'>{' • '.join(meta_parts)}</div>", unsafe_allow_html=True)
 
             # Append assistant message to chat history
