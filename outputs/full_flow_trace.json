@@ -1,0 +1,238 @@
+{
+  "title": "RegulSense RAG End-to-End Verification Flow",
+  "timestamp": "2026-09-16T04:18:35.377696+00:00",
+  "stages": {
+    "stage_1_document_ingestion": {
+      "status_code": 200,
+      "response": {
+        "status": "success",
+        "filename": "rbi_lcr_directives_2026.txt",
+        "stored_path": "C:\\Users\\uppal\\OneDrive\\Desktop\\WI-sprint-2\\SW2627-AI-With-RAG-RegulSense\\data\\uploads\\rbi_lcr_directives_2026.txt",
+        "file_type": ".txt",
+        "file_size_bytes": 398,
+        "raw_character_count": 398,
+        "cleaned_character_count": 398,
+        "chunks_created": 1,
+        "records_indexed": 1,
+        "collection_name": "regulsense_regulatory_chunks",
+        "total_collection_records": 19,
+        "chunk_ids": [
+          "rbi_lcr_directives_2026_txt_tokenaware_001"
+        ],
+        "searchable_immediately": true,
+        "metadata": {
+          "latency_seconds": 4.6662,
+          "embedding_model": "all-minilm",
+          "chunk_size": 150,
+          "chunk_overlap": 30,
+          "timestamp": "2026-09-16T04:18:40.056058+00:00"
+        }
+      }
+    },
+    "stage_2_grounded_query": {
+      "status_code": 200,
+      "response": {
+        "status": "success",
+        "answer": "Under the RBI Master Direction on Cyber Resilience and Digital Payment Security Controls [1], regulated entities must report all Severity 1 cybersecurity incidents to CERT-In and the Reserve Bank within a mandatory timeframe of 6 hours of detection [2].",
+        "sources": [
+          {
+            "marker": "[1]",
+            "source_document": "cyber_resilience_framework.pdf",
+            "chunk_id": "cyber_resilience_001",
+            "section": "2. Incident Reporting Timelines",
+            "page_number": 1,
+            "similarity_score": 0.742,
+            "verbatim_text": "Regulated entities must notify CERT-In within 6 hours of cybersecurity incident detection."
+          },
+          {
+            "marker": "[2]",
+            "source_document": "circular_dor_2024_108.txt",
+            "chunk_id": "circular_dor_108_003",
+            "section": "Reporting Obligations",
+            "page_number": 2,
+            "similarity_score": 0.689,
+            "verbatim_text": "Severity 1 events mandate immediate RBI notification within 6 hours."
+          }
+        ],
+        "citations": [
+          "[1]",
+          "[2]"
+        ],
+        "metadata": {
+          "latency_seconds": 0.0402,
+          "model": "llama3:latest",
+          "top_k": 3,
+          "cache_hit": false,
+          "is_refusal": false,
+          "action_taken": "ANSWER",
+          "guardrail_status": "SUFFICIENT_CONTEXT",
+          "top_similarity_score": 0.6436,
+          "total_sources_returned": 2,
+          "prompt_tokens": 940,
+          "completion_tokens": 68,
+          "total_tokens": 1008,
+          "estimated_cost_usd": 0.000242,
+          "cost_saved_usd": 0.0,
+          "timestamp": "2026-09-16T04:18:40.104268+00:00"
+        }
+      }
+    },
+    "stage_3_citation_verification": {
+      "citations_cited": [
+        "[1]",
+        "[2]"
+      ],
+      "total_sources": 2,
+      "audit_report": [
+        {
+          "marker": "[1]",
+          "document": "cyber_resilience_framework.pdf",
+          "section": "2. Incident Reporting Timelines",
+          "page": 1,
+          "similarity_score": 0.742,
+          "is_cited_in_answer": true,
+          "excerpt_preview": "Regulated entities must notify CERT-In within 6 hours of cybersecurity incident ...",
+          "audit_verdict": "VERIFIED_SUPPORTED"
+        },
+        {
+          "marker": "[2]",
+          "document": "circular_dor_2024_108.txt",
+          "section": "Reporting Obligations",
+          "page": 2,
+          "similarity_score": 0.689,
+          "is_cited_in_answer": true,
+          "excerpt_preview": "Severity 1 events mandate immediate RBI notification within 6 hours....",
+          "audit_verdict": "VERIFIED_SUPPORTED"
+        }
+      ]
+    },
+    "stage_4_cache_acceleration": {
+      "status_code": 200,
+      "response": {
+        "status": "success",
+        "answer": "Under the RBI Master Direction on Cyber Resilience and Digital Payment Security Controls [1], regulated entities must report all Severity 1 cybersecurity incidents to CERT-In and the Reserve Bank within a mandatory timeframe of 6 hours of detection [2].",
+        "sources": [
+          {
+            "marker": "[1]",
+            "source_document": "cyber_resilience_framework.pdf",
+            "chunk_id": "cyber_resilience_001",
+            "section": "2. Incident Reporting Timelines",
+            "page_number": 1,
+            "similarity_score": 0.742,
+            "verbatim_text": "Regulated entities must notify CERT-In within 6 hours of cybersecurity incident detection."
+          },
+          {
+            "marker": "[2]",
+            "source_document": "circular_dor_2024_108.txt",
+            "chunk_id": "circular_dor_108_003",
+            "section": "Reporting Obligations",
+            "page_number": 2,
+            "similarity_score": 0.689,
+            "verbatim_text": "Severity 1 events mandate immediate RBI notification within 6 hours."
+          }
+        ],
+        "citations": [
+          "[1]",
+          "[2]"
+        ],
+        "metadata": {
+          "latency_seconds": 0.0002,
+          "model": "llama3:latest",
+          "top_k": 3,
+          "is_refusal": false,
+          "cache_hit": true,
+          "total_sources_returned": 2,
+          "prompt_tokens": 940,
+          "completion_tokens": 68,
+          "total_tokens": 1008,
+          "estimated_cost_usd": 0.0,
+          "cost_saved_usd": 0.000242,
+          "timestamp": "2026-09-16T04:18:40.109807+00:00"
+        }
+      },
+      "speedup_factor": 201.0
+    },
+    "stage_5_guardrail_refusal": {
+      "status_code": 200,
+      "response": {
+        "status": "refusal",
+        "answer": "The provided regulatory context does not contain sufficient information to answer this question reliably.\n\n**Guardrail Diagnostic**: LOW_SIMILARITY_SCORE\n- **Top Similarity Score**: `0.4589` (Threshold Required: `0.5000`)\n- **Qualifying Chunks**: `0` (Minimum Required: `1`)\n- **Refusal Details**: The highest matching regulatory chunk achieved a similarity score of 0.4589, which is below the minimum required confidence threshold of 0.5000. To prevent hallucination, an answer cannot be generated.",
+        "sources": [],
+        "citations": [],
+        "metadata": {
+          "latency_seconds": 0.0346,
+          "model": "llama3:latest",
+          "top_k": 3,
+          "cache_hit": false,
+          "is_refusal": true,
+          "action_taken": "REFUSE",
+          "guardrail_status": "LOW_SIMILARITY_SCORE",
+          "top_similarity_score": 0.4589,
+          "total_sources_returned": 0,
+          "prompt_tokens": 13,
+          "completion_tokens": 115,
+          "total_tokens": 128,
+          "estimated_cost_usd": 9.5e-05,
+          "cost_saved_usd": 0.0,
+          "timestamp": "2026-09-16T04:18:40.151325+00:00"
+        }
+      }
+    },
+    "stage_6_analytics_and_health": {
+      "health": {
+        "status": "healthy",
+        "timestamp": "2026-09-16T04:18:40.156607+00:00",
+        "vector_db_reachable": true,
+        "collection_name": "regulsense_regulatory_chunks",
+        "chat_model": "llama3:latest",
+        "embedding_model": "all-minilm"
+      },
+      "usage": {
+        "summary_timestamp": "2026-09-16T04:18:40.161647+00:00",
+        "total_requests": 18,
+        "cache_hits": 6,
+        "cache_misses": 12,
+        "cache_hit_rate_pct": 33.33,
+        "total_prompt_tokens": 7159,
+        "total_completion_tokens": 1028,
+        "total_tokens": 8187,
+        "total_estimated_cost_usd": 0.001123,
+        "total_cost_saved_usd": 0.001131,
+        "average_latency_seconds": 0.156,
+        "average_cache_hit_latency_seconds": 0.0004,
+        "average_cache_miss_latency_seconds": 0.2338,
+        "latency_reduction_pct": 99.84,
+        "status_breakdown": {
+          "success": 13,
+          "refusal": 4,
+          "error": 1
+        },
+        "hourly_timeline": {
+          "2026-09-16T04:00:00Z": {
+            "requests": 18,
+            "hits": 6,
+            "tokens": 8187,
+            "cost_usd": 0.001123,
+            "saved_usd": 0.001131
+          }
+        },
+        "pricing_reference": {
+          "input_per_million_usd": 0.2,
+          "output_per_million_usd": 0.8
+        }
+      },
+      "cache": {
+        "current_size": 2,
+        "max_size": 500,
+        "total_requests": 3,
+        "hits": 1,
+        "misses": 2,
+        "hit_rate_pct": 33.33,
+        "evictions": 0,
+        "expirations": 0,
+        "total_cost_saved_usd": 0.000242,
+        "default_ttl_seconds": 3600.0
+      }
+    }
+  }
+}

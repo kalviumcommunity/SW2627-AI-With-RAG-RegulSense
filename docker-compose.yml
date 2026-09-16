@@ -1,0 +1,70 @@
+# ==============================================================================
+# RegulSense Multi-Container Deployment Orchestration
+# ==============================================================================
+version: '3.8'
+
+services:
+  # ----------------------------------------------------------------------------
+  # FastAPI Regulatory RAG Backend Service
+  # ----------------------------------------------------------------------------
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: regulsense-backend
+    restart: unless-stopped
+    command: ["uvicorn", "src.api:app", "--host", "0.0.0.0", "--port", "8000"]
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - APP_ENV=production
+      - OPENAI_BASE_URL=${OPENAI_BASE_URL:-http://host.docker.internal:11434/v1}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-ollama}
+      - CHAT_MODEL=${CHAT_MODEL:-llama3:latest}
+      - EMBEDDING_MODEL=${EMBEDDING_MODEL:-all-minilm}
+      - CHROMA_PERSIST_DIRECTORY=/app/data/chroma_db
+      - CHROMA_COLLECTION_NAME=${CHROMA_COLLECTION_NAME:-regulsense_regulatory_chunks}
+      - UPLOAD_DIRECTORY=/app/data/uploads
+    volumes:
+      - ./data:/app/data
+      - ./outputs:/app/outputs
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/api/v1/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+  # ----------------------------------------------------------------------------
+  # Streamlit Compliance Officer Chat & Inspection Interface
+  # ----------------------------------------------------------------------------
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: regulsense-frontend
+    restart: unless-stopped
+    command: ["streamlit", "run", "app.py", "--server.port", "8501", "--server.address", "0.0.0.0"]
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env
+    environment:
+      - REGULSENSE_API_URL=http://backend:8000
+      - STREAMLIT_SERVER_HEADLESS=true
+    volumes:
+      - ./data:/app/data
+      - ./outputs:/app/outputs
+    depends_on:
+      backend:
+        condition: service_healthy
+
+networks:
+  default:
+    name: regulsense-network
